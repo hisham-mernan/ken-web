@@ -1,0 +1,36 @@
+.p-inputotp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  @media (max-width: 765px) {
+    gap: 10px;
+  }
+  &-input {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
+    border: 1px solid #b9b9b991 !important;
+
+    @media (max-width: 765px) {
+      width: 45px !important;
+      height: 45px !important;
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+    }
+  }
+  .p-invalid {
+    border: 1px solid var(--color-red-dark) !important;
+  }
+  .p-inputtext:enabled:focus {
+    box-shadow: 0 0 1px var(--color-secondary-dark);
+    border: 1px solid var(--color-secondary-dark) !important;
+  }
+}

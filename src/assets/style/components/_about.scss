@@ -1,0 +1,129 @@
+.hero_gradient {
+  position: relative;
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+}
+body:dir(rtl) {
+  .hero_gradient {
+    &.hero::after {
+      background: linear-gradient(
+        90deg,
+        rgba(249, 245, 235, 0) 36.59%,
+        rgba(249, 245, 235, 0.6) 74.76%,
+        #f9f5eb 95.08%
+      );
+    }
+    &.thumbnail::after {
+      background: linear-gradient(
+        90deg,
+        rgba(249, 245, 235, 0.6) 0,
+        rgba(249, 245, 235, 0.36) 70.97%,
+        rgba(249, 245, 235, 0) 95.08%
+      );
+    }
+  }
+}
+body:dir(ltr) {
+  .hero_gradient {
+    position: relative;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+    }
+    &.hero::after {
+      background: linear-gradient(
+        270deg,
+        rgba(249, 245, 235, 0) 36.59%,
+        rgba(249, 245, 235, 0.6) 74.76%,
+        #f9f5eb 95.08%
+      );
+    }
+    &.thumbnail::after {
+      background: linear-gradient(
+        90deg,
+        rgba(249, 245, 235, 0.6) 0,
+        rgba(249, 245, 235, 0.36) 70.97%,
+        rgba(249, 245, 235, 0) 95.08%
+      );
+    }
+  }
+}
+
+// story section in about page
+.story_container {
+  position: relative;
+  transition: all 0.7s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    inset-inline-start: -1.5%;
+    width: 35px;
+    height: 35px;
+    background: #61634d70;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px #9c9e9066;
+    z-index: 5;
+    transition: background 0.5s ease;
+    @media (max-width: 600px) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    inset-inline-start: -3px;
+    width: 1px;
+    height: 0;
+    background-color: #9c9e9066;
+
+    transition: height 1.5s ease-in-out;
+    -webkit-transition: height 1.5s ease-in-out;
+    -moz-transition: height 1.5s ease-in-out;
+    -ms-transition: height 1.5s ease-in-out;
+    -o-transition: height 1.5s ease-in-out;
+    @media (min-width: 992px) and (max-width: 1024px) {
+      inset-inline-start: 4px;
+    }
+    @media (min-width: 601px) and (max-width: 991px) {
+      inset-inline-start: 5px;
+    }
+    @media (max-width: 600px) {
+      inset-inline-start: 10px;
+    }
+  }
+
+  &:first-of-type::after {
+    background: var(--color-primary-3);
+  }
+
+  &.active::before {
+    height: calc(100% - 50px);
+  }
+}
+
+// end story section in about page

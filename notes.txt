@@ -1,0 +1,37 @@
+
+Success Payment Card (Sandbox)
+
+    Card: 4012000033330026
+        Cardholder Name: Any Name
+        Expiry Date: 01/39
+        CVV: 100
+        Result: Success
+
+_______________________
+
+    Card: 5123450000000008
+        Cardholder Name: Any Name
+        Expiry Date: 01/39
+        CVV: 100
+        Result: Success
+
+    Card: 5204730000002514        
+        Cardholder Name: Any Name        
+        Expiry Date: 01/39    
+        CVV2: 251
+        Result: Fail
+
+For MADA card testing:
+    Cardholder Name: Any Name
+    MADA Card: 4464040000000007
+    Expiry Date: 11/25
+    CVV: 850
+
+
+
+------------------------
+MISSING (16/3/2026)
+----------------
+1- need to understand flow now and discount
+2- need to work on details
+3- ask to understand profile badge

@@ -1,0 +1,13 @@
+.map_container {
+  height: 240px;
+  width: 100%;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  outline: none;
+  @media (max-width: 768px) {
+    height: 200px;
+  }
+}

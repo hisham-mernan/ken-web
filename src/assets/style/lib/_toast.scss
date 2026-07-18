@@ -1,0 +1,109 @@
+@use "../layout/font";
+.Toastify__toast-container {
+  .Toastify__progress-bar--wrp {
+    height: 2.5px !important;
+  }
+  .Toastify__close-button {
+    display: none;
+  }
+
+  // success
+  .toast_main_content_style {
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    padding: 12px;
+    overflow: hidden !important;
+  }
+  .Toastify__toast {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      display: flex;
+      inset-inline-start: 0;
+      width: 4px;
+      height: 100%;
+    }
+    &--success {
+      @extend .toast_main_content_style;
+
+      background-color: var(--color-grean-light);
+      .Toastify__toast-icon svg {
+        fill: var(--color-grean-normal);
+      }
+      &::before {
+        background-color: var(--color-grean-normal);
+      }
+    }
+    &--info {
+      @extend .toast_main_content_style;
+
+      background-color: var(--color-blue-light);
+
+      .Toastify__toast-icon svg {
+        fill: var(--color-blue-normal);
+      }
+      &::before {
+        background-color: var(--color-blue-normal);
+      }
+    }
+    &--error {
+      @extend .toast_main_content_style;
+
+      background-color: var(--color-red-light);
+      .Toastify__toast-icon svg {
+        fill: var(--color-red-normal);
+      }
+      &::before {
+        background-color: var(--color-red-normal);
+      }
+    }
+    &--warning {
+      @extend .toast_main_content_style;
+      background-color: var(--color-orange-light);
+      .Toastify__toast-icon svg {
+        fill: var(--color-orange-normal);
+      }
+      &::before {
+        background-color: var(--color-orange-normal);
+      }
+    }
+  }
+  .Toastify__progress-bar {
+    &--success {
+      background-color: var(--color-grean-normal) !important;
+    }
+    &--info {
+      background-color: var(--color-info-normal) !important;
+    }
+    &--error {
+      background-color: var(--color-red-normal) !important;
+    }
+    &--warning {
+      background-color: var(--color-orange-normal) !important;
+    }
+  }
+}
+
+.toast_header {
+  &.success {
+    color: var(--color-state-on-success-container);
+  }
+  &.warning {
+    color: var(--color-state-on-warning-container);
+  }
+  &.error {
+    color: var(--color-state-on-error-container);
+  }
+  &.info {
+    color: var(--color-state-on-info-container);
+  }
+  @extend .body_lg;
+}
+.toast_text {
+  color: var(--color-on-surface-primary);
+  @extend .body_lg;
+}

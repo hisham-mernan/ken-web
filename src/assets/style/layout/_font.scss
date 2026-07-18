@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+
+@font-face {
+  font-family: "Bell MT";
+  src: url("/src/assets/fonts/bell-mt.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Dima Nashkh";
+  src: url("../../fonts/dimanaskh.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin typography($size, $line-height) {
+  font-size: $size;
+  line-height: $line-height;
+}
+.body_lg {
+  font-family: var(--font-blinker);
+
+  @include typography(14px, 20px);
+
+  @media (min-width: 600px) {
+    @include typography(16px, 150%);
+  }
+}
+.body_sm {
+  @include typography(14px, 20px);
+}
+.body_xs {
+  @include typography(12px, 16px);
+  @media (max-width: 768px) {
+    @include typography(10px, 12px);
+  }
+}
+.display_xs {
+  @include typography(32px, 40px);
+
+  @media (max-width: 1024px) {
+    @include typography(28px, 36px);
+  }
+  @media (max-width: 1991px) {
+    @include typography(24px, 28px);
+  }
+  @media (max-width: 400px) {
+    @include typography(16px, 24px);
+  }
+}
+.display_sm {
+  font-family: var(--font-blinker);
+  font-weight: 700;
+
+  @include typography(20px, 32px);
+
+  @media (min-width: 600px) {
+    @include typography(28px, 36px);
+  }
+  @media (min-width: 1024px) {
+    @include typography(32px, 40px);
+  }
+  @media (min-width: 1536px) {
+    @include typography(40px, 120%);
+  }
+}
+.display_md {
+  font-family: var(--font-blinker);
+  font-weight: 700;
+
+  @include typography(20px, 32px);
+  @media (min-width: 991px) {
+    @include typography(28px, 36px);
+  }
+  @media (min-width: 600px) {
+    @include typography(32px, 40px);
+  }
+  @media (min-width: 1024px) {
+    @include typography(40px, 60px);
+  }
+}
+.title_lg {
+  font-weight: 400;
+
+  @include typography(14px, 20px);
+
+  @media (min-width: 1024px) {
+    @include typography(16px, 24px);
+  }
+
+  @media (min-width: 1536px) {
+    @include typography(20px, 32px);
+  }
+}
+.headline_lg {
+  font-weight: 500;
+  letter-spacing: 0.15000000596046448px;
+
+  @include typography(16px, 24px);
+
+  @media (min-width: 600px) {
+    @include typography(20px, 32px);
+  }
+
+  @media (min-width: 1024px) {
+    @include typography(24px, 36px);
+  }
+
+  @media (min-width: 1536px) {
+    @include typography(32px, 40px);
+  }
+}
+.headline_sm {
+  font-weight: 500;
+
+  @include typography(18px, 24px);
+
+  @media (min-width: 1024px) {
+    @include typography(20px, 32px);
+  }
+
+  @media (min-width: 1536px) {
+    @include typography(24px, 36px);
+  }
+}
+
+body:dir(ltr) {
+  &,
+  .p-component {
+    font-family: var(--font-blinker) !important;
+  }
+}
+body:dir(rtl) {
+  &,
+  .p-component {
+    font-family: var(--font-cairo) !important;
+  }
+}

@@ -1,0 +1,1 @@
+import{r as t,l}from"./index-Bc3ahgEM.js";function g(e,r){const[f,s]=t.useState([]),[i,o]=t.useState(!1),[u,d]=t.useState(),n=async()=>{try{o(!0);const c=(await l.get(e)).data;s(c||[]),r&&r(c)}catch(a){d(a.response.data),console.error("Error fetching data:",a)}finally{o(!1)}};return t.useEffect(()=>{n()},[e]),{data:f,setData:s,loading:i,fetchData:n,error:u}}export{g as u};

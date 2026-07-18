@@ -1,0 +1,14 @@
+.p-overlaypanel {
+  border-radius: 14px;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  -ms-border-radius: 14px;
+  -o-border-radius: 14px;
+  .p-overlaypanel-content {
+    padding: 0 !important;
+  }
+  &::after,
+  &::before {
+    display: none;
+  }
+}

@@ -1,0 +1,73 @@
+.p-dialog-content {
+  padding: 5px 16px 40px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  @media (max-width: 600px) {
+    padding: 10px 16px 16px;
+  }
+}
+.modal_hide_header {
+  .p-dialog-header {
+    padding: 5px 10px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    @media (max-width: 600px) {
+      padding: 7px 10px;
+    }
+    &-icons button {
+      display: none;
+    }
+  }
+}
+.p-dialog {
+  backdrop-filter: blur(20px);
+  border: 2px solid #b3aa99;
+}
+.p-dialog-mask {
+  backdrop-filter: blur(2px);
+}
+.p-dialog-header-icons button {
+  outline: none;
+  box-shadow: none;
+  &:hover {
+    background: transparent !important;
+  }
+}
+.no_padding {
+  .p-dialog-content {
+    padding: 0 !important;
+  }
+}
+
+.hide_header {
+  .p-dialog-header {
+    padding: 12px !important;
+    &-icons {
+      display: none;
+    }
+  }
+}
+
+.clanedar_modal {
+  &.p-dialog {
+    border-radius: 20px !important;
+    -webkit-border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    -ms-border-radius: 20px !important;
+    -o-border-radius: 20px !important;
+  }
+  .p-dialog-content {
+    border-bottom-right-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+  }
+  .p-dialog-header {
+    border-top-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+  }
+}
+
+.p-dialog-header {
+  &-icons {
+    display: none !important;
+  }
+}

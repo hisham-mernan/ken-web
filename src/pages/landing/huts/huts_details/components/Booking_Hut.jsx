@@ -1,0 +1,362 @@
+// lib
+
+import { useTranslation } from "react-i18next";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+// component
+import Form from "../../../../../components/shared/form/Form";
+import Button from "../../../../../components/shared/Button";
+
+// assets
+import {
+  EditPenIcon,
+  PercentageIcon,
+  UsersIcon,
+} from "../../../../../assets/icons/Icon";
+import { useState } from "react";
+import { useAuth } from "../../../../../context/Auth_Context";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { isRangeAvailable } from "../../../../../utils/validator";
+import { formatDateToYYYYMMDD } from "../../../../../utils/formateDateToYYYYMMDD";
+
+const Booking_Hut = ({
+  setError,
+  watch,
+  data,
+  special,
+  errors,
+  control,
+  loading,
+  isDisabled = false,
+  isConfirm = false,
+  title = "booking",
+  available_dates,
+  eventTickets,
+  serviceTickets,
+}) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [disabled, setDisabled] = useState(isDisabled);
+  const { token } = useAuth();
+  // ____________ list __________________
+  const formList = [
+    {
+      id: 0,
+      formType: "calendar",
+      fieldName: "date_from",
+      label: "from",
+      name: "from",
+      placeholder: `5-5-${new Date().getFullYear()}`,
+      validator: {
+        required: "required_field",
+      },
+      disabled: disabled,
+      allowedDates: available_dates,
+      className: "col-span-1 lg:col-span-2",
+    },
+    {
+      id: 1,
+      formType: "calendar",
+      fieldName: "date_to",
+      label: "to",
+      name: "to",
+      placeholder: `5-5-${new Date().getFullYear()}`,
+      allowedDates: available_dates,
+      validator: {
+        required: "required_field",
+        validate: (value) => {
+          const fromDate = watch("date_from");
+          if (!fromDate) {
+            setError("date_from", {
+              type: "manual",
+              message: "required_field",
+            });
+            return "set_from_date";
+          }
+
+          const fromValue = new Date(fromDate);
+          const toValue = new Date(value);
+
+          fromValue.setHours(0, 0, 0, 0);
+          toValue.setHours(0, 0, 0, 0);
+
+          if (isNaN(fromValue) || isNaN(toValue)) {
+            return "invalid_date";
+          }
+
+          if (toValue <= fromValue) {
+            return "to_date_must_be_after_from";
+          }
+
+          const dates = isConfirm
+            ? data?.hut_details?.available_dates
+            : available_dates;
+
+          if (!isRangeAvailable(fromValue, toValue, dates)) {
+            return t("date_range_not_available", {
+              from: formatDateToYYYYMMDD(fromValue),
+              to: formatDateToYYYYMMDD(toValue),
+            });
+          }
+
+          return true;
+        },
+      },
+      disabled: disabled,
+      className: "col-span-1 lg:col-span-2",
+    },
+    {
+      id: 50,
+      formType: "label_groups",
+      label: "number_of_guests",
+      className: "col-span-1 lg:col-span-2",
+    },
+    {
+      id: 2,
+      formType: "input",
+      fieldName: "persons_max_num",
+      name: "number_of_guests",
+
+      placeholder: `2 ${t("adults")}`,
+      type: "number",
+      validator: {
+        required: "required_field",
+        min: {
+          value: 0,
+          message: `${t("min_number_of_adult")}: 0 `,
+        },
+        max: {
+          value: isConfirm
+            ? data?.hut_details?.max_persons_num
+            : data?.max_persons_num,
+          message: `${t("max_number_of_adult")}: ${
+            isConfirm
+              ? data?.hut_details?.max_persons_num
+              : data?.max_persons_num
+          } `,
+        },
+      },
+
+      insteraction: `→ ${t("max_number_of_adult")}:${
+        isConfirm
+          ? data?.hut_details?.max_persons_num
+          : data?.max_persons_num || 0
+      }`,
+      icon: <UsersIcon />,
+      disabled: disabled,
+    },
+    {
+      id: 3,
+      formType: "input",
+      fieldName: "kids_max_num",
+      name: "kids",
+
+      placeholder: `2 ${t("kids")}`,
+      type: "number",
+      validator: {
+        required: "required_field",
+        min: {
+          value: 0,
+          message: `${t("min_number_of_kids")} 0 `,
+        },
+        max: {
+          value: isConfirm
+            ? data?.hut_details?.max_kids_num
+            : data?.max_kids_num,
+          message: `${t("max_number_of_kids")}: ${
+            isConfirm ? data?.hut_details?.max_kids_num : data?.max_kids_num
+          } `,
+        },
+      },
+      insteraction: `→ ${t("max_number_of_kids")}:${
+        isConfirm ? data?.hut_details?.max_kids_num : data?.max_kids_num || 0
+      }`,
+      icon: <UsersIcon />,
+      disabled: disabled,
+    },
+    !isConfirm && {
+      id: 4,
+      formType: "input",
+      fieldName: "promocode",
+      name: "do_you_have_prome_code",
+      label: "do_you_have_prome_code",
+      placeholder: "add_here",
+
+      icon: <PercentageIcon />,
+      disabled: disabled,
+      className: "col-span-1 lg:col-span-2",
+    },
+  ];
+  const terms = [
+    !isConfirm && {
+      id: 5,
+      formType: "checkbox",
+      fieldName: "terms",
+      name: "do_you_have_prome_code",
+      title: <Terms_And_Condtion_Checkbox />,
+      validator: {
+        required: "required_field",
+      },
+      disabled: disabled,
+      className: "col-span-1 lg:col-span-2",
+    },
+  ].filter(Boolean);
+  const calculatePrice = () => {
+    const fromRaw = watch("date_from");
+    const toRaw = watch("date_to");
+
+    const fromDate = new Date(fromRaw);
+    const toDate = new Date(toRaw);
+
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const availableDates = isConfirm
+      ? data?.hut_details?.available_dates
+      : data?.available_dates;
+    const defaultPrice = isConfirm
+      ? data?.hut_details?.price
+      : data?.price || 0;
+
+    let total = 0;
+    let hasNoPrice = false;
+    for (
+      let d = new Date(fromDate);
+      d < toDate;
+      d = new Date(d.getTime() + msPerDay)
+    ) {
+      const matchedPeriod = availableDates?.find((range) => {
+        const start = new Date(range.date_from);
+        const end = new Date(range.date_to);
+
+        const current = new Date(d);
+        current.setHours(0, 0, 0, 0);
+        start.setHours(0, 0, 0, 0);
+        end.setHours(0, 0, 0, 0);
+
+        return current >= start && current <= end;
+      });
+
+      if (matchedPeriod?.price) {
+        const nightlyPrice = matchedPeriod ? matchedPeriod.price : defaultPrice;
+
+        total += nightlyPrice;
+      } else {
+        hasNoPrice = true;
+      }
+    }
+    if (hasNoPrice) {
+      total += +data?.total_price;
+    }
+    // Add specials
+    if (special?.length > 0) {
+      special.forEach((item) => {
+        total += Number(item.quantity) * Number(item.price);
+      });
+    }
+
+    if (eventTickets?.length > 0) {
+      eventTickets.forEach((item) => {
+        total += Number(item.quantity) * Number(item.price);
+      });
+    }
+
+    if (serviceTickets?.length > 0) {
+      serviceTickets.forEach((item) => {
+        total += Number(item.quantity) * Number(item.price);
+      });
+    }
+    if (data?.promocode && total > 0 && isConfirm) {
+      total = total - (total * data?.promocode?.percentage) / 100;
+    }
+
+    return total && total != "nan" ? total : 0;
+  };
+
+  const totalPrice = calculatePrice() ?? 0;
+  const pricesList = [
+    {
+      id: 1,
+      label: "subtotal",
+      value: totalPrice,
+    },
+    { id: 2, label: "discount", value: 0 },
+    { id: 3, label: "total", value: 0 },
+  ];
+  return (
+    <section className="Container ">
+      <div className="secondary_border form_p flex flex-col gap-[50px] ">
+        {isConfirm && (
+          <span
+            className="flex items-end ms-auto cursor-pointer"
+            onClick={() => {
+              setDisabled((pre) => !pre);
+            }}
+          >
+            <EditPenIcon />
+          </span>
+        )}
+        <h2 className=" font-bold text-[36px] text-primary-2  ">{t(title)}</h2>
+        <div className="flex flex-col gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+            <Form
+              formList={formList}
+              control={control}
+              errors={errors}
+              loading={loading}
+              setError={setError}
+            />
+          </div>
+          <footer className="flex flex-col gap-3">
+            {pricesList?.map((item) => (
+              <div
+                key={item?.id}
+                className="text-primary-dark flex_center_y justify-between gap-2"
+              >
+                <span className="text-sm font-semibold">{t(item?.label)}</span>
+                <strong className=" text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+                  {item?.value}
+                </strong>
+              </div>
+            ))}
+          </footer>
+          {/* terms */}
+          {!isConfirm && (
+            <fieldset>
+              <Form
+                formList={terms}
+                control={control}
+                errors={errors}
+                loading={loading}
+                setError={setError}
+              />
+            </fieldset>
+          )}
+          {!isConfirm && (
+            <Button role="submit" loading={loading}>
+              {" "}
+              {t("book_now")}
+            </Button>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+const Terms_And_Condtion_Checkbox = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <span>{t("i_accept_all")}</span>
+      <Link
+        to="/terms-and-conditions"
+        target="_blank"
+        className="outline-none underline underline-offset-2 decoration-primary-4 "
+      >
+        {" "}
+        {t("terms_and_conditions")}
+      </Link>
+    </>
+  );
+};
+export default Booking_Hut;

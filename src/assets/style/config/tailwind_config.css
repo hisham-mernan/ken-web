@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@theme {
+  /* fonts */
+  --font-blinker: "Blinker", sans-serif;
+  --font-cairo: "Cairo", sans-serif;
+
+  --font-open-sans: "Open Sans", sans-serif;
+
+  /* break poinst */
+  --breakpoint-xs: 500px;
+  /* colors */
+  --color-red-light: #fcf3f3;
+  --color-red-light-hover: #f8e2e2;
+  --color-red-normal: #d21c1c;
+  --color-red-dark: #970c0c;
+
+  --color-grey-300: #bbbebd;
+  --color-grey-400: #c8c8c891;
+  --color-grey-500: #5d5d5d;
+
+  --color-icon: #292d32;
+
+  --color-dark: #212b36;
+
+  --color-main-dark: #1c2b38;
+
+  --color-primary: #393c20;
+  --color-primary-dark: #2e301a;
+  --color-primary-2: #4d5036;
+  --color-primary-3: #61634d;
+  --color-primary-4: #747763;
+  --color-primary-5: #888a79;
+  --color-primary-light: #9c9e90;
+
+  --color-font-light: #ffeedd;
+  --color-main: #f9f5eb;
+  --color-light: #fffaf4;
+  --color-secondary-dark: #432202;
+  --color-secondary: #4a2602;
+  --color-secondary-1: #5c3c1b;
+  --color-secondary-2: #6e5135;
+  --color-secondary-3: #80674e;
+  --color-secondary-4: #927d67;
+  --color-secondary-5: #a59381;
+  --color-secondary-light: #a59381;
+
+  --color-primary2: #4f4f4f;
+
+  --color-body: #6e6e6e;
+
+  --color-text-primary: #020202;
+
+  --color-grey-color: #8e8e93;
+  --color-blue-light: #f1f8fe;
+  --color-blue-normal: #0172cb;
+
+  --color-orange-light: #fef7f1;
+  --color-orange-normal: #df7b00;
+
+  --color-grean-light: #f2f8f2;
+  --color-grean-normal: #28a138;
+  --color-dmv-black: #23262f;
+}
+@layer base {
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    background: var(--color-neutral-200);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary-5);
+  }
+
+  .hide_scroll_bar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide_scroll_bar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+@layer utilities {
+  .glass_card {
+    @apply flex items-center justify-center flex-col px-8 py-10 border-[2px] border-[#9C9E9066] rounded-[10px] bg-[#F9F5EB1F] backdrop-blur-lg;
+  }
+  .page_p {
+    @apply pt-[130px] md:pt-[172px];
+  }
+  .main_gap {
+    @apply flex flex-col gap-16 md:gap-[150px];
+  }
+  .section_gap {
+    @apply flex flex-col gap-6 sm:gap-12 md:gap-[60px];
+  }
+  .ticket_card {
+    @apply py-8 sm:py-10 xl:py-20 px-4 sm:px-8 xl:px-[120px] flex flex-col;
+  }
+  .form_p {
+    @apply px-4 py-14 sm:px-8 md:px-11  lg:p-[54px];
+  }
+  .navlink {
+    @apply hover:font-bold after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-primary-dark after:transition-all after:duration-300 hover:after:w-full;
+  }
+  .navlink.active {
+    @apply font-bold  after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-primary-dark after:transition-all after:duration-300;
+  }
+  .section_p {
+    @apply py-8 sm:py-12 md:py-[60px];
+  }
+  .section_p_t {
+    @apply pt-16 md:pt-[150px];
+  }
+  .section_p_b {
+    @apply pb-16 md:pb-[150px];
+  }
+  .glass_effect_40 {
+    @apply bg-white/35 hover:bg-white/40 transition-all ease-in-out duration-500 backdrop-blur-xl border border-[#DBBBFC33];
+  }
+}

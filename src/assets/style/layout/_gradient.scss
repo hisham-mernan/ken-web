@@ -1,0 +1,130 @@
+.main_gradient {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+  &.event::after {
+    background: linear-gradient(
+      270deg,
+      rgba(46, 48, 26, 0.1) 69.81%,
+      #2e301a 100%
+    );
+  }
+  &.service::after {
+    background: linear-gradient(
+      180deg,
+      rgba(46, 48, 26, 0.1) 63.81%,
+      #2e301a 100%
+    );
+  }
+
+  &.dark::after {
+    background: linear-gradient(
+      180deg,
+      rgba(46, 48, 26, 0.1) 63.81%,
+      #2e301a 100%
+    );
+  }
+  &.main::after {
+    background: linear-gradient(
+      180deg,
+      rgba(46, 48, 26, 0.05) 63.81%,
+      rgba(46, 48, 26, 0.5) 100%
+    );
+  }
+}
+.about_gradiant {
+  background: linear-gradient(
+    180deg,
+    rgba(46, 48, 26, 0.1) 31.53%,
+    rgba(46, 48, 26, 0.869985) 64.58%,
+    #2e301a 100%
+  );
+}
+.light_gradient {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    background: #a5938154;
+  }
+  &.r_lg {
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+  &.right::after {
+    border-top-right-radius: calc(infinity * 1px);
+  }
+  &.left::after {
+    border-top-left-radius: calc(infinity * 1px);
+  }
+}
+.extra_light_gradient {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    background: #5858581a;
+  }
+  &.r_lg {
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+}
+.right_gradient {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      270deg,
+      rgba(46, 48, 26, 0.1) 41.5%,
+      #2e301a 100%
+    );
+
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+}
+.hut_details_gradient {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: #a593811a;
+
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+}
