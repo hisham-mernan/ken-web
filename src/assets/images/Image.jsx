@@ -85,7 +85,7 @@ export { default as HeaderTestimonialsEn } from "./header/testimonials_en.svg";
 export { default as HeaderFaqAr } from "./header/faq_ar.svg";
 export { default as HeaderFaqEn } from "./header/faq_en.svg";
 
-export { default as Decore } from "./decore.svg";
+export { default as Decore } from "./Decore.svg";
 
 // profile
 export { default as ProfilePersonalInfoImg } from "./profile/personal_info.svg";
