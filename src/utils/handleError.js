@@ -72,16 +72,23 @@ export const handleErrors = (err, setError, t, navigate, item) => {
     return;
   }
 
+  const getFirstError = (val) => {
+    if (!val) return null;
+    if (Array.isArray(val)) return val[0];
+    if (typeof val === "string") return val;
+    return null;
+  };
+
   const detail =
     data.detail ||
     data.message ||
     data.error ||
-    data?.phone?.at(0) ||
-    data?.email?.at(0) ||
-    data?.password?.at(0) ||
-    data?.id_num?.at(0) ||
-    data?.promocode?.at(0) ||
-    data?.non_field_errors?.at(0);
+    getFirstError(data?.phone) ||
+    getFirstError(data?.email) ||
+    getFirstError(data?.password) ||
+    getFirstError(data?.id_num) ||
+    getFirstError(data?.promocode) ||
+    getFirstError(data?.non_field_errors);
   if (
     detail?.includes("Cannot cancel booking less than 2 days before start date")
   ) {

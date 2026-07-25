@@ -21,10 +21,12 @@ import {
 } from "../../../assets/icons/Icon";
 import Form from "../form/Form";
 import Button from "../Button";
-import { getUserRole } from "../../../utils/auth";
-const { email } = getUserRole();
+import { useAuth } from "../../../context/Auth_Context";
+
 const Support = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const email = user?.email || "";
   const isContactPage = location.pathname.includes("contact");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -39,7 +41,7 @@ const Support = () => {
   } = useForm({
     defaultValues: {
       full_name: "",
-      email: email ?? "",
+      email: email,
       content: "",
       is_admin: isContactPage ? false : true,
     },
