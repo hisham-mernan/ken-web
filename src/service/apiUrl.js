@@ -1,4 +1,4 @@
-export const apiKey = import.meta.env.VITE_REACT_APP_BASE_URL;
+export const apiKey = import.meta.env.VITE_REACT_APP_BASE_URL || "http://127.0.0.1:8000";
 export const API = {
   list: {
     suppliers: "/supplier-dropdown/",

@@ -60,9 +60,16 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
+      const rawPhone = data?.phone ? String(data.phone).trim() : "";
+      const formattedPhone = rawPhone.startsWith("+")
+        ? rawPhone
+        : rawPhone.startsWith("0")
+        ? `+966${rawPhone.slice(1)}`
+        : `+966${rawPhone}`;
+
       const response = await axiosInstance.post(API.auth.register, {
         ...data,
-        phone: `+966${data?.phone}`,
+        phone: formattedPhone,
       });
       if (response.status === 201) {
         if (isSupplierForm) {
