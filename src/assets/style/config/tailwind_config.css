@@ -9,49 +9,54 @@
 
   /* break poinst */
   --breakpoint-xs: 500px;
-  /* colors */
-  --color-red-light: #fcf3f3;
-  --color-red-light-hover: #f8e2e2;
-  --color-red-normal: #d21c1c;
-  --color-red-dark: #970c0c;
+  /* Official Ken Brand Guidelines Palette */
+  --color-dark-walnut: #3F2E1E;   /* Dark Walnut */
+  --color-red-clay: #6B2C1C;      /* Red Clay */
+  --color-saddle-brown: #806444;  /* Saddle Brown */
+  --color-warm-ivory: #DDD4C2;    /* Warm Ivory */
+  --color-off-white: #FFFBF2;     /* Off White */
+  --color-desert-sage: #9D9576;   /* Desert Sage */
 
-  --color-grey-300: #bbbebd;
-  --color-grey-400: #c8c8c891;
-  --color-grey-500: #5d5d5d;
+  /* Primary Brand Theme Tokens */
+  --color-primary: #3F2E1E;
+  --color-primary-dark: #3F2E1E;
+  --color-primary-2: #6B2C1C;
+  --color-primary-3: #806444;
+  --color-primary-4: #9D9576;
+  --color-primary-5: #DDD4C2;
+  --color-primary-light: #DDD4C2;
 
-  --color-icon: #292d32;
+  /* Secondary Brand Theme Tokens */
+  --color-secondary-dark: #6B2C1C;
+  --color-secondary: #806444;
+  --color-secondary-1: #6B2C1C;
+  --color-secondary-2: #806444;
+  --color-secondary-3: #9D9576;
+  --color-secondary-4: #DDD4C2;
+  --color-secondary-5: #9D9576;
+  --color-secondary-light: #FFFBF2;
 
-  --color-dark: #212b36;
+  /* Base & Typography Colors */
+  --color-font-light: #FFFBF2;
+  --color-main: #FFFBF2;
+  --color-light: #FFFBF2;
 
-  --color-main-dark: #1c2b38;
+  --color-dark: #3F2E1E;
+  --color-main-dark: #3F2E1E;
+  --color-text-primary: #3F2E1E;
+  --color-body: #6B2C1C;
+  --color-primary2: #806444;
+  --color-icon: #3F2E1E;
+  --color-grey-color: #9D9576;
 
-  --color-primary: #393c20;
-  --color-primary-dark: #2e301a;
-  --color-primary-2: #4d5036;
-  --color-primary-3: #61634d;
-  --color-primary-4: #747763;
-  --color-primary-5: #888a79;
-  --color-primary-light: #9c9e90;
+  --color-red-light: #FFFBF2;
+  --color-red-light-hover: #DDD4C2;
+  --color-red-normal: #6B2C1C;
+  --color-red-dark: #3F2E1E;
 
-  --color-font-light: #ffeedd;
-  --color-main: #f9f5eb;
-  --color-light: #fffaf4;
-  --color-secondary-dark: #432202;
-  --color-secondary: #4a2602;
-  --color-secondary-1: #5c3c1b;
-  --color-secondary-2: #6e5135;
-  --color-secondary-3: #80674e;
-  --color-secondary-4: #927d67;
-  --color-secondary-5: #a59381;
-  --color-secondary-light: #a59381;
-
-  --color-primary2: #4f4f4f;
-
-  --color-body: #6e6e6e;
-
-  --color-text-primary: #020202;
-
-  --color-grey-color: #8e8e93;
+  --color-grey-300: #DDD4C2;
+  --color-grey-400: #DDD4C2;
+  --color-grey-500: #806444;
   --color-blue-light: #f1f8fe;
   --color-blue-normal: #0172cb;
 
