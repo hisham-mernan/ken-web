@@ -13,6 +13,7 @@ export const API = {
   },
   testimonials: "/api/products/testmonial/",
   home: {
+    combined: "/api/products/homepage/",
     faq: "/api/content/faq/",
     event: "/api/products/events/random/",
     huts: "/api/products/huts-home/list/",

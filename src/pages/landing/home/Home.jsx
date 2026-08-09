@@ -11,7 +11,13 @@ import Discover from "./Discover";
 import Service_Pitch from "./Service_Pitch";
 import Offer_Banner from "./Offer_Banner";
 
+import useGetData from "../../../hooks/useGetData";
+import { API } from "../../../service/apiUrl";
+
 const Home = () => {
+  // Pre-fetch consolidated homepage data in 1 single HTTP network request
+  useGetData(API.home.combined);
+
   return (
     <main className="layout_bg flex flex-col ">
       <Home_Hero />
