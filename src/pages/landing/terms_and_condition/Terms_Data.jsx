@@ -6,10 +6,12 @@ import { Skeleton } from "primereact/skeleton";
 
 const Terms_Data = () => {
   const { data, loading } = useGetData(API.terms_and_condtions.terms);
-  const { data: termsDescription, loading: loadingDescription } = useGetData(
+  const { data: rawDescription, loading: loadingDescription } = useGetData(
     API.terms_and_condtions.description
   );
- 
+
+  const termsDescription = Array.isArray(rawDescription) ? rawDescription[0] : rawDescription;
+
   return (
     <section className="Container flex flex-col gap-5 md:gap-9 ">
       {loadingDescription ? (
@@ -20,7 +22,7 @@ const Terms_Data = () => {
         </div>
       ) : (
         (termsDescription?.title || termsDescription?.title_ar) && (
-          <p className=" text-[#696969] text-xs  sm:text-sm md:text-base lg:text-lg xl:text-xl">
+          <p className=" text-[#696969] text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium">
             {currentLanguageCode === "en"
               ? termsDescription?.title
               : termsDescription?.title_ar}
@@ -43,13 +45,13 @@ const Terms_Data = () => {
           data?.map((item) => (
             <div
               key={item?.id}
-              className="secondary_border  p-5 lg:p-11  flex flex-col gap-3  "
+              className="secondary_border p-5 lg:p-11 flex flex-col gap-3 rounded-xl shadow-sm"
             >
-              <h3 className=" text-lg text-secondary-1 font-bold">
+              <h3 className="text-lg md:text-xl text-primary font-bold">
                 {currentLanguageCode === "en" ? item?.title : item?.title_ar}
               </h3>
               <div
-                className="revert_tailwind text-secondary-dark text-xs sm:text-sm flex flex-col gap-3"
+                className="revert_tailwind text-secondary-dark text-xs sm:text-sm md:text-base leading-relaxed flex flex-col gap-3"
                 dangerouslySetInnerHTML={{
                   __html:
                     currentLanguageCode === "en"
