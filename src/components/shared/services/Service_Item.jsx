@@ -5,6 +5,8 @@ import { SarIcon } from "../../../assets/images/Image";
 import Counter from "../counter/Counter";
 import { apiKey } from "../../../service/apiUrl";
 
+import { getImageUrl } from "../../../utils/getImageUrl";
+
 const Service_Item = ({
   data,
   children,
@@ -21,12 +23,8 @@ const Service_Item = ({
       className={`main_gradient dark ${className} z-10 h-[490px] sm:h-[420px] sm:h-[506px] rounded-lg relative`}
     >
       <img
-        src={
-          data?.image?.includes(apiKey)
-            ? data?.image
-            : `${apiKey}${data?.image}`
-        }
-        className="w-full h-full object-fill rounded-lg"
+        src={getImageUrl(data?.image)}
+        className="w-full h-full object-cover rounded-lg"
       />
       <figcaption className="absolute bottom-[25px] w-[90%] left-[50%] translate-x-[-50%] z-10">
         <h4 className="text-font-light headline_sm truncate">

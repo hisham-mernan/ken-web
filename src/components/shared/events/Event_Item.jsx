@@ -7,6 +7,8 @@ import { apiKey } from "../../../service/apiUrl";
 import Counter from "../counter/Counter";
 import { SarIcon } from "../../../assets/images/Image";
 
+import { getImageUrl } from "../../../utils/getImageUrl";
+
 const Event_Item = ({
   item,
   hasBookingBtn = false,
@@ -21,20 +23,16 @@ const Event_Item = ({
   return (
     <figure
       key={item?.id}
-      className={`relateive main_gradient event rounded-lg ${
+      className={`relative main_gradient event rounded-lg ${
         hasBookingBtn
           ? "h-[300px] sm:h-[300px] lg:h-[426px]"
           : "h-[250px] sm:h-[300px] lg:h-[426px]"
       }`}
     >
       <img
-        src={
-          item?.image?.includes(apiKey)
-            ? item?.image
-            : `${apiKey}${item?.image}`
-        }
+        src={getImageUrl(item?.image)}
         alt={currentLanguageCode === "en" ? item?.title : item?.title_ar}
-        className="w-full h-full object-cover  rounded-lg"
+        className="w-full h-full object-cover rounded-lg"
       />
       <div
         dir={currentLanguageCode === "en" ? "ltr" : "rtl"}

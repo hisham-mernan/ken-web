@@ -26,6 +26,7 @@ import {
 
 // service
 import { API } from "../../../../service/apiUrl";
+import { getImageUrl } from "../../../../utils/getImageUrl";
 
 // utils
 import { currentLanguageCode } from "../../../../utils/switchLang";
@@ -132,12 +133,12 @@ const Event_Details = () => {
           </div>
           <figure
             className={`order-1 md:order-2 w-full max-w-[690px] rounded-lg h-[330px] border border-font-light ${
-              data?.image ? "relateive main_gradient" : ""
+              data?.image ? "relative main_gradient" : ""
             } `}
           >
             {data?.image ? (
               <img
-                src={data?.image}
+                src={getImageUrl(data?.image)}
                 alt="event image"
                 className="w-full h-full object-cover rounded-lg"
               />

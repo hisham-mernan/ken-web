@@ -1,4 +1,4 @@
-export const apiKey = import.meta.env.VITE_REACT_APP_BASE_URL || "https://ken-back.vercel.app";
+export const apiKey = import.meta.env.VITE_REACT_APP_BASE_URL || "http://localhost:8000";
 export const API = {
   list: {
     suppliers: "/supplier-dropdown/",

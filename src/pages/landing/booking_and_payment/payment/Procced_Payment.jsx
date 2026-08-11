@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Right_Text_Header from "../../../../components/layout/header/Right_Text_Header";
 import Landing_Header from "../../../../components/layout/header/Landing_Header";
 
-const paymentURL = import.meta.env.VITE_REACT_APP_PAYMENT;
+const paymentURL = import.meta.env.VITE_REACT_APP_PAYMENT || "https://eu-prod.oppwa.com/v1/paymentWidgets.js";
 const Procced_Payment = () => {
   const { id: checkoutId } = useParams();
   const shopperResultUrl = `${window.location.origin}/payment/result`;

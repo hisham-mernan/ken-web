@@ -13,6 +13,8 @@ import { Skeleton } from "primereact/skeleton";
 
 const Events = () => {
   const { data, loading } = useGetData(API.home.event);
+  const eventsList = Array.isArray(data) ? data : (data?.results || []);
+
   let settings = {
     dots: true,
     infinite: false,
@@ -22,10 +24,10 @@ const Events = () => {
     cssEase: "linear",
     slidesToShow: 1,
     slidesToScroll: 1,
-    // rtl: true,
     pauseOnHover: true,
   };
-  if (data?.length === 0) {
+
+  if (!eventsList || eventsList.length === 0) {
     return null;
   }
   return (
@@ -35,7 +37,7 @@ const Events = () => {
         <EventSkeleton />
       ) : (
         <Slider {...settings}>
-          {data?.results?.map((item) => (
+          {eventsList.map((item) => (
             <Event_Item item={item} key={item?.id} />
           ))}
         </Slider>
