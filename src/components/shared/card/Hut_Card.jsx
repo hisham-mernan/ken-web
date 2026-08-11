@@ -13,6 +13,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
 
+import { getImageUrl } from "../../../utils/getImageUrl";
+
 const Hut_Card = ({ className = "", data }) => {
   const { i18n, t } = useTranslation();
   const lang = i18n?.language;
@@ -39,7 +41,8 @@ const Hut_Card = ({ className = "", data }) => {
     { id: 3, icon: <LinearBox />, value: data?.size },
   ];
 
-  const images = [data?.main_image, data?.main_image, data?.main_image];
+  const imagesList = data?.images?.length > 0 ? data.images : [data?.main_image];
+
   return (
     <div
       onMouseEnter={() => swiperRef.current?.autoplay.start()}
@@ -63,11 +66,11 @@ const Hut_Card = ({ className = "", data }) => {
           }}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         >
-          {images?.map((item) => (
-            <SwiperSlide key={item?.id}>
+          {imagesList?.map((item, idx) => (
+            <SwiperSlide key={item?.id || idx}>
               <figure className="hut_image_layout h-[266px] object-cover w-full">
                 <img
-                  src={data?.main_image}
+                  src={getImageUrl(typeof item === "string" ? item : item?.image)}
                   alt={data?.title}
                   className="h-[266px] object-cover w-full  "
                 />
@@ -77,7 +80,7 @@ const Hut_Card = ({ className = "", data }) => {
         </Swiper>
         {/* pagination */}
         <div className=" hidden group-hover:flex gap-1 absolute bottom-[11px] left-1/2 -translate-x-1/2   z-10">
-          {images?.map((_, index) => (
+          {imagesList?.map((_, index) => (
             <button
               key={index}
               onClick={() => swiperRef.current?.slideToLoop(index)}

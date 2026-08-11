@@ -1,5 +1,6 @@
 import React from "react";
 import { currentLanguageCode } from "../../../../../utils/switchLang";
+import { getImageUrl } from "../../../../../utils/getImageUrl";
 import {
   LinearBox,
   PrizeIcon,
@@ -49,9 +50,9 @@ const Hut_Item = ({ data }) => {
             currentLanguageCode === "en" ? "md:border-r" : "md:border-l"
           } border-primary-4 flex flex-col gap-8 lg:gap-12`}
         >
-          <figure className="max-w-[95%] xl:max-w-[453px] h-[250px] sm:h-[300px] md:h-[280px] lg:h-[320px] xl:h-[400px] rounded-lg light_gradient r_lg">
+          <figure className="max-w-[95%] xl:max-w-[453px] h-[250px] sm:h-[300px] md:h-[280px] lg:h-[320px] xl:h-[400px] relative rounded-lg overflow-hidden">
             <img
-              src={data?.main_image}
+              src={getImageUrl(data?.main_image)}
               className="w-full h-full object-cover object-center rounded-lg "
             />
           </figure>
@@ -78,11 +79,11 @@ const Hut_Item = ({ data }) => {
           <figure className="flex gap-3 sm:gap-5 md:gap-8 lg:gap-5 xl:gap-8">
             {data?.images?.length > 0
               ? data?.images?.slice(0, 2)?.map((item) => (
-                  <figure className="w-full h-[160px] sm:h-[200px] lg:h-[250px] xl:h-[330px] extra_light_gradient">
+                  <figure key={item?.id || item?.image || item} className="w-full h-[160px] sm:h-[200px] lg:h-[250px] xl:h-[330px] relative rounded-lg overflow-hidden">
                     <img
-                      src={item?.image}
+                      src={getImageUrl(typeof item === "string" ? item : item?.image)}
                       alt="hut images"
-                      className="w-full h-full rounded-lg object-cover "
+                      className="w-full h-full rounded-lg object-cover"
                     />
                   </figure>
                 ))
