@@ -16,7 +16,6 @@ const Our_Services = () => {
       />
       <div className="Container relative z-10 flex flex-col gap-20 ">
         <Service />
-        <Our_Partener />
       </div>
       <img
         src={OurServiceVector2}
