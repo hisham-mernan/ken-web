@@ -1,24 +1,21 @@
 import { useTranslation } from "react-i18next";
-import Right_Text_Header from "../../../../components/layout/header/Right_Text_Header";
-
+import Landing_Header from "../../../../components/layout/header/Landing_Header";
 import useGetData from "../../../../hooks/useGetData";
-import { API, apiKey } from "../../../../service/apiUrl";
-import Booking_Card_Layout from "../../my_booking/components/Booking_Card_Layout";
-import { useNavigate, useParams } from "react-router-dom";
+import { API } from "../../../../service/apiUrl";
+import { useNavigate } from "react-router-dom";
 import Payment_Booking_Details from "./components/Payment_Booking_Details";
 import Payment_Ticket_Card from "./components/Payment_Ticket_Card";
 import Button from "../../../../components/shared/Button";
 import Full_Page_Loader from "../../../../components/shared/loaders/Full_Page_Loader";
 import {
   CardRemoveIcon,
-  CircleCloseIcon,
   EmptyWaletTimeIcon,
 } from "../../../../assets/icons/Icon";
 import { useEffect, useState } from "react";
 import { handleErrors } from "../../../../utils/handleError";
 import axiosInstance from "../../../../service/axiosInstance";
 import { downloadFile } from "../../../../utils/downloadFile";
-import Landing_Header from "../../../../components/layout/header/Landing_Header";
+import { getImageUrl } from "../../../../utils/getImageUrl";
 
 const Payment_Results = () => {
   const { t } = useTranslation();
@@ -107,7 +104,7 @@ const Failed_Payment = ({ id }) => {
           </p>
         </header>
 
-        {/*  retry Button */}
+        {/* retry Button */}
         <div className="flex justify-center mt-6">
           <Button
             type="primary"
@@ -144,13 +141,22 @@ const Success_Payment = ({ id }) => {
       fetchData();
     }
   }, [id]);
+
+  const paidAmount =
+    data?.paid !== undefined && data?.paid !== null && parseFloat(data?.paid) > 0
+      ? data?.paid
+      : data?.total_price;
+
   const list = {
-    from: `${data?.dates?.date_from}`,
-    to: `${data?.dates?.date_to}`,
-    number_of_guests: data?.persons_max_num + data?.kids_max_num || 0,
-    event_ticket: data?.events_tickets_count,
-    subtotal: `${data?.total_price}${t("sar")}`,
+    from: `${data?.dates?.date_from || data?.check_in || ""}`,
+    to: `${data?.dates?.date_to || data?.check_out || ""}`,
+    number_of_guests: (data?.persons_max_num || 0) + (data?.kids_max_num || 0),
+    event_ticket: data?.events_tickets_count || 0,
+    subtotal: `${paidAmount}${t("sar")}`,
   };
+
+  const qrImageUrl = getImageUrl(data?.qr_code_image);
+
   return (
     <>
       <Landing_Header src="xl" title="booked_succecffuly" />
@@ -166,21 +172,25 @@ const Success_Payment = ({ id }) => {
         <div className="flex flex-col md:flex-row gap-8 xl:gap-[123px]">
           <Payment_Booking_Details
             data={list}
+            loading={loading}
             className="w-full md:w-1/2 md:max-w-[577px]"
           />
           <Payment_Ticket_Card
             className="w-full md:w-1/2 md:max-w-[540px]"
             title="your_qr_code"
             description="qr_des"
-            img={`${apiKey}${data?.qr_code_image}`}
+            img={qrImageUrl}
+            loading={loading}
             button={() => (
               <Button
                 onClick={() => {
-                  downloadFile(
-                    `${apiKey}${data?.qr_code_image}`,
-                    "ticket.png",
-                    t
-                  );
+                  if (qrImageUrl) {
+                    downloadFile(
+                      qrImageUrl,
+                      "ticket.png",
+                      t
+                    );
+                  }
                 }}
               >
                 {t("download_ticket")}

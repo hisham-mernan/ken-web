@@ -7,6 +7,7 @@ import Modal from "../popup/Modal";
 import Rate from "../../../pages/landing/my_booking/components/Rate";
 import { ThanksImage } from "../../../assets/images/Image";
 import { downloadFile } from "../../../utils/downloadFile";
+import { getImageUrl } from "../../../utils/getImageUrl";
 
 const titleStyles = {
   primary: "text-secondary-dark",
@@ -55,11 +56,11 @@ const Booking_Details_Card = ({
                         <button
                           className="cursor-pointer bg-white border border-secondary-dark w-20 h-20 flex_center rounded-lg "
                           onClick={() =>
-                            downloadFile(value?.qr_code_image, "ticket.png", t)
+                            downloadFile(getImageUrl(value?.qr_code_image), "ticket.png", t)
                           }
                         >
                           <img
-                            src={value?.qr_code_image}
+                            src={getImageUrl(value?.qr_code_image)}
                             alt="QR"
                             className="w-full h-full rounded-[10px] object-cover "
                           />
