@@ -9,12 +9,12 @@ import Landing_Header from "../../../components/layout/header/Landing_Header";
 import { getImageUrl } from "../../../utils/getImageUrl";
 
 const defaultSpecial = [
-  { id: 1, title: "BUILT BY SAUDI HANDS", title_ar: "بُني بأيدي سعودية", image: "uploads/content/about_us/main.jpg" },
-  { id: 2, title: "LUXURIOUS EXPERIENCE", title_ar: "تجربة كوخ فاخرة", image: "uploads/services/hut_image/DSC_0046_2.jpg" },
-  { id: 3, title: "STRATEGIC LOCATION", title_ar: "موقع استراتيجي", image: "uploads/content/story/story1.jpg" },
-  { id: 4, title: "FAMILY PROJECT", title_ar: "مشروع عائلي", image: "uploads/services/service_image/dining.jpg" },
-  { id: 5, title: "SMART ENTRY", title_ar: "دخول ذكي", image: "uploads/services/hut_image/DSC_0080_2.jpg" },
-  { id: 6, title: "NATURAL WOOD", title_ar: "خشب طبيعي", image: "uploads/services/service_image/spa.jpg" },
+  { id: 1, title: "BUILT BY SAUDI HANDS", title_ar: "بُني بأيدي سعودية", image: "uploads/content/special_about_us/hands_building.jpg" },
+  { id: 2, title: "LUXURIOUS EXPERIENCE", title_ar: "تجربة كوخ فاخرة", image: "uploads/content/special_about_us/luxury_huts.jpg" },
+  { id: 3, title: "STRATEGIC LOCATION", title_ar: "موقع استراتيجي", image: "uploads/content/special_about_us/desert_dunes.jpg" },
+  { id: 4, title: "FAMILY PROJECT", title_ar: "مشروع عائلي", image: "uploads/content/special_about_us/hands_building.jpg" },
+  { id: 5, title: "SMART ENTRY", title_ar: "دخول ذكي", image: "uploads/content/special_about_us/family_gazebo.jpg" },
+  { id: 6, title: "NATURAL WOOD", title_ar: "خشب طبيعي", image: "uploads/content/special_about_us/natural_wood_grain.jpg" },
 ];
 
 const Special_About_Us = () => {
