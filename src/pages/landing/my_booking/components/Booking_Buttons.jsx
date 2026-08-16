@@ -187,7 +187,7 @@ const Booking_Buttons = ({ id, isCancelled, available_dates }) => {
               }</span> ${t("reply_cancellation")}`,
             }}
           />
-          <img
+          <img loading="lazy" decoding="async"
             src={MessageRecived}
             alt="message recived image"
             className="w-[250px] sm:w-[300px]"

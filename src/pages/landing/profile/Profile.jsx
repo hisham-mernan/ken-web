@@ -368,7 +368,7 @@ const Profile = () => {
             <div key={item?.id}>
               <section className="flex flex-col gap-4 sm:gap-6 lg:gap-7 py-8">
                 <header className="flex items-center gap-3">
-                  <img src={item?.headerImg} className="w-9 h-9 rounded-full" />
+                  <img loading="lazy" decoding="async" src={item?.headerImg} className="w-9 h-9 rounded-full" />
                   <h3 className="text-main-dark  font-bold text-lg">
                     {t(item?.title)}
                   </h3>

@@ -10,6 +10,7 @@ import { currentLanguageCode } from "../../../utils/switchLang";
 import useGetData from "./../../../hooks/useGetData";
 import { API } from "../../../service/apiUrl";
 
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 const Testimonials = ({ className }) => {
   const { data, loading } = useGetData(API.testimonials);
   let settings = {
@@ -46,7 +47,7 @@ const Testimonials = ({ className }) => {
     <section className={`Container section_gap ${className ?? "section_p"} `}>
       <Landing_Header title="testimonials" src="2xl" />
       <div className="relative">
-        <img
+        <img loading="lazy" decoding="async"
           alt="quote"
           src={QuoteImg}
           className="w-12 h-12 absolute top-[-25px] left-[-10px] z-20"
@@ -61,8 +62,8 @@ const Testimonials = ({ className }) => {
               <div key={item?.id} className=" max-w-[380px] px-1 ">
                 <div className="h-[300px]  gap-1.5 glass_card flex flex-col gap-1.5 ">
                   {item?.user?.avatar ? (
-                    <img
-                      src={item?.user?.avatar}
+                    <img loading="lazy" decoding="async"
+                      src={getImageUrl(item?.user?.avatar, { width: IMG.avatar })}
                       alt="avatar"
                       className="mx-auto flex w-12 h-12 rounded-full border-[3px] border-primary-5 object-full"
                     />
@@ -83,7 +84,7 @@ const Testimonials = ({ className }) => {
             ))}
           </Slider>
         )}
-        <img
+        <img loading="lazy" decoding="async"
           alt="quote"
           src={QuoteImg}
           className="w-12 h-12 absolute bottom-[-25px] right-[4%] z-20 rotate-180"

@@ -14,6 +14,7 @@ import useGetData from "../../../../hooks/useGetData";
 import { API } from "../../../../service/apiUrl";
 import Landing_Header from "../../../../components/layout/header/Landing_Header";
 
+import { getImageUrl, IMG } from "../../../../utils/getImageUrl";
 const Our_Partener = () => {
   const { t } = useTranslation();
   const { data, loading } = useGetData(API.parteners);
@@ -56,9 +57,9 @@ const Our_Partener = () => {
       <figure>
         <Slider {...settings}>
           {data?.map((item) => (
-            <img
+            <img loading="lazy" decoding="async"
               key={item?.id}
-              src={item?.image}
+              src={getImageUrl(item?.image, { width: IMG.thumb })}
               className="h-[31px] !max-w-[150px] object-contain object-center"
               alt="partner logo"
             />

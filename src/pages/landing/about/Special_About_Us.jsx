@@ -6,7 +6,7 @@ import useGetData from "../../../hooks/useGetData";
 import { API } from "../../../service/apiUrl";
 import { Skeleton } from "primereact/skeleton";
 import Landing_Header from "../../../components/layout/header/Landing_Header";
-import { getImageUrl } from "../../../utils/getImageUrl";
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 
 const defaultSpecial = [
   { id: 1, title: "BUILT BY SAUDI HANDS", title_ar: "بُني بأيدي سعودية", image: "uploads/content/special_about_us/hands_building.jpg" },
@@ -37,8 +37,10 @@ const Special_About_Us = () => {
               className="h-[110px] sm:h-[140px] lg:h-[160px] rounded-lg relative overflow-hidden group shadow-sm"
             >
               <img
-                src={getImageUrl(item?.image)}
+                src={getImageUrl(item?.image, { width: IMG.card })}
                 alt={item?.title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-center object-cover rounded-lg transform group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-black/45 rounded-lg transition-opacity duration-300" />

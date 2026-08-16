@@ -78,7 +78,7 @@ const Footer = () => {
 
         <div className="flex flex-col gap-4 md:gap-6 text-primary-light col-span-3 ">
           <Link to="/">
-            <img src={LogoLight} className="h-[20px]" alt="logo" />
+            <img loading="lazy" decoding="async" src={LogoLight} className="h-[20px]" alt="logo" />
           </Link>
           <p className=" text-sm md:text-lg">{t("ken_footer")}</p>
           <a
@@ -107,7 +107,7 @@ const Footer = () => {
                 target="_blank"
                 aria-label={item?.alt}
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src={item.img}
                   alt={item.alt}
                   className="w-4 h-4 md:w-5 md:h-5"
@@ -127,7 +127,7 @@ const Footer = () => {
         <Footer_Link_item title="support" list={supportList} />
         <Footer_Link_item title="more" list={moreList} />
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         src={FooterImg}
         className="absolute bottom-0 right-0 w-[600px]  z-[1]"
       />

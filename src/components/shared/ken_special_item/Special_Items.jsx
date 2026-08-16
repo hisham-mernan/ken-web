@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import Paginated_Slider from "../slider/Paginated_Slider";
 import usePaginatedData from "./../../../hooks/usePaginatedData";
 
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 const Special_Items = ({ setSpecial, special, isConfirm = false, id }) => {
   const { t } = useTranslation();
 
@@ -155,8 +156,8 @@ const Box = ({
               error.includes(item.id) ? "!border-red-dark" : ""
             }`}
           >
-            <img
-              src={item?.image}
+            <img loading="lazy" decoding="async"
+              src={getImageUrl(item?.image, { width: IMG.thumb })}
               alt="special item image"
               className="w-full sm:w-[200px] h-[190px] sm:h-[150px] rounded-[10px] object-cover object-center"
             />
@@ -166,7 +167,7 @@ const Box = ({
               </h3>
               <div className="flex_center_y justify-between gap-1">
                 <figure className="flex_center_y font-semibold text-sm text-secondary-dark gap-1">
-                  <img src={SarBlackIcon} alt="sar" className="w-3.5 h-3.5" />
+                  <img loading="lazy" decoding="async" src={SarBlackIcon} alt="sar" className="w-3.5 h-3.5" />
                   <span>{item?.price}</span>
                 </figure>
                 <Counter

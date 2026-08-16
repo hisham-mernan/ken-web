@@ -26,7 +26,7 @@ import {
 
 // service
 import { API } from "../../../../service/apiUrl";
-import { getImageUrl } from "../../../../utils/getImageUrl";
+import { getImageUrl, IMG } from "../../../../utils/getImageUrl";
 
 // utils
 import { currentLanguageCode } from "../../../../utils/switchLang";
@@ -109,7 +109,7 @@ const Event_Details = () => {
           <div className="order-2 md:order-1 md:max-w-[407px] flex flex-col gap-10 xl:gap-[60px] ">
             {/* price */}
             <header className="flex_center_y">
-              <img src={SarBlackIcon} alt="sar" className="w-[30px] h-[30px]" />
+              <img loading="lazy" decoding="async" src={SarBlackIcon} alt="sar" className="w-[30px] h-[30px]" />
               <strong className="headline_lg !font-bold text-secondary ">
                 {data?.available_dates?.price}
                 <small className="title_lg !font-normal">/{t("_person")}</small>
@@ -138,8 +138,9 @@ const Event_Details = () => {
           >
             {data?.image ? (
               <img
-                src={getImageUrl(data?.image)}
+                src={getImageUrl(data?.image, { width: IMG.hero })}
                 alt="event image"
+                decoding="async"
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (

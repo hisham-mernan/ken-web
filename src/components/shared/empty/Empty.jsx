@@ -14,7 +14,7 @@ const Empty = ({
     <section className={`Container  layout_bg_2 ${containerClassName} `}>
       <div className="flex_center flex-col gap-8">
         {hasImg && (
-          <img
+          <img loading="lazy" decoding="async"
             src={img}
             alt="avatar"
             className="max-w-[300px] md:max-w-[400px] mx-auto"

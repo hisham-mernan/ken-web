@@ -35,7 +35,7 @@ const Payment_Faq_Layout = ({ index, children, title, des, img }) => {
           header={
             <header className="flex items-center justify-between">
               <div className="flex  items-start gap-7">
-                <img src={img} className="w-10 h-10 " alt="icon" />
+                <img loading="lazy" decoding="async" src={img} className="w-10 h-10 " alt="icon" />
                 <div className="flex gap-2 flex-col">
                   <h4 className="!text-base text-secondary-dark">{t(title)}</h4>
                   <p className="text-secondary-dark text-xs !font-normal ">

@@ -58,13 +58,13 @@ const Story_Item = ({ data, isLastIndex, isFirstIndex }) => {
           alt="hut image"
           className="hut_primary md:!w-[300px] !h-[400px] xs:!h-[450px] md:!h-[400px]"
         >
-          <img
+          <img loading="lazy" decoding="async"
             src={Vector}
             alt="vector"
             className="absolute bottom-[-30px] start-[-20px]  w-[64px]"
           />
           {isFirstIndex && (
-            <img
+            <img loading="lazy" decoding="async"
               src={LogoLetter}
               alt="vector"
               className="absolute bottom-[-5px] end-[-30px]  w-[84px] rotate-[27deg]"

@@ -10,7 +10,7 @@ const Booking_Contact = () => {
     <section
       className={`w-full bg-main py-10  relative rounded-sm min-h-[249px] flex flex-col items-center justify-center `}
     >
-      <img
+      <img loading="lazy" decoding="async"
         src={LogoLg}
         className={` absolute top-0 start-0 w-[40px] sm:w-[60px] `}
       />
@@ -30,12 +30,12 @@ const Booking_Contact = () => {
           {t("contact_us")}
         </Button>
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         src={LogoLetter}
         className="absolute bottom-[12%] start-[4%] md:end-[10%] w-[40px] sm:w-[50px]  "
         alt="vector"
       />
-      <img
+      <img loading="lazy" decoding="async"
         src={LogoWhite}
         className="absolute bottom-9 end-[-5%] w-[100px] sm:w-[120px] md:w-[180px] lg:w-[250px] "
       />

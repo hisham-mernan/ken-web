@@ -4,15 +4,15 @@ export { default as LogoSecondary } from "./logo/logo_secondary.svg";
 export { default as LogoWhite } from "./logo/logo_white.svg";
 
 // auth
-export { default as AuthImage } from "./auth/auth_image.png";
+export { default as AuthImage } from "./auth/auth_image.webp";
 
 // footer
 export { default as TiktokIcon } from "./footer/tiktok.svg";
 export { default as InstgramIcon } from "./footer/instgram.svg";
-export { default as FooterImg } from "./layout/footer_img.png";
+export { default as FooterImg } from "./layout/footer_img.webp";
 
 //home
-export { default as HomeHero } from "./home/hero.png";
+export { default as HomeHero } from "./home/hero.webp";
 export { default as HomeHeroTextAr } from "./home/hero_text_ar.svg";
 export { default as HomeHeroTextEn } from "./home/hero_text_en.svg";
 
@@ -33,12 +33,12 @@ export { default as QuoteImg } from "./layout/quote.svg";
 
 // about page landing
 // about hero
-export { default as AboutHero1 } from "./about/aboutHero1.png";
-export { default as AboutHero2 } from "./about/aboutHero2.png";
+export { default as AboutHero1 } from "./about/aboutHero1.webp";
+export { default as AboutHero2 } from "./about/aboutHero2.webp";
 // about story
-export { default as StoryImage1 } from "./about/story/story1.png";
-export { default as StoryImage2 } from "./about/story/story2.png";
-export { default as StoryImage3 } from "./about/story/story3.png";
+export { default as StoryImage1 } from "./about/story/story1.webp";
+export { default as StoryImage2 } from "./about/story/story2.webp";
+export { default as StoryImage3 } from "./about/story/story3.webp";
 
 // our services
 export { default as OurServiceVector1 } from "./about/about_vector_1.svg";
@@ -56,9 +56,9 @@ export { default as WalletIcon } from "./icon/walletImg.svg";
 export { default as MarkerImg } from "./icon/marker.png";
 
 // huts page landing
-export { default as HutsHero1 } from "./huts/hero/huts_hero_1.png";
-export { default as HutsHero2 } from "./huts/hero/huts_hero_2.png";
-export { default as HutsHero3 } from "./huts/hero/huts_hero_3.png";
+export { default as HutsHero1 } from "./huts/hero/huts_hero_1.webp";
+export { default as HutsHero2 } from "./huts/hero/huts_hero_2.webp";
+export { default as HutsHero3 } from "./huts/hero/huts_hero_3.webp";
 
 // 404
 export { default as PageNotFoundImg } from "./404/404.svg";
@@ -93,8 +93,8 @@ export { default as ProfileSecurityImg } from "./profile/security.svg";
 export { default as EmojiImg } from "./profile/emoji.svg";
 export { default as StarBadgeImg } from "./profile/star.svg";
 // home -- offer
-export { default as TicketImg } from "./home/offer/ticket.png";
+export { default as TicketImg } from "./home/offer/ticket.webp";
 
 // mock
-export { default as HomeOfferBg } from "./mock/offer_bg.png";
-export { default as OfferImg1 } from "./mock/offer.png";
+export { default as HomeOfferBg } from "./mock/offer_bg.webp";
+export { default as OfferImg1 } from "./mock/offer.webp";

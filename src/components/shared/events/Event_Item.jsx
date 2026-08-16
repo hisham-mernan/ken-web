@@ -7,7 +7,7 @@ import { apiKey } from "../../../service/apiUrl";
 import Counter from "../counter/Counter";
 import { SarIcon } from "../../../assets/images/Image";
 
-import { getImageUrl } from "../../../utils/getImageUrl";
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 
 const Event_Item = ({
   item,
@@ -30,8 +30,10 @@ const Event_Item = ({
       }`}
     >
       <img
-        src={getImageUrl(item?.image)}
+        src={getImageUrl(item?.image, { width: IMG.card })}
         alt={currentLanguageCode === "en" ? item?.title : item?.title_ar}
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-cover rounded-lg"
       />
       <div
@@ -67,7 +69,7 @@ const Event_Item = ({
             <div className="flex_center_y justify-between">
               {item?.available_dates?.price && (
                 <div className="flex items-center gap-1 text-white text-base font-semibold">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={SarIcon}
                     alt="sar"
                     className="w-5 h-5 object-center"

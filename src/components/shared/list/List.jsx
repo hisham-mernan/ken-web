@@ -4,6 +4,7 @@ import { currentLanguageCode } from "../../../utils/switchLang";
 import { Skeleton } from "primereact/skeleton";
 import { apiKey } from "../../../service/apiUrl";
 
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 const List = ({
   variant = "icon",
   list = [],
@@ -46,8 +47,8 @@ const List = ({
               className="text-primary-4 body_sm flex_center_y gap-4"
             >
               {variant === "icon" ? (
-                <img
-                  src={`${item?.icon.image}`}
+                <img loading="lazy" decoding="async"
+                  src={getImageUrl(item?.icon?.image, { width: IMG.icon })}
                   alt={item?.description}
                   className="w-6 h-6 object-center object-contain"
                 />

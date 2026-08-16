@@ -10,6 +10,7 @@ import { API } from "../../../service/apiUrl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 const About_Section = () => {
   const { t, i18n } = useTranslation();
   const isRtl = i18n?.language === "ar";
@@ -71,8 +72,8 @@ const About_Section = () => {
                     className="    flex flex-col gap-4 md:gap-[18px]"
                   >
                     <figure className="   main_gradient main h-[350px] md:h-[450px] lg:h-[543px]   rounded-3xl group overflow-hidden ">
-                      <img
-                        src={item?.image}
+                      <img loading="lazy" decoding="async"
+                        src={getImageUrl(item?.image, { width: IMG.card })}
                         className="w-full h-full object-cover rounded-lg"
                       />
                       <div

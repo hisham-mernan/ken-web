@@ -552,7 +552,7 @@ body:dir(ltr) .mobile_navbar.close aside {
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
-  background-image: url("../../images/home/hero.png");
+  background-image: url("../../images/home/hero.webp");
   background-size: cover;
   background-repeat: no-repeat;
 }

@@ -70,7 +70,7 @@ const Upload_Image = ({
         }`}
       >
         {value || img ? (
-          <img
+          <img loading="lazy" decoding="async"
             src={value && !img ? value : img}
             alt="avatar"
             className="w-full h-full rounded-full object-cover object-center"

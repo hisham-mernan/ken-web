@@ -1,6 +1,6 @@
 import React from "react";
 import { currentLanguageCode } from "../../../../../utils/switchLang";
-import { getImageUrl } from "../../../../../utils/getImageUrl";
+import { getImageUrl, IMG } from "../../../../../utils/getImageUrl";
 import {
   LinearBox,
   PrizeIcon,
@@ -52,7 +52,10 @@ const Hut_Item = ({ data }) => {
         >
           <figure className="max-w-[95%] xl:max-w-[453px] h-[250px] sm:h-[300px] md:h-[280px] lg:h-[320px] xl:h-[400px] relative rounded-lg overflow-hidden">
             <img
-              src={getImageUrl(data?.main_image)}
+              src={getImageUrl(data?.main_image, { width: IMG.card })}
+              alt={data?.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center rounded-lg "
             />
           </figure>
@@ -81,8 +84,12 @@ const Hut_Item = ({ data }) => {
               ? data?.images?.slice(0, 2)?.map((item) => (
                   <figure key={item?.id || item?.image || item} className="w-full h-[160px] sm:h-[200px] lg:h-[250px] xl:h-[330px] relative rounded-lg overflow-hidden">
                     <img
-                      src={getImageUrl(typeof item === "string" ? item : item?.image)}
+                      src={getImageUrl(typeof item === "string" ? item : item?.image, {
+                        width: IMG.card,
+                      })}
                       alt="hut images"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full rounded-lg object-cover"
                     />
                   </figure>
@@ -119,7 +126,7 @@ const Hut_Item = ({ data }) => {
                   : data?.description_ar}
               </p>
               <div className="flex items-center gap-1 text-primary-3 text-base font-semibold">
-                <img
+                <img loading="lazy" decoding="async"
                   src={SarBlackIcon}
                   alt="sar"
                   className="w-5 h-5 object-center"

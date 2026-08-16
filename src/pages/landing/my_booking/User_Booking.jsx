@@ -45,7 +45,7 @@ const User_Booking = () => {
             <h3 className=" text-[28px] xs:text-[35px] md:text-[48px] text-secondary-dark ">
               {t("we_are_exciting_see_soon")}
             </h3>
-            <img
+            <img loading="lazy" decoding="async"
               src={InboxEmpty}
               alt="don't have upcoming appointments"
               className="max-w-[300px] md:max-w-[400px]"

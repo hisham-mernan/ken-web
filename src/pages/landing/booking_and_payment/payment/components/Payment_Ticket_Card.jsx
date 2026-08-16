@@ -27,7 +27,7 @@ const Payment_Ticket_Card = ({
       <div className="flex flex-col gap-[10px] items-center justify-center text-center">
         <span className=" text-[25px] lg:text-[30px]">{t(title)}</span>
         {img && (
-          <img
+          <img loading="lazy" decoding="async"
             src={img}
             className="w-[200px] h-[200px] md:w-[300px] md:h-[300px] object-contain rounded-[10px]"
           />

@@ -59,7 +59,7 @@ const Booking_Details_Card = ({
                             downloadFile(getImageUrl(value?.qr_code_image), "ticket.png", t)
                           }
                         >
-                          <img
+                          <img loading="lazy" decoding="async"
                             src={getImageUrl(value?.qr_code_image)}
                             alt="QR"
                             className="w-full h-full rounded-[10px] object-cover "
@@ -158,7 +158,7 @@ const Booking_Details_Card = ({
         open={thankYouModalOpen}
         onClose={() => setThankYouModalOpen(false)}
       >
-        <img
+        <img loading="lazy" decoding="async"
           src={ThanksImage}
           alt="Thanks"
           className="w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[350px] md:h-[350px]"

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 import {
   HomeOfferBg,
   OfferImg1,
@@ -35,7 +36,7 @@ const Ticket = ({ item, className }) => {
       style={{ transform: isRtl ? "rotate(30deg)" : "rotate(-30deg)" }}
     >
       {/* Ticket Image */}
-      <img
+      <img loading="lazy" decoding="async"
         src={TicketImg}
         className="w-full h-full object-fill relative z-10"
         alt="ticket"
@@ -51,8 +52,8 @@ const Ticket = ({ item, className }) => {
           <span>{item?.hut}</span>
         </p>
 
-        <img
-          src={item?.image}
+        <img loading="lazy" decoding="async"
+          src={getImageUrl(item?.image, { width: IMG.thumb })}
           className="w-[152px] h-20 rounded-sm object-cover"
           alt=""
         />

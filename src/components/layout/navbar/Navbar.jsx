@@ -14,9 +14,9 @@ import { currentLanguageCode, switchLang } from "../../../utils/switchLang";
 import Button from "../../shared/Button";
 import { getUserRole } from "../../../utils/auth";
 import { OverlayPanel } from "primereact/overlaypanel";
-import { apiKey } from "../../../service/apiUrl";
 import { useOutsideClick } from "./../../../hooks/useOutsideClick";
 
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 const navList = [
   { title: "home", path: "/" },
   { title: "about", path: "/about" },
@@ -152,7 +152,7 @@ const Navbar = () => {
             <figure className=" w-7 h-7 rounded-full">
               {user?.avatar ? (
                 <img
-                  src={`${apiKey}${user?.avatar}`}
+                  src={getImageUrl(user?.avatar, { width: IMG.avatar })}
                   alt="logo"
                   className="h-full w-full rounded-full border-[.5px] border-on-surface-outline-variant"
                 />

@@ -14,7 +14,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
 
-import { getImageUrl } from "../../../utils/getImageUrl";
+import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 
 const Hut_Card = ({ className = "", data }) => {
   const { i18n, t } = useTranslation();
@@ -86,8 +86,12 @@ const Hut_Card = ({ className = "", data }) => {
             <SwiperSlide key={idx}>
               <figure className="hut_image_layout h-[266px] object-cover w-full">
                 <img
-                  src={getImageUrl(typeof item === "string" ? item : item?.image)}
+                  src={getImageUrl(typeof item === "string" ? item : item?.image, {
+                    width: IMG.card,
+                  })}
                   alt={data?.title}
+                  loading="lazy"
+                  decoding="async"
                   className="h-[266px] object-cover w-full"
                 />
               </figure>

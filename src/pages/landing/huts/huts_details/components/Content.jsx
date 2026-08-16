@@ -20,6 +20,7 @@ import {
 // utils
 import { currentLanguageCode } from "../../../../../utils/switchLang";
 
+import { getImageUrl, IMG } from "../../../../../utils/getImageUrl";
 const Content = ({ loading = false, data }) => {
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
@@ -144,8 +145,8 @@ const Content = ({ loading = false, data }) => {
                 key={item?.id}
                 className="hut_details_gradient h-[443px] w-full rounded-lg"
               >
-                <img
-                  src={item?.image}
+                <img loading="lazy" decoding="async"
+                  src={getImageUrl(item?.image, { width: IMG.card })}
                   className="w-full h-full rounded-lg object-cover"
                 />
               </figure>
