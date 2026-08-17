@@ -12,13 +12,13 @@
  * JPEG is safe.
  */
 
-// Comfortably under the platform limit, leaving room for the rest of the
-// multipart body (other form fields, boundaries, headers).
-const TARGET_BYTES = 2 * 1024 * 1024;
+// Well under the platform limit, leaving room for the rest of the multipart
+// body (other form fields, boundaries, headers).
+const TARGET_BYTES = 1024 * 1024;
 
-// Larger than any layout asks for, so the stored file is still a usable
-// "original" while being far smaller than what the camera produced.
-const MAX_EDGE = 2560;
+// Comfortably above the largest layout (the widest hero asks for 1600px), so
+// the stored file is still the sharpest thing anything renders.
+const MAX_EDGE = 1920;
 
 const INITIAL_QUALITY = 0.85;
 const MIN_QUALITY = 0.5;
