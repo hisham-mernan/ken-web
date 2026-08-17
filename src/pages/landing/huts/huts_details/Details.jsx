@@ -24,6 +24,7 @@ import axiosInstance from "../../../../service/axiosInstance";
 import { handleErrors } from "../../../../utils/handleError";
 import { currentLanguageCode } from "../../../../utils/switchLang";
 import { formatDateToYYYYMMDD } from "../../../../utils/formateDateToYYYYMMDD";
+import { saveGuestToken } from "../../../../utils/guestBooking";
 
 // hooks
 import useGetData from "../../../../hooks/useGetData";
@@ -83,6 +84,11 @@ const Details = () => {
         special_items: special,
       });
       if (response.status === 201) {
+        // Returned only when the booking was made without an account. It is
+        // what lets checkout and payment act on this booking later.
+        if (response?.data?.access_token) {
+          saveGuestToken(response.data.id, response.data.access_token);
+        }
         navigate(`/${response?.data?.id}/confirm/confirm-booking`);
         reset();
       }

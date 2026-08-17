@@ -1,0 +1,1 @@
+const a=e=>{const t=["Backspace","Tab","ArrowLeft","ArrowRight","Delete","Home","End","."];!/^[0-9]$/.test(e.key)&&!t.includes(e.key)&&e.preventDefault(),e.key==="."&&e.currentTarget.value.includes(".")&&e.preventDefault()};export{a};

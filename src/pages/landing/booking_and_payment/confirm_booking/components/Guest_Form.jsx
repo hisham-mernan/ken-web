@@ -7,10 +7,12 @@ import { handleErrors } from "../../../../../utils/handleError";
 import { API } from "../../../../../service/apiUrl";
 import {
   emailRegex,
+  genericNationalIdPattern,
   namePattern,
   saudiPhoneNumberRegex,
 } from "../../../../../utils/validator";
-import { EmailIcon, UserIcon } from "../../../../../assets/icons/Icon";
+import { allowOnlyNumbers } from "../../../../../utils/allowOnlyNumbers";
+import { EmailIcon, IdIcon, UserIcon } from "../../../../../assets/icons/Icon";
 import Form from "../../../../../components/shared/form/Form";
 import Button from "../../../../../components/shared/Button";
 import { Link } from "react-router-dom";
@@ -60,6 +62,28 @@ const Guest_Form = ({ open, onClose }) => {
       hasRequiredStar: true,
     },
     {
+      id: 2,
+      formType: "input",
+      fieldName: "id_num",
+      name: "id_number",
+      label: "id_number",
+      placeholder: "id_number_placeholder",
+      validator: {
+        required: "required_field",
+        pattern: {
+          value: genericNationalIdPattern,
+          message: "id_validation",
+        },
+        maxLength: {
+          value: 16,
+          message: `${t("max_value", { value: 16 })}`,
+        },
+      },
+      icon: <IdIcon />,
+      hasRequiredStar: true,
+      onKeyDown: (e) => allowOnlyNumbers(e),
+    },
+    {
       id: 3,
       formType: "input",
       fieldName: "email",
@@ -100,12 +124,18 @@ const Guest_Form = ({ open, onClose }) => {
   ];
   // ____________ function __________________
   const onSubmit = async (data) => {
+    // These details are not saved on their own -- they are attached to the
+    // booking when the checkout page confirms it, so there is nothing to
+    // persist if the guest abandons payment.
     try {
       setLoading(true);
-      const response = await axiosInstance.post(API.booking.confirm.guest, {
-        ...data,
-        phone: `+966${data?.phone}`,
+      await onConfirm({
+        guest_name: data?.full_name,
+        guest_email: data?.email,
+        guest_phone: `+966${data?.phone}`,
+        guest_id_num: String(data?.id_num ?? ""),
       });
+      onClose?.();
     } catch (err) {
       handleErrors(err, setError, t);
     } finally {

@@ -22,6 +22,7 @@ import { handleErrors } from "../../../../utils/handleError";
 
 import axiosInstance from "../../../../service/axiosInstance";
 import { formatDateToYYYYMMDD } from "../../../../utils/formateDateToYYYYMMDD";
+import { getGuestToken } from "../../../../utils/guestBooking";
 import { toast } from "react-toastify";
 import Page_Nout_Found from "../../404/Page_Nout_Found";
 import Landing_Header from "../../../../components/layout/header/Landing_Header";
@@ -91,8 +92,11 @@ const Confirm_Booking = () => {
   const handlePayment = async (bookingId) => {
     try {
       setLoading(true);
+      // A guest has no session, so the booking's own token authorises this.
+      const guestToken = getGuestToken(bookingId ?? id);
       const response = await axiosInstance.post(API.payment.checkout, {
         booking_id: bookingId,
+        ...(guestToken ? { access_token: guestToken } : {}),
       });
       if (response.status === 201) {
         navigate(`/payment/${response?.data?.checkout_id}`);
@@ -103,12 +107,22 @@ const Confirm_Booking = () => {
       setLoading(false);
     }
   };
-  const onSubmit = async (data) => {
+  // guestDetails is supplied by Guest_Form when nobody is signed in; the
+  // backend requires those contact details before it will confirm a booking
+  // that has no account behind it.
+  const onSubmit = async (data, guestDetails = null) => {
     try {
       setLoading(true);
       let dataToSend = { ...data };
       delete dataToSend.date_from;
       delete dataToSend.date_to;
+      if (guestDetails) {
+        Object.assign(dataToSend, guestDetails);
+      }
+      const guestToken = getGuestToken(id);
+      if (guestToken) {
+        dataToSend.access_token = guestToken;
+      }
       dataToSend.date = {
         date_from: formatDateToYYYYMMDD(data.date_from),
         date_to: formatDateToYYYYMMDD(data.date_to),
@@ -295,6 +309,9 @@ const Confirm_Booking = () => {
       <Guest_Form
         open={toggleGuestForm}
         onClose={() => setToggleGuestForm(false)}
+        // Details go straight into the same confirm call a signed-in user
+        // makes, rather than being stored separately first.
+        onConfirm={(guestDetails) => onSubmit(getValues(), guestDetails)}
       />
     </main>
   );

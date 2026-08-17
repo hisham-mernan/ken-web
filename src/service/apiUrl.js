@@ -41,8 +41,9 @@ export const API = {
   booking: {
     create: "/api/products/booking/",
     details: "/api/products/bookings/",
+    // Opens a guest booking straight from the token in their confirmation email.
+    by_token: "/api/products/bookings/by-token/",
     confirm: {
-      guest: "",
       upcoming_event_and_servicse: "/api/products/avliable/service/",
       update: "/api/products/booking/update/",
       extra_service: "/api/products/service-tickets/extra/",

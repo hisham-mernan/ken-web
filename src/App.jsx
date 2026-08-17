@@ -39,6 +39,9 @@ const Huts_Details = lazy(() =>
 );
 
 // booking and payment
+const Guest_Booking = lazy(() =>
+  import("./pages/landing/guest_booking/Guest_Booking")
+);
 const Confirm_Booking = lazy(() =>
   import("./pages/landing/booking_and_payment/confirm_booking/Confirm_Booking")
 );
@@ -133,13 +136,21 @@ const App = () => {
             path=":id/:type/confirm-booking"
             element={<Confirm_Booking />}
           />
+
+          {/* Payment is reachable without an account: a guest checkout has no
+              session, and the API authorises those calls with the booking's
+              own access token instead. */}
+          <Route path="payment" element={<Payment_Container />}>
+            <Route path=":id" element={<Procced_Payment />} />
+            <Route path="result" element={<Payment_Results />} />
+          </Route>
+
+          {/* Where the confirmation email sends a guest: no account to sign
+              into, so the token in the URL stands in for one. */}
+          <Route path="booking/:accessToken" element={<Guest_Booking />} />
+
           {token && (
             <>
-              {/* payment */}
-              <Route path="payment" element={<Payment_Container />}>
-                <Route path=":id" element={<Procced_Payment />} />
-                <Route path="result" element={<Payment_Results />} />
-              </Route>
               <Route path="my-booking" element={<User_Booking />} />
               <Route path="profile" element={<Landing_Profile />} />{" "}
               <Route path="contact" element={<Contact_Us />} />
