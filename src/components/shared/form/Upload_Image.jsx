@@ -5,10 +5,16 @@ import { toast } from "react-toastify";
 import { PenIcon } from "../../../assets/icons/Icon";
 import { Skeleton } from "primereact/skeleton";
 import { getInitials } from "../../../utils/getInitials";
+import { compressImage } from "../../../utils/compressImage";
 
 // validation
 const maxFileSizeInMB = import.meta.env.VITE_REACT_APP_IMAGE_SIZE;
 const maxFileSizeInBytes = maxFileSizeInMB * 1024 * 1024;
+
+// The API runs on Vercel, which rejects request bodies over ~4.5 MB at the
+// edge with a 413 -- before Django sees them. Files are downscaled below this
+// first; anything still over it is refused here rather than failing invisibly.
+const HARD_UPLOAD_LIMIT_BYTES = 4 * 1024 * 1024;
 
 const Upload_Image = ({
   value,
@@ -23,10 +29,10 @@ const Upload_Image = ({
   const { t } = useTranslation();
 
   const [img, setImg] = useState(null);
-  const onFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const fileType = file.type;
+  const onFileChange = async (e) => {
+    const original = e.target.files[0];
+    if (original) {
+      const fileType = original.type;
 
       if (fileType !== "image/jpeg" && fileType !== "image/png") {
         setError(fieldName, {
@@ -34,16 +40,26 @@ const Upload_Image = ({
           message: "invalid_file_type",
         });
         toast.error(t("invalid_file_type"));
-      } else if (file.size > maxFileSizeInBytes) {
+      } else if (original.size > maxFileSizeInBytes) {
         setError(fieldName, {
           type: "manual",
           message: `${t("file_size_limit")} ${maxFileSizeInMB} MB`,
         });
         toast.error(`${t("file_size_limit")} ${maxFileSizeInMB} MB`);
       } else {
-        const blobURL = URL.createObjectURL(file);
-        setImg(blobURL);
-        handleChange(file);
+        // Downscale before upload -- the API rejects anything much over 4 MB.
+        const file = await compressImage(original);
+        if (file.size > HARD_UPLOAD_LIMIT_BYTES) {
+          setError(fieldName, {
+            type: "manual",
+            message: `${t("file_size_limit")} 4 MB`,
+          });
+          toast.error(`${t("file_size_limit")} 4 MB`);
+        } else {
+          const blobURL = URL.createObjectURL(file);
+          setImg(blobURL);
+          handleChange(file);
+        }
       }
 
       e.target.value = null;
