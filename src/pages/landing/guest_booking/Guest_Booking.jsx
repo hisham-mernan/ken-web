@@ -103,6 +103,24 @@ const Guest_Booking = () => {
         </ul>
       </section>
 
+      {booking?.qr_code_image && (
+        <section className="flex flex-col items-center gap-3 p-6 border border-font-light rounded-lg">
+          <h2 className="title_lg text-primary-3">{t("your_entry_qr_code")}</h2>
+          {/* The reason a guest comes back here: their pass on arrival. */}
+          <img
+            src={booking.qr_code_image}
+            alt={`${t("booking_number")} #${booking?.id}`}
+            width={200}
+            height={200}
+            decoding="async"
+            className="w-[200px] h-[200px]"
+          />
+          <span className="body_sm text-primary-4">
+            {t("booking_number")} #{booking?.id}
+          </span>
+        </section>
+      )}
+
       <p className="body_sm text-primary-4">{t("guest_booking_email_note")}</p>
     </main>
   );

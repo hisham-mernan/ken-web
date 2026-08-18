@@ -322,5 +322,6 @@
   "hut": "الكوخ",
   "date": "التاريخ",
   "status": "الحالة",
-  "total_price": "الإجمالي"
+  "total_price": "الإجمالي",
+  "your_entry_qr_code": "رمز الدخول الخاص بك"
 }
