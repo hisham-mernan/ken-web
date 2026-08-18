@@ -54,7 +54,14 @@ export const handleErrors = (err, setError, t, navigate, item) => {
     return;
   }
 
-  if (data?.non_field_errors?.includes("This user is not verfied")) {
+  // The backend spells it "verified"; this used to look for "verfied" and so
+  // never matched, dropping unverified users into the generic error instead
+  // of the OTP screen. Both spellings are accepted now.
+  if (
+    data?.non_field_errors?.some((e) =>
+      /This user is not ver(i)?fied/.test(e)
+    )
+  ) {
     toast.error(t("unverified_account"));
     navigate(`/account/${item}/verify-account`);
     return;
