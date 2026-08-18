@@ -4,6 +4,7 @@ import {
   UsersIcon,
 } from "../../../../assets/icons/Icon";
 import { currentLanguageCode } from "../../../../utils/switchLang";
+import { SHOW_EVENTS, SHOW_SERVICES } from "../../../../config/features";
 
 const PRIMARY_COLOR = "var(--color-primary-dark)";
 
@@ -23,11 +24,16 @@ const formatOrder = (data) => [
     value: (data?.persons_max_num ?? 0) + (data?.kids_max_num ?? 0),
     icon: <UsersIcon />,
   },
-  {
-    title: "event_ticket",
-    value: data?.events_tickets_count,
-    icon: <TicketIcon />,
-  },
+  // Event ticket row is dropped while events are hidden.
+  ...(SHOW_EVENTS
+    ? [
+        {
+          title: "event_ticket",
+          value: data?.events_tickets_count,
+          icon: <TicketIcon />,
+        },
+      ]
+    : []),
 ];
 
 const formatServices = (services = []) =>
@@ -37,7 +43,9 @@ const formatServices = (services = []) =>
   }));
 
 const formatExtra = (extraDays = [], extraServices = []) => {
-  if (!extraDays.length && !extraServices.length) return "no_extra";
+  // Extra services are hidden, so an extension of services alone shows nothing.
+  const services = SHOW_SERVICES ? extraServices : [];
+  if (!extraDays.length && !services.length) return "no_extra";
 
   return {
     title: "Extension",
@@ -54,7 +62,7 @@ const formatExtra = (extraDays = [], extraServices = []) => {
           icon: <CalendarIcon fill={PRIMARY_COLOR} />,
         },
       ]),
-      services: formatServices(extraServices),
+      services: formatServices(services),
     },
   };
 };
@@ -66,7 +74,7 @@ export const bookingDataFormater = (data) => ({
     title: "booking_details",
     data: {
       order: formatOrder(data),
-      services: formatServices(data?.services),
+      services: SHOW_SERVICES ? formatServices(data?.services) : [],
     },
   },
   Extension: formatExtra(data?.extra_days, data?.extra_services),

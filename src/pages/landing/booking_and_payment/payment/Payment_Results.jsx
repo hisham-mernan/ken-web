@@ -162,7 +162,6 @@ const Success_Payment = ({ id }) => {
     from: `${data?.dates?.date_from || data?.check_in || "-"}`,
     to: `${data?.dates?.date_to || data?.check_out || "-"}`,
     number_of_guests: (data?.persons_max_num || 0) + (data?.kids_max_num || 0),
-    event_ticket: data?.events_tickets_count || 0,
     // Without this guard a failed fetch renders the literal "undefinedsar".
     subtotal:
       paidAmount === undefined || paidAmount === null

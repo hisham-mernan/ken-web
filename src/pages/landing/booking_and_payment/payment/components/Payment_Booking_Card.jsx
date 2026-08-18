@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // lib
 
 import { useTranslation } from "react-i18next";
+import { SHOW_EVENTS, SHOW_SERVICES } from "../../../../../config/features";
 
 // components
 
@@ -120,24 +121,26 @@ const Payment_Booking_Card = ({
           </fieldset>
         </div>
         {/* for events */}
-        <div className="flex flex-col gap-4 lg:gap-6">
-          <h3 className="text-secondary font-bold text-lg md:text-xl">
-            {" "}
-            {t("tickets_for_event")}
-          </h3>
-          <Form
-            formList={eventList}
-            viewOnly={true}
-            control={control}
-            errors={errors}
-            loading={loading}
-            setError={setError}
-            dataLoader={dataLoader}
-          />
-        </div>
+        {SHOW_EVENTS && (
+          <div className="flex flex-col gap-4 lg:gap-6">
+            <h3 className="text-secondary font-bold text-lg md:text-xl">
+              {" "}
+              {t("tickets_for_event")}
+            </h3>
+            <Form
+              formList={eventList}
+              viewOnly={true}
+              control={control}
+              errors={errors}
+              loading={loading}
+              setError={setError}
+              dataLoader={dataLoader}
+            />
+          </div>
+        )}
         {/* end for events */}
         {/* start extra service */}
-        {data?.services?.length > 0 && (
+        {SHOW_SERVICES && data?.services?.length > 0 && (
           <div className="flex flex-col gap-4 lg:gap-6">
             <h3 className="text-secondary font-bold text-lg md:text-xl">
               {" "}

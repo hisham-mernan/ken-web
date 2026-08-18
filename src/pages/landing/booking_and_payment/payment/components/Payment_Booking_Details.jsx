@@ -1,6 +1,7 @@
 import { Skeleton } from "primereact/skeleton";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { SHOW_EVENTS } from "../../../../../config/features";
 import {
   ArrowIcon,
   CalendarIcon,
@@ -35,14 +36,22 @@ const Payment_Booking_Details = ({
       id: 2,
       title: "number_of_guests",
       icons: <UsersIcon fill="var(--color-primary-dark)" />,
-      value: `${data?.event_ticket} ${t("tickets")} `,
+      // Was reading event_ticket, so it showed the event ticket count as the
+      // guest count. It read 0 while that field was populated; with events
+      // hidden it read "undefined".
+      value: data?.number_of_guests ?? 0,
     },
-    {
-      id: 3,
-      title: "event_ticket",
-      icons: <TicketIcon fill="var(--color-primary-dark)" />,
-      value: `${data?.event_ticket} ${t("tickets")} `,
-    },
+    // Event ticket row is dropped while events are hidden.
+    ...(SHOW_EVENTS
+      ? [
+          {
+            id: 3,
+            title: "event_ticket",
+            icons: <TicketIcon fill="var(--color-primary-dark)" />,
+            value: `${data?.event_ticket} ${t("tickets")} `,
+          },
+        ]
+      : []),
   ];
   if (loading) {
     return (

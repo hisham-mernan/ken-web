@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { SHOW_EVENTS } from "../../../../config/features";
 import {
   CalendarIcon,
   TicketIcon,
@@ -40,12 +41,17 @@ const Old_Booking_Card = ({
       icons: <UsersIcon fill="var(--color-primary-dark)" />,
       value: `${data?.number_of_kids} ${t("kids")} `,
     },
-    {
-      id: 5,
-      title: "event_ticket",
-      icons: <TicketIcon fill="var(--color-primary-dark)" />,
-      value: `${data?.event_ticket} ${t("tickets")} `,
-    },
+    // Event ticket row is dropped while events are hidden.
+    ...(SHOW_EVENTS
+      ? [
+          {
+            id: 5,
+            title: "event_ticket",
+            icons: <TicketIcon fill="var(--color-primary-dark)" />,
+            value: `${data?.event_ticket} ${t("tickets")} `,
+          },
+        ]
+      : []),
   ];
   if (loading) {
     return (
