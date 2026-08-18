@@ -17,7 +17,7 @@ import Form from "../../../../../components/shared/form/Form";
 import Button from "../../../../../components/shared/Button";
 import { Link } from "react-router-dom";
 
-const Guest_Form = ({ open, onClose }) => {
+const Guest_Form = ({ open, onClose, onConfirm }) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +32,7 @@ const Guest_Form = ({ open, onClose }) => {
   } = useForm({
     defaultValues: {
       full_name: "",
-
+      id_num: "",
       email: "",
       phone: null,
     },
@@ -144,7 +144,10 @@ const Guest_Form = ({ open, onClose }) => {
   };
   return (
     <Modal open={open} onClose={onClose} hide_close={true}>
-      <form className="max-w-[550px] pt-8 w-full mx-auto flex flex-col gap-6 md:gap-[46px] ">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-[550px] pt-8 w-full mx-auto flex flex-col gap-6 md:gap-[46px] "
+      >
         <header className="flex flex-col gap-2.5">
           <h3 className="display_sm text-main-dark">{t("guest_form_title")}</h3>
           <p className="title_lg text-main-dark">{t("guest_form_des")}</p>
@@ -165,7 +168,7 @@ const Guest_Form = ({ open, onClose }) => {
             loading={loading}
             disabled={loading}
           >
-            {t("sign_up")}
+            {t("continue_to_payment")}
           </Button>
 
           <p className="text-[#817D85] font-[300] text-sm flex_center_y gap-1 ">

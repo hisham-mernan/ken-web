@@ -315,5 +315,12 @@
   "gold_member": "Gold Member",
   "guest_form_title": "Your Data",
   "guest_form_des": "We need to know you before booking..",
-  "404_des": "Ops! This page is not available, Don’t worry it’s not your problem."
+  "404_des": "Ops! This page is not available, Don’t worry it’s not your problem.",
+  "continue_to_payment": "Continue to payment",
+  "guest_booking_email_note": "Keep the confirmation email - this link is how you return to this booking.",
+  "booking_number": "Booking number",
+  "hut": "Hut",
+  "date": "Date",
+  "status": "Status",
+  "total_price": "Total"
 }

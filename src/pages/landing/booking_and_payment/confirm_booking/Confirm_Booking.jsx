@@ -83,8 +83,11 @@ const Confirm_Booking = () => {
       );
     }
   };
+  // A guest has no session here, so the booking's own token identifies it.
   const { data, error } = useGetData(
-    `${API.booking.details}${id}/`,
+    `${API.booking.details}${id}/${
+      getGuestToken(id) ? `?access_token=${getGuestToken(id)}` : ""
+    }`,
     defaultValues
   );
 
@@ -197,6 +200,7 @@ const Confirm_Booking = () => {
         API.booking.confirm.upcoming_event_and_servicse,
         {
           booking_id: id,
+          ...(getGuestToken(id) ? { access_token: getGuestToken(id) } : {}),
         }
       );
 

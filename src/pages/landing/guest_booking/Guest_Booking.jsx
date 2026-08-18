@@ -65,12 +65,12 @@ const Guest_Booking = () => {
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <figure className="w-full h-[280px] rounded-lg overflow-hidden border border-font-light">
-          {booking?.hut_details?.main_image ? (
+          {booking?.hut?.main_image ? (
             <img
-              src={getImageUrl(booking.hut_details.main_image, {
+              src={getImageUrl(booking.hut.main_image, {
                 width: IMG.card,
               })}
-              alt={booking?.hut_details?.title ?? ""}
+              alt={booking?.hut?.title ?? ""}
               decoding="async"
               className="w-full h-full object-cover"
             />
@@ -82,7 +82,7 @@ const Guest_Booking = () => {
         <ul className="flex flex-col gap-4 text-primary-3">
           <li className="flex justify-between gap-4">
             <span className="font-semibold">{t("hut")}</span>
-            <span>{booking?.hut_details?.title ?? "-"}</span>
+            <span>{booking?.hut?.title ?? "-"}</span>
           </li>
           {mainDate && (
             <li className="flex justify-between gap-4">
