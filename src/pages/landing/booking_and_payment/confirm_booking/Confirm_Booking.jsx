@@ -118,7 +118,13 @@ const Confirm_Booking = () => {
   // guestDetails is supplied by Guest_Form when nobody is signed in; the
   // backend requires those contact details before it will confirm a booking
   // that has no account behind it.
-  const onSubmit = async (data, guestDetails = null) => {
+  //
+  // Never pass this straight to react-hook-form. handleSubmit invokes its
+  // callback as (values, event), so a signed-in user's submit would land the
+  // SyntheticEvent in the guestDetails slot; Object.assign then spread the
+  // event's DOM references into the body and axios could not serialise it,
+  // so the request was never sent and registered users could not book.
+  const submitBooking = async (data, guestDetails = null) => {
     try {
       setLoading(true);
       let dataToSend = { ...data };
@@ -244,7 +250,10 @@ const Confirm_Booking = () => {
       </div>
       <form
         onSubmit={handleSubmit(
-          type === "service" ? addNewExtraService : onSubmit
+          type === "service"
+            ? addNewExtraService
+            : // Drop handleSubmit's second argument (the submit event).
+              (values) => submitBooking(values)
         )}
         className="flex flex-col gap-20"
       >
@@ -358,7 +367,7 @@ const Confirm_Booking = () => {
         onClose={() => setToggleGuestForm(false)}
         // Details go straight into the same confirm call a signed-in user
         // makes, rather than being stored separately first.
-        onConfirm={(guestDetails) => onSubmit(getValues(), guestDetails)}
+        onConfirm={(guestDetails) => submitBooking(getValues(), guestDetails)}
       />
     </main>
   );

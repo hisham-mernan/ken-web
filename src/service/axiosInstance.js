@@ -35,9 +35,15 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Every hop must be optional. `error.response` is undefined for anything
+    // that never got an HTTP reply -- a dropped connection, a timeout, a
+    // cancelled request, a CORS rejection -- and reading .data off it threw a
+    // TypeError from inside the interceptor. That TypeError then replaced the
+    // real error, so callers saw "Something went wrong" and the actual cause
+    // was destroyed before anyone could log it.
     const detail =
       error?.response?.code ||
-      error?.response.data.error ||
+      error?.response?.data?.error ||
       error?.response?.data?.detail;
 
     const shouldLogout =

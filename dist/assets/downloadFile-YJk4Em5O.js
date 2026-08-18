@@ -1,0 +1,1 @@
+import{y as a}from"./index-C-sJxMXu.js";const s=async(t,r="ticket.png",c)=>{try{const d=await(await fetch(t,{mode:"cors"})).blob(),e=URL.createObjectURL(d),o=document.createElement("a");o.href=e,o.download=r,document.body.appendChild(o),o.click(),document.body.removeChild(o),URL.revokeObjectURL(e)}catch{a.error(c("download_ticket_error"))}};export{s as d};
