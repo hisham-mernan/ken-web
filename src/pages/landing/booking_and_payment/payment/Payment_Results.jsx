@@ -124,6 +124,7 @@ const Failed_Payment = ({ id }) => {
 };
 const Success_Payment = ({ id }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -170,17 +171,41 @@ const Success_Payment = ({ id }) => {
   };
 
   const qrImageUrl = getImageUrl(data?.qr_code_image);
+  // A deposit leaves a balance, and no entry pass is issued until it clears.
+  const balanceDue = Number(data?.not_paid ?? 0);
+  const isPartiallyPaid = balanceDue > 0;
+
+  const payRemaining = async () => {
+    try {
+      setLoading(true);
+      const guestToken = getGuestToken(id);
+      const response = await axiosInstance.post(API.payment.checkout, {
+        booking_id: id,
+        ...(guestToken ? { access_token: guestToken } : {}),
+      });
+      if (response.status === 201) {
+        navigate(`/payment/${response?.data?.checkout_id}`);
+      }
+    } catch (err) {
+      console.error("Failed to start balance payment:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
-      <Landing_Header src="xl" title="booked_succecffuly" />
+      <Landing_Header
+        src="xl"
+        title={isPartiallyPaid ? "deposit_received_banner" : "booked_succecffuly"}
+      />
       <div className="flex flex-col gap-4 sm:gap-8 md:gap-12 lg:gap-16">
         <header className="flex_center text-center flex-col gap-5">
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[32px] !font-bold text-secondary-1">
-            {t("success_payment_title")}
+            {t(isPartiallyPaid ? "deposit_received_title" : "success_payment_title")}
           </h2>
           <p className="text-secondary-light text-xs sm:text-sm lg:text-base">
-            {t("success_payment_des")}
+            {t(isPartiallyPaid ? "deposit_received_des" : "success_payment_des")}
           </p>
         </header>
         <div className="flex flex-col md:flex-row gap-8 xl:gap-[123px]">
@@ -189,28 +214,38 @@ const Success_Payment = ({ id }) => {
             loading={loading}
             className="w-full md:w-1/2 md:max-w-[577px]"
           />
-          <Payment_Ticket_Card
-            className="w-full md:w-1/2 md:max-w-[540px]"
-            title="your_qr_code"
-            description="qr_des"
-            img={qrImageUrl}
-            loading={loading}
-            button={() => (
-              <Button
-                onClick={() => {
-                  if (qrImageUrl) {
-                    downloadFile(
-                      qrImageUrl,
-                      "ticket.png",
-                      t
-                    );
-                  }
-                }}
-              >
-                {t("download_ticket")}
-              </Button>
-            )}
-          />
+          {isPartiallyPaid ? (
+            <Payment_Ticket_Card
+              className="w-full md:w-1/2 md:max-w-[540px]"
+              title="balance_due"
+              description="deposit_qr_pending"
+              loading={loading}
+              button={() => (
+                <Button loading={loading} disabled={loading} onClick={payRemaining}>
+                  {`${t("pay_balance")} (${data?.not_paid} ${t("sar")})`}
+                </Button>
+              )}
+            />
+          ) : (
+            <Payment_Ticket_Card
+              className="w-full md:w-1/2 md:max-w-[540px]"
+              title="your_qr_code"
+              description="qr_des"
+              img={qrImageUrl}
+              loading={loading}
+              button={() => (
+                <Button
+                  onClick={() => {
+                    if (qrImageUrl) {
+                      downloadFile(qrImageUrl, "ticket.png", t);
+                    }
+                  }}
+                >
+                  {t("download_ticket")}
+                </Button>
+              )}
+            />
+          )}
         </div>
       </div>
     </>

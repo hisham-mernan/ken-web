@@ -335,5 +335,11 @@
   "booking_status_confirmed": "مؤكد",
   "booking_status_partially_paid": "تم دفع العربون",
   "booking_status_paid": "مدفوع",
-  "booking_status_cancelled": "ملغي"
+  "booking_status_cancelled": "ملغي",
+  "deposit_received_title": "تم استلام العربون - تم حجز تواريخك",
+  "deposit_received_des": "حجزك غير مدفوع بالكامل بعد. ادفع المتبقي أدناه أو استخدم الرابط المرسل إلى بريدك. يصدر رمز الدخول عند السداد.",
+  "deposit_qr_pending": "سيظهر رمز الدخول هنا بعد سداد المبلغ المتبقي.",
+  "paid": "المدفوع",
+  "sar": "ر.س",
+  "deposit_received_banner": "تم استلام العربون"
 }

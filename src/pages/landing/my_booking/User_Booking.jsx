@@ -13,6 +13,7 @@ import { InboxEmpty } from "../../../assets/images/Image";
 import Booking_Card_Layout from "./components/Booking_Card_Layout";
 import Pagination from "../../../components/shared/pagination/Pagination";
 import Booking_Buttons from "./components/Booking_Buttons";
+import Balance_Due from "./components/Balance_Due";
 import { Skeleton } from "primereact/skeleton";
 import Landing_Header from "../../../components/layout/header/Landing_Header";
 
@@ -98,6 +99,14 @@ const User_Booking = () => {
                       loading={upcomingLoading}
                       isUpcoming={true}
                     />
+                    {Number(upcoming?.not_paid ?? 0) > 0 && (
+                      <Balance_Due
+                        id={upcoming?.id}
+                        paid={upcoming?.paid}
+                        notPaid={upcoming?.not_paid}
+                        totalPrice={upcoming?.total_price}
+                      />
+                    )}
                     <Booking_Buttons
                       id={upcoming?.id}
                       available_dates={upcoming?.available_dates}

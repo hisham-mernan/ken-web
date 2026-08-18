@@ -335,5 +335,11 @@
   "booking_status_confirmed": "Confirmed",
   "booking_status_partially_paid": "Deposit paid",
   "booking_status_paid": "Paid",
-  "booking_status_cancelled": "Cancelled"
+  "booking_status_cancelled": "Cancelled",
+  "deposit_received_title": "Deposit received - your dates are held",
+  "deposit_received_des": "Your booking is not fully paid yet. Pay the balance below, or use the link we emailed you. Your QR code is issued once it clears.",
+  "deposit_qr_pending": "Your entry QR code appears here once the balance is paid.",
+  "paid": "Paid",
+  "sar": "SAR",
+  "deposit_received_banner": "Deposit Received"
 }
