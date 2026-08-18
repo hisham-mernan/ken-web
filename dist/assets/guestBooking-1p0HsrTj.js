@@ -1,0 +1,1 @@
+const n="ken_guest_booking_",s=t=>`${n}${t}`,r=(t,e)=>{if(!(!t||!e))try{sessionStorage.setItem(s(t),e)}catch{}},u=t=>{if(!t)return null;try{return sessionStorage.getItem(s(t))}catch{return null}};export{u as g,r as s};

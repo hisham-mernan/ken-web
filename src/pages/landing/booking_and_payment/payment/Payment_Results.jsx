@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { handleErrors } from "../../../../utils/handleError";
 import axiosInstance from "../../../../service/axiosInstance";
+import { getGuestToken } from "../../../../utils/guestBooking";
 import { downloadFile } from "../../../../utils/downloadFile";
 import { getImageUrl } from "../../../../utils/getImageUrl";
 
@@ -71,8 +72,10 @@ const Failed_Payment = ({ id }) => {
   const handleRetryPayment = async () => {
     try {
       setLoader(true);
+      const guestToken = getGuestToken(id);
       const response = await axiosInstance.post(API.payment.checkout, {
         booking_id: id,
+        ...(guestToken ? { access_token: guestToken } : {}),
       });
       if (response.status === 201) {
         navigate(`/payment/${response?.data?.checkout_id}`);
@@ -127,7 +130,14 @@ const Success_Payment = ({ id }) => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axiosInstance.get(`${API.payment.details}${id}/`);
+      // A guest comes back from the gateway without a session, so the
+      // booking's own token identifies it.
+      const guestToken = getGuestToken(id);
+      const response = await axiosInstance.get(
+        `${API.payment.details}${id}/${
+          guestToken ? `?access_token=${guestToken}` : ""
+        }`
+      );
       const fetchedData = response.data;
       setData(fetchedData);
     } catch (error) {
@@ -148,11 +158,15 @@ const Success_Payment = ({ id }) => {
       : data?.total_price;
 
   const list = {
-    from: `${data?.dates?.date_from || data?.check_in || ""}`,
-    to: `${data?.dates?.date_to || data?.check_out || ""}`,
+    from: `${data?.dates?.date_from || data?.check_in || "-"}`,
+    to: `${data?.dates?.date_to || data?.check_out || "-"}`,
     number_of_guests: (data?.persons_max_num || 0) + (data?.kids_max_num || 0),
     event_ticket: data?.events_tickets_count || 0,
-    subtotal: `${paidAmount}${t("sar")}`,
+    // Without this guard a failed fetch renders the literal "undefinedsar".
+    subtotal:
+      paidAmount === undefined || paidAmount === null
+        ? "-"
+        : `${paidAmount}${t("sar")}`,
   };
 
   const qrImageUrl = getImageUrl(data?.qr_code_image);
