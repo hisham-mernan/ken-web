@@ -14,6 +14,7 @@ import Page_Nout_Found from "../../404/Page_Nout_Found";
 import Support from "../../../../components/shared/support/Support";
 import Testimonials from "../../../../components/shared/testimonials/Testimonials";
 import Special_Items from "../../../../components/shared/ken_special_item/Special_Items";
+import { SHOW_SPECIAL_ITEMS } from "../../../../config/features";
 import Right_Text_Header from "../../../../components/layout/header/Right_Text_Header";
 
 // service
@@ -125,7 +126,9 @@ const Details = () => {
           available_dates={data?.available_dates}
         />
       </form>
-      <Special_Items special={special} setSpecial={setSpecial} id={id} />
+      {SHOW_SPECIAL_ITEMS && (
+        <Special_Items special={special} setSpecial={setSpecial} id={id} />
+      )}
       <Testimonials />
       <Support />
     </main>

@@ -17,15 +17,16 @@ import { OverlayPanel } from "primereact/overlaypanel";
 import { useOutsideClick } from "./../../../hooks/useOutsideClick";
 
 import { getImageUrl, IMG } from "../../../utils/getImageUrl";
+import { SHOW_EVENTS, SHOW_SERVICES } from "../../../config/features";
 const navList = [
   { title: "home", path: "/" },
   { title: "about", path: "/about" },
   { title: "huts", path: "/huts" },
-  { title: "events", path: "/event" },
-  { title: "services", path: "/services" },
+  { title: "events", path: "/event", hidden: !SHOW_EVENTS },
+  { title: "services", path: "/services", hidden: !SHOW_SERVICES },
   { title: "booking", path: "/my-booking", onlyShowForAuth: true },
   { title: "profile", path: "/profile", onlyShowForAuth: true },
-];
+].filter((item) => !item.hidden);
 const Navbar = () => {
   const { t } = useTranslation();
   const location = useLocation();

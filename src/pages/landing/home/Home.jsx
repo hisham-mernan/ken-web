@@ -13,6 +13,7 @@ import Offer_Banner from "./Offer_Banner";
 
 import useGetData from "../../../hooks/useGetData";
 import { API } from "../../../service/apiUrl";
+import { SHOW_EVENTS, SHOW_SERVICES } from "../../../config/features";
 
 const Home = () => {
   // Pre-fetch consolidated homepage data in 1 single HTTP network request
@@ -24,8 +25,8 @@ const Home = () => {
       <About_Section />
       <Offer_Banner />
       <Discover />
-      <Events />
-      <Services />
+      {SHOW_EVENTS && <Events />}
+      {SHOW_SERVICES && <Services />}
       <Testimonials />
       <Faq />
       <Service_Pitch />

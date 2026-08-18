@@ -6,6 +6,7 @@ import Testimonials from "../../../../components/shared/testimonials/Testimonial
 import Huts_Hero from "./components/Huts_Hero";
 import Available_Huts from "./components/Available_Huts";
 import Support from "../../../../components/shared/support/Support";
+import { SHOW_EVENTS, SHOW_SERVICES } from "../../../../config/features";
 
 const Huts = () => {
   const nextStepRef = useRef(null);
@@ -13,8 +14,8 @@ const Huts = () => {
     <main className="layout_bg   page_p ">
       <Huts_Hero scrollToRef={nextStepRef} />
       <Available_Huts ref={nextStepRef} />
-      <Events />
-      <Services />
+      {SHOW_EVENTS && <Events />}
+      {SHOW_SERVICES && <Services />}
       <Testimonials />
       <Support />
     </main>

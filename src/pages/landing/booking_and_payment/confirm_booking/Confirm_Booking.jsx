@@ -28,6 +28,11 @@ import Page_Nout_Found from "../../404/Page_Nout_Found";
 import Landing_Header from "../../../../components/layout/header/Landing_Header";
 import Guest_Form from "./components/Guest_Form";
 import { useAuth } from "../../../../context/Auth_Context";
+import {
+  SHOW_EVENTS,
+  SHOW_SERVICES,
+  SHOW_SPECIAL_ITEMS,
+} from "../../../../config/features";
 
 const Confirm_Booking = () => {
   const { t } = useTranslation();
@@ -274,7 +279,7 @@ const Confirm_Booking = () => {
           />
         )}
         {/* events */}
-        {type === "confirm" && (
+        {SHOW_EVENTS && type === "confirm" && (
           <Confirm_Events
             ticket={eventTickets}
             setTicket={setEventTickets}
@@ -283,7 +288,7 @@ const Confirm_Booking = () => {
           />
         )}
         {/* end events */}
-        {(type === "confirm" || type === "service") && (
+        {SHOW_SERVICES && (type === "confirm" || type === "service") && (
           <Add_Services
             ticket={serviceTickets}
             setTicket={setServiceTickets}
@@ -298,7 +303,7 @@ const Confirm_Booking = () => {
             }
           />
         )}
-        {type === "confirm" && data?.hut_details?.id && (
+        {SHOW_SPECIAL_ITEMS && type === "confirm" && data?.hut_details?.id && (
           <Special_Items
             isConfirm={true}
             special={special}

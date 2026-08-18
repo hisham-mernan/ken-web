@@ -14,6 +14,7 @@ import Form from "../../../../components/shared/form/Form";
 import { useNavigate } from "react-router-dom";
 import { formatDateToYYYYMMDD } from "../../../../utils/formateDateToYYYYMMDD";
 import { toast } from "react-toastify";
+import { SHOW_SERVICES } from "../../../../config/features";
 
 const Booking_Buttons = ({ id, isCancelled, available_dates }) => {
   const { t } = useTranslation();
@@ -139,17 +140,19 @@ const Booking_Buttons = ({ id, isCancelled, available_dates }) => {
   return (
     <>
       <div className="flex flex-col xs:flex-row items-center gap-3 sm:gap-5 justify-between">
-        <Button
-          rounded="full"
-          className="max-w-full sm:max-w-[400px]"
-          type="secondary_light"
-          to={`/${id}/service/confirm-booking`}
-        >
-          {t("add_services")}
-          <span className={currentLanguageCode === "en" ? "" : "rotate-180"}>
-            <TrailingIcon />
-          </span>
-        </Button>
+        {SHOW_SERVICES && (
+          <Button
+            rounded="full"
+            className="max-w-full sm:max-w-[400px]"
+            type="secondary_light"
+            to={`/${id}/service/confirm-booking`}
+          >
+            {t("add_services")}
+            <span className={currentLanguageCode === "en" ? "" : "rotate-180"}>
+              <TrailingIcon />
+            </span>
+          </Button>
+        )}
         <Button
           rounded="full"
           className="max-w-full sm:max-w-[400px]"

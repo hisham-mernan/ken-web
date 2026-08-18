@@ -16,6 +16,7 @@ const App_Layout = lazy(() => import("./components/layout/App_Layout"));
 // auth layout
 const Auth_Container = lazy(() => import("./pages/auth/Auth_Container"));
 const Login = lazy(() => import("./pages/auth/Login"));
+import { SHOW_EVENTS, SHOW_SERVICES } from "./config/features";
 const Register = lazy(() => import("./pages/auth/Register"));
 const Forget_Password = lazy(() => import("./pages/auth/Forget_Password"));
 const Reset_Password = lazy(() => import("./pages/auth/Reset_Password"));
@@ -117,11 +118,15 @@ const App = () => {
         <Route path="/" element={<App_Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="services" element={<Services />} />
-          <Route path="event">
-            <Route index element={<Events />} />
-            <Route path=":id/details" element={<Event_Details />} />
-          </Route>
+          {/* Hidden for now; the pages remain so this is one flag to undo. A
+              direct visit falls through to the 404 route below. */}
+          {SHOW_SERVICES && <Route path="services" element={<Services />} />}
+          {SHOW_EVENTS && (
+            <Route path="event">
+              <Route index element={<Events />} />
+              <Route path=":id/details" element={<Event_Details />} />
+            </Route>
+          )}
 
           <Route path="huts" element={<Huts_Container />}>
             <Route index element={<Huts />} />

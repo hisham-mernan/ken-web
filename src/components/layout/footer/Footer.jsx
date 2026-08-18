@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import Footer_Link_item from "./components/dropdown/Footer_Link_item";
 import { useAuth } from "../../../context/Auth_Context";
 import Language_Dropdown from "./components/dropdown/Language_Dropdown";
+import { SHOW_EVENTS, SHOW_SERVICES } from "../../../config/features";
 
 const email = import.meta.env.VITE_REACT_APP_KEN_EMAIL;
 const phone = import.meta.env.VITE_REACT_APP_KEN_PHONE;
@@ -29,9 +30,9 @@ const homeList = [
   { title: "home", path: "/" },
   { title: "about_us", path: "/about" },
   { title: "huts", path: "/huts" },
-  { title: "events", path: "/event" },
-  { title: "services", path: "/services" },
-];
+  { title: "events", path: "/event", hidden: !SHOW_EVENTS },
+  { title: "services", path: "/services", hidden: !SHOW_SERVICES },
+].filter((item) => !item.hidden);
 const contactUsList = [
   { title: email, underline: true },
   {
