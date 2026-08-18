@@ -46,6 +46,8 @@ const Confirm_Booking = () => {
 
   // guest form
   const [toggleGuestForm, setToggleGuestForm] = useState(false);
+  // "full" or "deposit" -- how much to take now.
+  const [paymentOption, setPaymentOption] = useState("full");
   // ___________ useform _________
   const {
     control,
@@ -92,13 +94,16 @@ const Confirm_Booking = () => {
   );
 
   // ______________ function ___________
-  const handlePayment = async (bookingId) => {
+  const handlePayment = async (bookingId, option = paymentOption) => {
     try {
       setLoading(true);
       // A guest has no session, so the booking's own token authorises this.
       const guestToken = getGuestToken(bookingId ?? id);
       const response = await axiosInstance.post(API.payment.checkout, {
         booking_id: bookingId,
+        // Omitted entirely for a full payment, so the server keeps its
+        // existing default rather than relying on a magic string.
+        ...(option === "deposit" ? { payment_option: "deposit" } : {}),
         ...(guestToken ? { access_token: guestToken } : {}),
       });
       if (response.status === 201) {
@@ -292,6 +297,44 @@ const Confirm_Booking = () => {
             id={data?.hut_details?.id}
           />
         )}
+
+        {/* Only offered on a first payment: once a deposit exists the server
+            always charges the whole remaining balance. */}
+        <div
+          className={`Container flex-col gap-3 ${
+            emptyPage || type === "service" ? "hidden" : "flex"
+          }`}
+        >
+          <span className="title_lg text-primary-3">{t("payment_option")}</span>
+          <div className="flex flex-col sm:flex-row gap-3">
+            {[
+              { value: "full", label: "pay_in_full" },
+              { value: "deposit", label: "pay_deposit" },
+            ].map((option) => (
+              <label
+                key={option.value}
+                className={`flex-1 flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer ${
+                  paymentOption === option.value
+                    ? "border-primary-dark bg-primary-5"
+                    : "border-font-light"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="payment_option"
+                  value={option.value}
+                  checked={paymentOption === option.value}
+                  onChange={() => setPaymentOption(option.value)}
+                  className="accent-primary-dark"
+                />
+                <span className="text-primary-3">{t(option.label)}</span>
+              </label>
+            ))}
+          </div>
+          {paymentOption === "deposit" && (
+            <p className="body_sm text-primary-4">{t("pay_deposit_note")}</p>
+          )}
+        </div>
 
         <div className={`Container ${emptyPage ? "hidden" : "flex"}`}>
           <Button

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "primereact/skeleton";
 
 import axiosInstance from "../../../service/axiosInstance";
+import Button from "../../../components/shared/Button";
+import { handleErrors } from "../../../utils/handleError";
 import { API } from "../../../service/apiUrl";
 import { getImageUrl, IMG } from "../../../utils/getImageUrl";
 import Page_Nout_Found from "../404/Page_Nout_Found";
@@ -17,11 +19,13 @@ import Page_Nout_Found from "../404/Page_Nout_Found";
  */
 const Guest_Booking = () => {
   const { accessToken } = useParams();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [paying, setPaying] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -41,6 +45,25 @@ const Guest_Booking = () => {
       cancelled = true;
     };
   }, [accessToken]);
+
+  // The whole point of the reminder email: settle what is still owed. The
+  // token in the URL is what authorises it, since a guest has no session.
+  const payBalance = async () => {
+    try {
+      setPaying(true);
+      const response = await axiosInstance.post(API.payment.checkout, {
+        booking_id: booking?.id,
+        access_token: accessToken,
+      });
+      if (response.status === 201) {
+        navigate(`/payment/${response?.data?.checkout_id}`);
+      }
+    } catch (err) {
+      handleErrors(err, null, t);
+    } finally {
+      setPaying(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -94,7 +117,10 @@ const Guest_Booking = () => {
           )}
           <li className="flex justify-between gap-4">
             <span className="font-semibold">{t("status")}</span>
-            <span className="capitalize">{booking?.status}</span>
+            {/* Statuses are stored snake_case; show them as words. */}
+            <span>{t(`booking_status_${booking?.status}`, {
+              defaultValue: String(booking?.status ?? "").replace(/_/g, " "),
+            })}</span>
           </li>
           <li className="flex justify-between gap-4">
             <span className="font-semibold">{t("total_price")}</span>
@@ -102,6 +128,21 @@ const Guest_Booking = () => {
           </li>
         </ul>
       </section>
+
+      {Number(booking?.not_paid) > 0 && (
+        <section className="flex flex-col gap-3 p-6 border border-primary-dark rounded-lg">
+          <h2 className="title_lg text-primary-3">{t("balance_due")}</h2>
+          <p className="body_sm text-primary-4">{t("balance_due_note")}</p>
+          <div className="flex items-center justify-between gap-4">
+            <span className="headline_lg text-secondary-dark">
+              {booking?.not_paid} {t("sar")}
+            </span>
+            <Button loading={paying} disabled={paying} onClick={payBalance}>
+              {t("pay_balance")}
+            </Button>
+          </div>
+        </section>
+      )}
 
       {booking?.qr_code_image && (
         <section className="flex flex-col items-center gap-3 p-6 border border-font-light rounded-lg">

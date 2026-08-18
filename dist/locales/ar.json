@@ -323,5 +323,17 @@
   "date": "التاريخ",
   "status": "الحالة",
   "total_price": "الإجمالي",
-  "your_entry_qr_code": "رمز الدخول الخاص بك"
+  "your_entry_qr_code": "رمز الدخول الخاص بك",
+  "pay_in_full": "الدفع بالكامل الآن",
+  "pay_deposit": "ادفع 50% الآن والباقي لاحقاً",
+  "pay_deposit_note": "سيتم حجز تواريخك فوراً. سنرسل لك رابط دفع للمبلغ المتبقي، ويصدر رمز الدخول عند سداده.",
+  "payment_option": "طريقة الدفع",
+  "balance_due": "المبلغ المتبقي",
+  "balance_due_note": "تم حجز تواريخك. يصدر رمز الدخول عند سداد المبلغ المتبقي.",
+  "pay_balance": "ادفع المتبقي",
+  "booking_status_pending": "قيد الانتظار",
+  "booking_status_confirmed": "مؤكد",
+  "booking_status_partially_paid": "تم دفع العربون",
+  "booking_status_paid": "مدفوع",
+  "booking_status_cancelled": "ملغي"
 }

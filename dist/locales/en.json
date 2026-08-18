@@ -323,5 +323,17 @@
   "date": "Date",
   "status": "Status",
   "total_price": "Total",
-  "your_entry_qr_code": "Your entry QR code"
+  "your_entry_qr_code": "Your entry QR code",
+  "pay_in_full": "Pay in full now",
+  "pay_deposit": "Pay 50% now, the rest later",
+  "pay_deposit_note": "Your dates are held straight away. We will email you a payment link for the balance, and your entry QR code is issued once it is paid.",
+  "payment_option": "Payment option",
+  "balance_due": "Balance due",
+  "balance_due_note": "Your dates are held. Your entry QR code is issued once this is paid.",
+  "pay_balance": "Pay balance",
+  "booking_status_pending": "Pending",
+  "booking_status_confirmed": "Confirmed",
+  "booking_status_partially_paid": "Deposit paid",
+  "booking_status_paid": "Paid",
+  "booking_status_cancelled": "Cancelled"
 }
