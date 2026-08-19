@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import {
   AboutHero1,
   AboutHero2,
-  Decore,
   HeaderAboutAr,
   HeaderFaqAr,
   HeaderFaqEn,
@@ -11,8 +10,6 @@ import {
 } from "../../../assets/images/Image";
 import Button from "../../../components/shared/Button";
 import { currentLanguageCode } from "../../../utils/switchLang";
-import useGetData from "../../../hooks/useGetData";
-import { API } from "../../../service/apiUrl";
 
 const About_Hero = () => {
   const { t } = useTranslation();
@@ -27,22 +24,18 @@ const About_Hero = () => {
             : "w-full lg:w-[465px]"
         }`}
       >
+        {/* Display face, and the decorative underline swirl is gone: the design
+            system carries emphasis with typography rather than a stray PNG
+            that had to be nudged into place per breakpoint. */}
         <h1
-          className={`text-secondary-dark text-[24px] capitalize md:text-[28px] lg:text-[40px] xl:text-[62px] font-bold ${
+          className={`about_hero_title ${
             currentLanguageCode === "en" ? "" : "max-w-[365px]"
           }`}
         >
-          {t("each_new_place")}
-          <div className={` text-secondary-dark inline-flex relative`}>
-            <span className="relative z-10">{t("story")}</span>
-            <img
-              src={Decore}
-              className="absolute z-[1] bottom-[20px] max-w-[224px] h-[12px] start-[-18px] "
-            />
-          </div>
+          {t("each_new_place")} {t("story")}
         </h1>
         <p
-          className={`text-base md:text-lg lg:text-xl xl:text-2xl text-secondary-4 font-normal ${
+          className={`about_hero_desc ${
             currentLanguageCode === "en" ? "" : "max-w-[310px]"
           } `}
           dangerouslySetInnerHTML={{ __html: t("about_hero_des") }}

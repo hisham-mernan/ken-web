@@ -1,0 +1,1 @@
+import{u as l,j as s}from"./index-4-tMK1uT.js";const c=({className:a="",title:r="",des:t=""})=>{const{t:e}=l();return s.jsxs("header",{className:`${a} flex flex-col gap-2.5`,children:[s.jsx("h1",{className:"display_sm text-dark",children:e(r)}),s.jsx("p",{className:"body_lg text-dark",children:e(t)})]})};export{c as A};

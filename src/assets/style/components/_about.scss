@@ -148,3 +148,27 @@
   line-height: 1.25;
   color: var(--color-off-white);
 }
+
+// About hero. The description was text-secondary-4 -- warm ivory -- on the
+// off-white page surface, which left it very nearly invisible.
+.about_hero_title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, calc(1.6rem + 2.4vw), 3.875rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-red-clay);
+  text-transform: capitalize;
+}
+
+.about_hero_desc {
+  font-size: clamp(1rem, calc(0.9rem + 0.4vw), 1.25rem);
+  line-height: 1.7;
+  color: var(--color-saddle-brown);
+
+  span {
+    color: var(--color-red-clay);
+    font-weight: 600;
+  }
+}
