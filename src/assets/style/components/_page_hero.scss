@@ -1,0 +1,35 @@
+// Inner-page hero: a short image band rather than the homepage's full 100vh,
+// so the page's own content starts above the fold.
+.page_hero {
+  position: relative;
+  height: 58vh;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 0 var(--space-5, 24px) 72px;
+  text-align: center;
+  background-color: var(--color-black-warm);
+  background-size: cover;
+  background-position: center;
+}
+
+.page_hero_eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide-caps);
+  text-transform: uppercase;
+  color: var(--color-desert-sage);
+}
+
+.page_hero_title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, calc(2rem + 2.2vw), 4.5rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-off-white);
+}

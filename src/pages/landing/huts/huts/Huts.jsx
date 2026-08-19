@@ -1,19 +1,38 @@
-import React, { useRef } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+import Testimonials from "../../../../components/shared/testimonials/Testimonials";
 import Events from "../../../../components/shared/events/Events";
 import Services from "../../../../components/shared/services/Services";
-import Testimonials from "../../../../components/shared/testimonials/Testimonials";
-
-import Huts_Hero from "./components/Huts_Hero";
-import Available_Huts from "./components/Available_Huts";
 import Support from "../../../../components/shared/support/Support";
+import Page_Hero from "../../../../components/layout/header/Page_Hero";
+import Huts_Editorial from "./components/Huts_Editorial";
+
+import useGetData from "../../../../hooks/useGetData";
+import { API } from "../../../../service/apiUrl";
+import { HutsHero3 } from "../../../../assets/images/Image";
 import { SHOW_EVENTS, SHOW_SERVICES } from "../../../../config/features";
 
+/**
+ * Huts, per the Ken design system: a short image hero, then each hut in
+ * editorial detail rather than a grid of cards.
+ *
+ * Copy is the site's own -- "Each new place has a Story" already existed in
+ * the locale files, and is the same line the reference page uses.
+ */
 const Huts = () => {
-  const nextStepRef = useRef(null);
+  const { t } = useTranslation();
+  const { data, loading } = useGetData(API.huts.all_huts);
+  const rows = Array.isArray(data) ? data : data?.results ?? [];
+
   return (
-    <main className="layout_bg   page_p ">
-      <Huts_Hero scrollToRef={nextStepRef} />
-      <Available_Huts ref={nextStepRef} />
+    <main className="layout_bg">
+      <Page_Hero
+        image={HutsHero3}
+        eyebrow="huts"
+        title={`${t("each_new_place")} ${t("story")}`}
+      />
+      <Huts_Editorial data={rows} loading={loading} />
       {SHOW_EVENTS && <Events />}
       {SHOW_SERVICES && <Services />}
       <Testimonials />

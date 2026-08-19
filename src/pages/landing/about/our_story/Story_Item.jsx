@@ -38,7 +38,7 @@ const Story_Item = ({ data, isLastIndex, isFirstIndex }) => {
     >
       {/* start content */}
       <div className="story_container_content ms-16 flex flex-col justify-center text-center md:text-start max-w-[473px] gap-4 xl:gap-7 ">
-        <q className="font-open-sans font-semibold italic text-base md:text-lg lg:text-xl xl:text-2xl text-[#2D2D2D">
+        <q className="font-open-sans font-semibold italic text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
           {currentLanguageCode === "en" ? data?.title : data?.title_ar}
         </q>
         <p
