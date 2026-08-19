@@ -341,5 +341,7 @@
   "deposit_qr_pending": "Your entry QR code appears here once the balance is paid.",
   "paid": "Paid",
   "sar": "SAR",
-  "deposit_received_banner": "Deposit Received"
+  "deposit_received_banner": "Deposit Received",
+  "view_invoice": "View your invoice",
+  "view_partial_invoice": "View your invoice (partially paid)"
 }

@@ -246,6 +246,20 @@ const Success_Payment = ({ id }) => {
             />
           )}
         </div>
+        {/* Raised in Daftra when the payment landed. Absent until that
+            succeeds, so the link only shows once there is one to open. */}
+        {data?.invoice_url && (
+          <div className="Container flex justify-center">
+            <a
+              href={data.invoice_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded-full border border-primary-dark px-8 py-3 text-primary-3 text-sm sm:text-base"
+            >
+              {t(isPartiallyPaid ? "view_partial_invoice" : "view_invoice")}
+            </a>
+          </div>
+        )}
       </div>
     </>
   );
