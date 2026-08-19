@@ -27,26 +27,25 @@ const Auth_Container = () => {
     }
   };
   return (
-    <main className=" gap-10 h-screen sm:h-full max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_250px] lg:grid-cols-[1fr_380px]">
-      <div className=" px-4 py-10 flex flex-col justify-center gap-6 flex-1 2xl:px-12 2xl:py-10 h-full">
+    <main className="auth_shell">
+      <div className="auth_panel">
         <span
           onClick={handleBack}
-          className={`flex items-center justify-center rounded-xl cursor-pointer border sm:border-[1.8px] border-secondary w-8 h-8 sm:w-10 sm:h-10 ${
+          className={`auth_back ${
             currentLanguageCode === "en" ? "" : "rotate-180"
-          } `}
+          }`}
         >
-          <ArrowIcon width="22" height="22" />
+          <ArrowIcon width="20" height="20" />
         </span>
-        <div>
+        <div className="auth_form">
           <Outlet />
         </div>
       </div>
-      <figure className="hidden md:flex h-fit md:h-auto w-full">
-        <img
-          src={AuthImage}
-          alt="image"
-          className="object-fill w-full h-full"
-        />
+
+      {/* Photography carries the other half, as it does on every other page.
+          It was a 250-380px strip of stretched image before. */}
+      <figure className="auth_media">
+        <img src={AuthImage} alt="" />
       </figure>
     </main>
   );

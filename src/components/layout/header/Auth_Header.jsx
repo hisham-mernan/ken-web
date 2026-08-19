@@ -5,8 +5,8 @@ const Auth_Header = ({ className = "", title = "", des = "" }) => {
   const { t } = useTranslation();
   return (
     <header className={`${className} flex flex-col gap-2.5`}>
-      <h1 className="display_sm text-dark">{t(title)}</h1>
-      <p className="body_lg text-dark">{t(des)}</p>
+      <h1 className="auth_title">{t(title)}</h1>
+      <p className="auth_subtitle">{t(des)}</p>
     </header>
   );
 };
