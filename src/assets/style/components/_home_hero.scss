@@ -1,14 +1,69 @@
+// Hero, per the Ken design system: full-bleed photography is the primary
+// background device, with a soft dark scrim carrying the type. The previous
+// hero was a boxed banner with the headline baked into a PNG.
 .home_hero {
-  background-repeat: no-repeat;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: var(--overlay-hero),
+    url("../../images/home/hero.webp");
   background-size: cover;
   background-position: center;
-  border-radius: 8px;
-  //width: 100%;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
-  background-image: url("../../images/home/hero.webp");
-  background-size: cover;
   background-repeat: no-repeat;
+}
+
+.home_hero_body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 0 var(--space-5, 24px);
+  text-align: center;
+}
+
+.home_hero_title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, calc(2.2rem + 3.4vw), 6rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-off-white);
+}
+
+.home_hero_desc {
+  margin: 0;
+  max-width: 520px;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: rgba(255, 251, 242, 0.85);
+}
+
+.home_hero_actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.home_hero_scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 28px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 251, 242, 0.7);
+}
+
+.home_hero_scroll_line {
+  width: 1px;
+  height: 34px;
+  background: rgba(255, 251, 242, 0.5);
 }

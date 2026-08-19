@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Logo, LogoLight, LogoWhite } from "../../../assets/images/Image";
 import { useTranslation } from "react-i18next";
@@ -35,15 +35,27 @@ const Navbar = () => {
   const [toggleNav, setToggleNav] = useState(false);
   const { role } = getUserRole();
   const profileRef = useRef(null);
+  // The design system's navbar is transparent over hero photography and takes
+  // on a solid surface once the page scrolls past it, so the links stay legible
+  // against page content rather than relying on the blur alone.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const toggleProfile = (e) => {
     profileRef.current.toggle(e);
   };
   return (
     <>
       <header
-        className={`max-w-[1536px] navbar w-[calc(100%-40px)] sm:w-[calc(100%-94px)] mx-auto border border-white/20 ${
+        className={`max-w-[1536px] navbar ${
+          scrolled ? "is_scrolled" : ""
+        } w-[calc(100%-40px)] sm:w-[calc(100%-94px)] mx-auto ${
           isHome ? "bg-[#7B7A7C14]  " : "bg-[#9B9B9B14] "
-        } py-[6px] px-4 sm:px-6 rounded-full backdrop-blur-xl mx-auto  absolute z-40 top-[32px] left-[50%] translate-x-[-50%]`}
+        } py-[6px] px-4 sm:px-6 rounded-full backdrop-blur-xl mx-auto fixed z-40 top-[32px] left-[50%] translate-x-[-50%]`}
       >
         <nav className=" w-full  flex items-center gap-2 justify-between   ">
           <Link to="/" className="outline-none">

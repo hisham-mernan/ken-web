@@ -1,6 +1,19 @@
 .navbar {
+  border: 1px solid var(--color-border-on-dark);
+  transition: background var(--duration-normal) var(--ease-standard),
+    border-color var(--duration-normal) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard);
+
   a.active {
     font-weight: bold;
+  }
+
+  // Once past the hero the bar takes a solid warm surface, so links read
+  // against page content instead of relying on blur over photography.
+  &.is_scrolled {
+    background: var(--color-surface-page) !important;
+    border-color: var(--color-border-subtle);
+    box-shadow: var(--shadow-card);
   }
 }
 

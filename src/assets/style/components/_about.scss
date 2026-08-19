@@ -1,129 +1,150 @@
-.hero_gradient {
+// About, per the Ken design system: an editorial split for the mission and a
+// full-bleed walnut band for the vision. Both statements are visible on load;
+// the previous treatment hid them behind a hover on a swiper slide.
+.about_ds {
+  background: var(--color-surface-page);
+}
+
+.about_ds_split {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: var(--container-max, 1440px);
+  margin: 0 auto;
+  padding: 140px var(--space-7, 48px) 120px;
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 96px var(--space-5, 24px) 80px;
+  }
+}
+
+.about_ds_copy {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.about_ds_eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-wide-caps);
+  text-transform: uppercase;
+  color: var(--color-red-clay);
+  font-weight: 700;
+}
+
+.about_ds_headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, calc(2rem + 2.2vw), 4.5rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+
+.about_ds_rule {
+  width: 64px;
+  height: 1px;
+  background: var(--color-desert-sage);
+}
+
+.about_ds_body {
+  margin: 0;
+  max-width: 520px;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-saddle-brown);
+}
+
+.about_ds_media {
   position: relative;
-  &::after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    inset: 0;
-    z-index: 5;
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-  }
 }
-body:dir(rtl) {
-  .hero_gradient {
-    &.hero::after {
-      background: linear-gradient(
-        90deg,
-        rgba(249, 245, 235, 0) 36.59%,
-        rgba(249, 245, 235, 0.6) 74.76%,
-        #f9f5eb 95.08%
-      );
-    }
-    &.thumbnail::after {
-      background: linear-gradient(
-        90deg,
-        rgba(249, 245, 235, 0.6) 0,
-        rgba(249, 245, 235, 0.36) 70.97%,
-        rgba(249, 245, 235, 0) 95.08%
-      );
-    }
-  }
-}
-body:dir(ltr) {
-  .hero_gradient {
-    position: relative;
-    &::after {
-      content: "";
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      inset: 0;
-      z-index: 5;
-      border-radius: 8px;
-      -webkit-border-radius: 8px;
-      -moz-border-radius: 8px;
-      -ms-border-radius: 8px;
-      -o-border-radius: 8px;
-    }
-    &.hero::after {
-      background: linear-gradient(
-        270deg,
-        rgba(249, 245, 235, 0) 36.59%,
-        rgba(249, 245, 235, 0.6) 74.76%,
-        #f9f5eb 95.08%
-      );
-    }
-    &.thumbnail::after {
-      background: linear-gradient(
-        90deg,
-        rgba(249, 245, 235, 0.6) 0,
-        rgba(249, 245, 235, 0.36) 70.97%,
-        rgba(249, 245, 235, 0) 95.08%
-      );
-    }
+
+.about_ds_media_main {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  display: block;
+  box-shadow: var(--shadow-card);
+
+  @media (max-width: 1024px) {
+    height: 420px;
   }
 }
 
-// story section in about page
-.story_container {
-  position: relative;
-  transition: all 0.7s ease;
+// The offset inset image is what makes the split read as editorial rather than
+// as a stock two-column block. Hidden on small screens, where it would collide.
+.about_ds_media_inset {
+  position: absolute;
+  inset-inline-start: -56px;
+  bottom: -48px;
+  width: 240px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 6px solid var(--color-surface-page);
+  box-shadow: var(--shadow-card-hover);
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0px;
-    inset-inline-start: -1.5%;
-    width: 35px;
-    height: 35px;
-    background: #61634d70;
-    border-radius: 50%;
-    box-shadow: 0 0 0 8px #9c9e9066;
-    z-index: 5;
-    transition: background 0.5s ease;
-    @media (max-width: 600px) {
-      width: 30px;
-      height: 30px;
-    }
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 40px;
-    inset-inline-start: -3px;
-    width: 1px;
-    height: 0;
-    background-color: #9c9e9066;
-
-    transition: height 1.5s ease-in-out;
-    -webkit-transition: height 1.5s ease-in-out;
-    -moz-transition: height 1.5s ease-in-out;
-    -ms-transition: height 1.5s ease-in-out;
-    -o-transition: height 1.5s ease-in-out;
-    @media (min-width: 992px) and (max-width: 1024px) {
-      inset-inline-start: 4px;
-    }
-    @media (min-width: 601px) and (max-width: 991px) {
-      inset-inline-start: 5px;
-    }
-    @media (max-width: 600px) {
-      inset-inline-start: 10px;
-    }
-  }
-
-  &:first-of-type::after {
-    background: var(--color-primary-3);
-  }
-
-  &.active::before {
-    height: calc(100% - 50px);
+  @media (max-width: 1024px) {
+    display: none;
   }
 }
 
-// end story section in about page
+.about_ds_band {
+  background: var(--color-surface-dark);
+  padding: 110px var(--space-7, 48px);
+
+  @media (max-width: 1024px) {
+    padding: 72px var(--space-5, 24px);
+  }
+}
+
+.about_ds_band_inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+  max-width: var(--container-max, 1440px);
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.about_ds_band_media {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  display: block;
+}
+
+.about_ds_band_copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about_ds_band_eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-wide-caps);
+  text-transform: uppercase;
+  color: var(--color-desert-sage);
+  font-weight: 700;
+}
+
+.about_ds_band_text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, calc(1.4rem + 1.4vw), 3rem);
+  line-height: 1.25;
+  color: var(--color-off-white);
+}
