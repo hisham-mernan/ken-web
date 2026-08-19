@@ -359,3 +359,59 @@
   line-height: 1.7;
   color: var(--color-saddle-brown);
 }
+
+// ---- Ken Design System: checkout ----
+// The payment choice is the decision on this page, so the options are proper
+// selectable cards rather than a pair of thin bordered rows.
+.checkout_legend {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+
+.checkout_options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkout_option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 22px;
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    border-color: var(--color-saddle-brown);
+  }
+
+  // Selection reads through the brand colour and a ring, not a fill that
+  // swallows the label.
+  &.is_selected {
+    border-color: var(--color-red-clay);
+    box-shadow: 0 0 0 3px rgba(107, 44, 28, 0.14);
+  }
+}
+
+.checkout_option_label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.checkout_note {
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--color-saddle-brown);
+}

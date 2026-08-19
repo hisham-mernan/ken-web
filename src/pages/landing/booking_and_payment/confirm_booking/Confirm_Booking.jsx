@@ -319,18 +319,16 @@ const Confirm_Booking = () => {
             emptyPage || type === "service" ? "hidden" : "flex"
           }`}
         >
-          <span className="title_lg text-primary-3">{t("payment_option")}</span>
-          <div className="flex flex-col sm:flex-row gap-3">
+          <span className="checkout_legend">{t("payment_option")}</span>
+          <div className="checkout_options">
             {[
               { value: "full", label: "pay_in_full" },
               { value: "deposit", label: "pay_deposit" },
             ].map((option) => (
               <label
                 key={option.value}
-                className={`flex-1 flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer ${
-                  paymentOption === option.value
-                    ? "border-primary-dark bg-primary-5"
-                    : "border-font-light"
+                className={`checkout_option ${
+                  paymentOption === option.value ? "is_selected" : ""
                 }`}
               >
                 <input
@@ -341,12 +339,12 @@ const Confirm_Booking = () => {
                   onChange={() => setPaymentOption(option.value)}
                   className="accent-primary-dark"
                 />
-                <span className="text-primary-3">{t(option.label)}</span>
+                <span className="checkout_option_label">{t(option.label)}</span>
               </label>
             ))}
           </div>
           {paymentOption === "deposit" && (
-            <p className="body_sm text-primary-4">{t("pay_deposit_note")}</p>
+            <p className="checkout_note">{t("pay_deposit_note")}</p>
           )}
         </div>
 
