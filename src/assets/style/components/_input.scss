@@ -1,27 +1,31 @@
 @use "../layout/font";
 // input
 .input {
-  border: 1px solid var(--color-grey-400);
-  color: var(--color-grey-500);
-  border-radius: 14px;
-  -webkit-border-radius: 14px;
-  -moz-border-radius: 14px;
-  -ms-border-radius: 14px;
-  -o-border-radius: 14px;
+  // Ken Design System: hairline low-contrast border on a white surface, with
+  // the system's 10px radius. Was a 14px radius in mid-grey, which read as
+  // generic form UI against the warm palette.
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border-default);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  -webkit-border-radius: var(--radius-md);
+  -moz-border-radius: var(--radius-md);
+  -ms-border-radius: var(--radius-md);
+  -o-border-radius: var(--radius-md);
   height: 56px;
   padding: 16px 24px;
   @media (max-width: 991px) {
     height: 48px;
-    padding: 8px 8px;
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    -webkit-border-radius: var(--radius-md);
+    -moz-border-radius: var(--radius-md);
+    -ms-border-radius: var(--radius-md);
+    -o-border-radius: var(--radius-md);
   }
   @extend .body_lg;
-  color: var(--color-grey-500);
-  transition: all ease-in-out 0.3s;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
   -webkit-transition: all ease-in-out 0.3s;
   -moz-transition: all ease-in-out 0.3s;
   -ms-transition: all ease-in-out 0.3s;
@@ -31,16 +35,17 @@
     box-shadow: none;
 
     &::placeholder {
-      color: var(--color-grey-300);
+      color: var(--color-desert-sage);
     }
   }
   &.focus {
-    border: 1px solid var(--color-secondary);
+    border: 1px solid var(--color-red-clay);
+    box-shadow: 0 0 0 3px rgba(107, 44, 28, 0.15);
   }
   &.disabled {
-    background: #ffeedd33 !important;
-    border: 1px solid #c8c8c891 !important;
-    color: var(--color-primary-2) !important;
+    background: var(--color-surface-sunken) !important;
+    border: 1px solid var(--color-border-subtle) !important;
+    color: var(--color-saddle-brown) !important;
   }
 }
 .label {

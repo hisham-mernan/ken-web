@@ -288,3 +288,28 @@
     color: var(--color-off-white);
   }
 }
+
+// ---- Ken Design System: section headings ----
+// Replaces the decorative swirl-image headers. Display face, generous scale,
+// and the primary text colour rather than the muted sage the images needed.
+.section_header {
+  position: relative;
+
+  &.is_centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.section_header_title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.25rem, calc(1.8rem + 2vw), 4rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+  text-transform: capitalize;
+}
