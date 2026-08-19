@@ -248,19 +248,25 @@ const Success_Payment = ({ id }) => {
         </div>
         {/* Served by our own backend rather than Daftra: Daftra's invoice
             links redirect to a Daftra sign-in, and a guest has no account
-            there. The token lets a guest open their own invoice. */}
+            there. The token lets a guest fetch their own invoice. */}
         {id && (
           <div className="Container flex justify-center">
-            <a
-              href={`${apiKey}/api/products/bookings/${id}/invoice.pdf${
-                getGuestToken(id) ? `?access_token=${getGuestToken(id)}` : ""
-              }`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block rounded-full border border-primary-dark px-8 py-3 text-primary-3 text-sm sm:text-base"
+            <Button
+              type="secondary_light"
+              rounded="full"
+              className="max-w-full sm:max-w-[400px]"
+              onClick={() =>
+                downloadFile(
+                  `${apiKey}/api/products/bookings/${id}/invoice.pdf${
+                    getGuestToken(id) ? `?access_token=${getGuestToken(id)}` : ""
+                  }`,
+                  `invoice-booking-${id}.pdf`,
+                  t
+                )
+              }
             >
-              {t(isPartiallyPaid ? "view_partial_invoice" : "view_invoice")}
-            </a>
+              {t(isPartiallyPaid ? "download_partial_invoice" : "download_invoice")}
+            </Button>
           </div>
         )}
       </div>

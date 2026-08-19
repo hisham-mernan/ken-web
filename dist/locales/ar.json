@@ -343,5 +343,7 @@
   "sar": "ر.س",
   "deposit_received_banner": "تم استلام العربون",
   "view_invoice": "عرض الفاتورة",
-  "view_partial_invoice": "عرض الفاتورة (مدفوعة جزئياً)"
+  "view_partial_invoice": "عرض الفاتورة (مدفوعة جزئياً)",
+  "download_invoice": "تحميل الفاتورة",
+  "download_partial_invoice": "تحميل الفاتورة (مدفوعة جزئياً)"
 }
