@@ -1,19 +1,78 @@
+// Navbar per the Ken design system: a full-width bar rather than a floating
+// pill. Transparent over hero photography, taking a solid warm surface once
+// the page scrolls past it so links stay legible against content.
 .navbar {
-  border: 1px solid var(--color-border-on-dark);
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+  background: var(--color-surface-page);
+  border-bottom: 1px solid var(--color-border-subtle);
   transition: background var(--duration-normal) var(--ease-standard),
     border-color var(--duration-normal) var(--ease-standard),
     box-shadow var(--duration-normal) var(--ease-standard);
 
-  a.active {
-    font-weight: bold;
+  &.is_over_photo {
+    background: transparent;
+    border-bottom-color: transparent;
   }
 
-  // Once past the hero the bar takes a solid warm surface, so links read
-  // against page content instead of relying on blur over photography.
   &.is_scrolled {
-    background: var(--color-surface-page) !important;
-    border-color: var(--color-border-subtle);
     box-shadow: var(--shadow-card);
+  }
+}
+
+.navbar_inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: var(--container-max, 1440px);
+  margin: 0 auto;
+  padding: 20px var(--space-7, 48px);
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    padding: 14px var(--space-5, 24px);
+  }
+}
+
+.navbar_links {
+  display: none;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+
+  @media (min-width: 1024px) {
+    display: flex;
+  }
+}
+
+// Active state is a 2px rule under the link, not a weight jump -- the system
+// avoids type that reflows as you navigate.
+.navbar_link {
+  position: relative;
+  outline: none;
+  padding-bottom: 4px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  border-bottom: 2px solid transparent;
+  transition: color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+
+  &.is_active {
+    font-weight: 700;
+    border-bottom-color: var(--color-red-clay);
+  }
+
+  .is_over_photo & {
+    color: var(--color-off-white);
+
+    &.is_active {
+      border-bottom-color: var(--color-off-white);
+    }
   }
 }
 

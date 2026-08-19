@@ -1,0 +1,101 @@
+// Testimonials on the system's card: white surface, warm shadow, 20px radius,
+// hairline border. Laid out as a grid so every review is visible rather than
+// paged through three at a time.
+.testimonials_ds {
+  max-width: var(--container-max, 1440px);
+  margin: 0 auto;
+  padding: var(--space-9, 96px) var(--space-7, 48px);
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: var(--space-8, 64px) var(--space-5, 24px);
+  }
+}
+
+.testimonials_ds_header {
+  text-align: center;
+  margin-bottom: var(--space-8, 64px);
+}
+
+.testimonials_ds_headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, calc(2rem + 2.2vw), 4.5rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+  text-transform: capitalize;
+}
+
+.testimonials_ds_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6, 32px);
+}
+
+.testimonials_ds_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5, 24px);
+  margin: 0;
+  padding: var(--space-6, 32px);
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--duration-normal) var(--ease-standard),
+    transform var(--duration-normal) var(--ease-standard);
+
+  &:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+}
+
+// The quote leads, in the body face at reading size. It was 12px and clamped
+// to three lines inside a fixed-height glass card before.
+.testimonials_ds_quote {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.testimonials_ds_person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: var(--space-5, 24px);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.testimonials_ds_avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  flex: 0 0 44px;
+
+  &.is_empty {
+    background: var(--color-surface-sunken);
+  }
+}
+
+.testimonials_ds_person_text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  strong {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  span {
+    font-size: 0.8125rem;
+    color: var(--color-desert-sage);
+  }
+}

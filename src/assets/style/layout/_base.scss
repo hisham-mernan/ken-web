@@ -258,3 +258,33 @@
   font-family: var(--font-display);
   letter-spacing: var(--tracking-display);
 }
+
+// ---- Ken Design System: footer ----
+// Column headings are small uppercase caption type with wide tracking, and
+// links sit at reduced opacity so the headings lead. Both were mid-size
+// sentence case before, which read as a sitemap rather than a footer.
+.footer_ds {
+  width: 100%;
+  max-width: none;
+}
+
+.footer_col_heading {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide-caps);
+  color: rgba(255, 251, 242, 0.45);
+}
+
+.footer_link {
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 251, 242, 0.65);
+  outline: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    color: var(--color-off-white);
+  }
+}

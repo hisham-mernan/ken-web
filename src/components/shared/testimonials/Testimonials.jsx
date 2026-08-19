@@ -1,143 +1,71 @@
 import React from "react";
-
-// lib
-import Slider from "react-slick";
 import { Skeleton } from "primereact/skeleton";
-// component
-import Landing_Header from "../../layout/header/Landing_Header";
-import { QuoteImg } from "../../../assets/images/Image";
-import { currentLanguageCode } from "../../../utils/switchLang";
+import { useTranslation } from "react-i18next";
+
 import useGetData from "./../../../hooks/useGetData";
 import { API } from "../../../service/apiUrl";
-
 import { getImageUrl, IMG } from "../../../utils/getImageUrl";
-const Testimonials = ({ className }) => {
-  const { data, loading } = useGetData(API.testimonials);
-  let settings = {
-    dots: true,
-    infinite: data?.length > 3 ? true : false,
-    speed: 500,
-    autoplay: false,
-    autoplaySpeed: 5000,
-    cssEase: "linear",
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    pauseOnHover: true,
-    rtl: currentLanguageCode === "en" ? false : true,
-    responsive: [
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
 
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-  if (data?.length === 0 && !loading) {
-    return;
-  }
+/**
+ * Testimonials as the design system's card: white surface, warm shadow, 20px
+ * radius, no coloured border. A grid rather than a slick carousel -- the
+ * reviews are short, so paging through three at a time hid most of them behind
+ * an interaction for no gain.
+ *
+ * The quote is no longer clamped to three lines and the name no longer
+ * truncated; the previous glass card was a fixed 300px tall and cut both off.
+ * Same testimonials endpoint as before.
+ */
+const Testimonials = ({ className }) => {
+  const { t } = useTranslation();
+  const { data, loading } = useGetData(API.testimonials);
+
+  if (!loading && data?.length === 0) return null;
+
   return (
-    <section className={`Container section_gap ${className ?? "section_p"} `}>
-      <Landing_Header title="testimonials" src="2xl" />
-      <div className="relative">
-        <img loading="lazy" decoding="async"
-          alt="quote"
-          src={QuoteImg}
-          className="w-12 h-12 absolute top-[-25px] left-[-10px] z-20"
-        />
-        {loading ? (
-          <div className="grid gap-5 sm:gap-10 lg:gap-20 grid-cols-1 xs:grid-cols-2 lg:grid-cols-3">
-            <TestimonialsSkeleton />
-          </div>
-        ) : (
-          <Slider {...settings}>
-            {data?.map((item) => (
-              <div key={item?.id} className=" max-w-[380px] px-1 ">
-                <div className="h-[300px]  gap-1.5 glass_card flex flex-col gap-1.5 ">
-                  {item?.user?.avatar ? (
-                    <img loading="lazy" decoding="async"
-                      src={getImageUrl(item?.user?.avatar, { width: IMG.avatar })}
-                      alt="avatar"
-                      className="mx-auto flex w-12 h-12 rounded-full border-[3px] border-primary-5 object-full"
-                    />
-                  ) : (
-                    <div className="mx-auto flex w-12 h-12 rounded-full border-[3px] border-primary-5 object-full bg-primary-light" />
-                  )}
-                  <strong className="text-base leading-[32px]  text-[#201F2E] truncate ] font-semibold  ">
-                    {item?.user?.full_name}
-                  </strong>
-                  <p className="truncate text-[#6E6C83] text-sm leading-[32px]  ">
-                    {item?.user?.role}
-                  </p>
-                  <p className="text-primary-2 text-center text-xs line-clamp-3">
-                    {item?.content}
-                  </p>
+    <section className={`testimonials_ds ${className ?? ""}`}>
+      <header className="testimonials_ds_header">
+        <h2 className="testimonials_ds_headline">{t("testimonials")}</h2>
+      </header>
+
+      <div className="testimonials_ds_grid">
+        {loading
+          ? Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className="testimonials_ds_card">
+                <Skeleton height="88px" />
+                <div className="testimonials_ds_person">
+                  <Skeleton shape="circle" size="44px" />
+                  <Skeleton width="120px" height="16px" />
                 </div>
               </div>
+            ))
+          : data?.map((item) => (
+              <figure key={item?.id} className="testimonials_ds_card">
+                <blockquote className="testimonials_ds_quote">
+                  {item?.content}
+                </blockquote>
+                <figcaption className="testimonials_ds_person">
+                  {item?.user?.avatar ? (
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={getImageUrl(item.user.avatar, { width: IMG.avatar })}
+                      alt={item?.user?.full_name || ""}
+                      className="testimonials_ds_avatar"
+                    />
+                  ) : (
+                    <span className="testimonials_ds_avatar is_empty" />
+                  )}
+                  <span className="testimonials_ds_person_text">
+                    <strong>{item?.user?.full_name}</strong>
+                    {item?.user?.role && <span>{item.user.role}</span>}
+                  </span>
+                </figcaption>
+              </figure>
             ))}
-          </Slider>
-        )}
-        <img loading="lazy" decoding="async"
-          alt="quote"
-          src={QuoteImg}
-          className="w-12 h-12 absolute bottom-[-25px] right-[4%] z-20 rotate-180"
-        />
       </div>
     </section>
   );
 };
-const TestimonialsSkeleton = () => {
-  return (
-    <>
-      {Array.from({ length: 3 }).map((_, index) => (
-        <div
-          key={index}
-          className="bg-gray-50 h-[300px] flex flex-col items-center justify-center gap-6 p-8 border-[4px] border-gray-100  rounded-lg "
-        >
-          <header className="flex_center flex-col gap-4">
-            <Skeleton
-              width="46px"
-              height="46px"
-              shape="circle"
-              className="!bg-gray-200"
-            />
-            <Skeleton width="100px" height="10px" className="!bg-gray-200" />
-          </header>
-          <Skeleton
-            height="12px"
-            borderRadius="16px"
-            className="!bg-gray-200"
-          />
-          <div className="flex flex-col items-center justify-center gap-1 w-full">
-            <Skeleton
-              width="100%"
-              height="12px"
-              borderRadius="16px"
-              className="!bg-gray-200"
-            />
-            <Skeleton
-              width="80%"
-              height="12px"
-              borderRadius="16px"
-              className="!bg-gray-200"
-            />
-            <Skeleton
-              width="70%"
-              height="12px"
-              borderRadius="16px"
-              className="!bg-gray-200"
-            />
-          </div>
-        </div>
-      ))}
-    </>
-  );
-};
+
 export default Testimonials;

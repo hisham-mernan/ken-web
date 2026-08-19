@@ -1,117 +1,105 @@
 import React, { useEffect, useRef, useState } from "react";
-// lib
 import { Skeleton } from "primereact/skeleton";
 import { useTranslation } from "react-i18next";
-
-import { Accordion, AccordionTab } from "primereact/accordion";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import useGetData from "../../../hooks/useGetData";
 import { API } from "../../../service/apiUrl";
 import { currentLanguageCode } from "../../../utils/switchLang";
-import { ArrowIcon } from "../../../assets/icons/Icon";
-import Branded_Section from "../../../components/shared/Branded_Section";
-import { useLocation, useNavigate } from "react-router-dom";
-import Landing_Header from "../../../components/layout/header/Landing_Header";
 
+/**
+ * FAQ in two columns, per the design system's hairline-and-typography
+ * treatment. There are enough questions that a single 870px column ran far
+ * down the page, so they are split across two.
+ *
+ * The PrimeReact accordion is gone: it allowed only one open tab at a time,
+ * which across two columns means opening a question on the right silently
+ * closes one on the left. These disclosures open independently.
+ *
+ * Questions and answers are the same FAQ endpoint, with the _ar variants.
+ */
 const Faq = () => {
   const { t } = useTranslation();
   const { data, loading } = useGetData(API.home.faq);
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [open, setOpen] = useState(() => new Set());
   const faqContainerRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Deep link from the footer's FAQ link.
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const section = params.get("scroll");
-
     if (
-      section === "faq" &&
+      params.get("scroll") === "faq" &&
       !loading &&
       data?.length > 0 &&
       faqContainerRef.current
     ) {
       const top =
         faqContainerRef.current.getBoundingClientRect().top + window.scrollY;
-
-      window.scrollTo({ top: top, behavior: "smooth" });
-
+      window.scrollTo({ top, behavior: "smooth" });
       params.delete("scroll");
-      const newSearch = params.toString();
       navigate(
-        { pathname: location.pathname, search: newSearch },
+        { pathname: location.pathname, search: params.toString() },
         { replace: true }
       );
     }
   }, [location.search, data, loading, navigate, location.pathname]);
-  const toggleIcon = (index) => {
-    return activeIndex === index ? (
-      <span className="rotate-90">
-        <ArrowIcon />
-      </span>
-    ) : (
-      <span className="rotate-270">
-        <ArrowIcon />
-      </span>
-    );
-  };
 
-  const onAccordionChange = (e) => {
-    setActiveIndex(e.index);
-  };
+  const toggle = (index) =>
+    setOpen((prev) => {
+      const next = new Set(prev);
+      next.has(index) ? next.delete(index) : next.add(index);
+      return next;
+    });
 
-  if (!loading && data?.length === 0) {
-    return;
-  }
+  if (!loading && data?.length === 0) return null;
+
   return (
-    <div ref={faqContainerRef} className="Container" id="faq">
-      <section className="section_p">
-        <div className=" z-10 relative max-w-[95%]  md:max-w-[870px]  mx-auto flex flex-col gap-5 md:gap-10 ">
-          <Landing_Header title="faq" src="faq" />
-          <div className="faq">
-            <Accordion
-              activeIndex={activeIndex}
-              onTabChange={onAccordionChange}
-            >
-              {loading
-                ? [1].map((_, index) => (
-                    <AccordionTab
-                      key={index}
-                      header={<Skeleton height="20px"></Skeleton>}
-                    >
-                      <Skeleton className="h-1.5 mb-2"></Skeleton>
-                      <Skeleton width="90%" className=" h-1.5 mb-2"></Skeleton>
-                    </AccordionTab>
-                  ))
-                : data?.map((item, index) => (
-                    <AccordionTab
-                      key={index}
-                      header={
-                        <div className="flex items-center justify-between ">
-                          <p
-                            className={`text-base md:text-xl text-[#0A1F1A] font-semibold  `}
-                          >
-                            {currentLanguageCode === "en"
-                              ? item.question
-                              : item.question_ar}
-                          </p>
-                          {toggleIcon(index)}
-                        </div>
-                      }
-                    >
-                      <p
-                        className={`text-[#0A1F1A] text-sm md:text-base font-[300] `}
-                      >
-                        {currentLanguageCode === "en"
-                          ? item.answer
-                          : item.answer_ar}
-                      </p>
-                    </AccordionTab>
-                  ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-    </div>
+    <section ref={faqContainerRef} id="faq" className="faq_ds">
+      <header className="faq_ds_header">
+        <h2 className="faq_ds_headline">{t("faq")}</h2>
+      </header>
+
+      <div className="faq_ds_grid">
+        {loading
+          ? Array.from({ length: 6 }).map((_, index) => (
+              <div key={index} className="faq_ds_item">
+                <Skeleton height="22px" />
+              </div>
+            ))
+          : data?.map((item, index) => {
+              const isOpen = open.has(index);
+              return (
+                <article
+                  key={item?.id ?? index}
+                  className={`faq_ds_item ${isOpen ? "is_open" : ""}`}
+                >
+                  <button
+                    type="button"
+                    className="faq_ds_question"
+                    aria-expanded={isOpen}
+                    onClick={() => toggle(index)}
+                  >
+                    <span>
+                      {currentLanguageCode === "en"
+                        ? item?.question
+                        : item?.question_ar}
+                    </span>
+                    <span className="faq_ds_sign" aria-hidden="true" />
+                  </button>
+                  <div className="faq_ds_answer">
+                    <p>
+                      {currentLanguageCode === "en"
+                        ? item?.answer
+                        : item?.answer_ar}
+                    </p>
+                  </div>
+                </article>
+              );
+            })}
+      </div>
+    </section>
   );
 };
 

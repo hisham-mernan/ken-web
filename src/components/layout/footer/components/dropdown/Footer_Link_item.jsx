@@ -10,7 +10,7 @@ const Footer_Link_item = ({ list = [], title = "", className }) => {
         className ?? ""
       }`}
     >
-      <h3 className="capitalize text-base md:text-lg font-medium tracking-[1px]">
+      <h3 className="footer_col_heading">
         {t(title)}
       </h3>
       <div className="flex flex-col gap-3  text-sm  md:text-base">
@@ -19,7 +19,7 @@ const Footer_Link_item = ({ list = [], title = "", className }) => {
             item &&
             (item?.path ? (
               <Link
-                className=" text-sm  md:text-base capitalize outline-none "
+                className="footer_link"
                 key={item.title}
                 to={item.path}
               >

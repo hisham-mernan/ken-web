@@ -1,0 +1,127 @@
+// FAQ, per the Ken design system: hairline rules and typography rather than
+// boxed accordion panels, split across two columns because there are enough
+// questions that one column ran a long way down the page.
+.faq_ds {
+  max-width: var(--container-max, 1440px);
+  margin: 0 auto;
+  padding: var(--space-9, 96px) var(--space-7, 48px);
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: var(--space-8, 64px) var(--space-5, 24px);
+  }
+}
+
+.faq_ds_header {
+  text-align: center;
+  margin-bottom: var(--space-8, 64px);
+}
+
+.faq_ds_headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, calc(2rem + 2.2vw), 4.5rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+  text-transform: capitalize;
+}
+
+.faq_ds_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // Column gap is wide enough that the two columns read as separate lists.
+  column-gap: var(--space-9, 96px);
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+}
+
+.faq_ds_item {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.faq_ds_question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: start;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    color: var(--color-red-clay);
+  }
+}
+
+// A plus that becomes a minus: quieter than a rotating chevron, and it reads
+// the same in both reading directions.
+.faq_ds_sign {
+  position: relative;
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: var(--color-red-clay);
+    transition: opacity var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-standard);
+  }
+
+  &::before {
+    inset-inline: 0;
+    top: 6px;
+    height: 2px;
+  }
+
+  &::after {
+    inset-block: 0;
+    inset-inline-start: 6px;
+    width: 2px;
+  }
+
+  .is_open &::after {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.faq_ds_answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-normal) var(--ease-standard);
+
+  p {
+    overflow: hidden;
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--color-saddle-brown);
+  }
+
+  .is_open & {
+    grid-template-rows: 1fr;
+
+    p {
+      padding-bottom: 22px;
+    }
+  }
+}

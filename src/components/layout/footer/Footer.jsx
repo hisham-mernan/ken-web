@@ -73,7 +73,7 @@ const Footer = () => {
     { title: "terms_and_conditions", path: "/terms-and-conditions" },
   ];
   return (
-    <footer className="bg-primary max-w-[1536px] mx-auto relative px-4 py-[30px] sm:py-16 sm:px-12  lg:py-20 lg:px-16 2xl:py-[116px] 2xl:px-[130px] ">
+    <footer className="footer_ds bg-primary relative px-4 py-[30px] sm:py-16 sm:px-12  lg:py-20 lg:px-16 2xl:py-[116px] 2xl:px-[130px] ">
       <div className=" relative z-10 grid grid-cols-3  md:flex flex-wrap  items-start justify-between gap-y-8 gap-x-4">
         {/* start basic info */}
 

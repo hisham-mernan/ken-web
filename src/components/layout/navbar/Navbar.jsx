@@ -51,13 +51,11 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`max-w-[1536px] navbar ${
-          scrolled ? "is_scrolled" : ""
-        } w-[calc(100%-40px)] sm:w-[calc(100%-94px)] mx-auto ${
-          isHome ? "bg-[#7B7A7C14]  " : "bg-[#9B9B9B14] "
-        } py-[6px] px-4 sm:px-6 rounded-full backdrop-blur-xl mx-auto fixed z-40 top-[32px] left-[50%] translate-x-[-50%]`}
+        className={`navbar ${scrolled ? "is_scrolled" : ""} ${
+          isHome && !scrolled ? "is_over_photo" : ""
+        }`}
       >
-        <nav className=" w-full  flex items-center gap-2 justify-between   ">
+        <nav className="navbar_inner">
           <Link to="/" className="outline-none">
             <img
               src={isHome ? LogoWhite : Logo}
@@ -65,14 +63,14 @@ const Navbar = () => {
               className="w-[70px]"
             />
           </Link>
-          <ul className="hidden lg:flex items-center gap-4 lg:gap-8 xl:gap-11">
+          <ul className="navbar_links">
             {navList?.map((item) =>
               item?.title === "booking" || item?.title === "profile" ? null : (
                 <li key={item.title}>
                   <NavLink
-                    className={`relative outline-none ${
-                      isHome ? "text-white" : "text-primary-dark"
-                    } text-base font-normal hover:font-bold transition-all ease-in-out duration-300`}
+                    className={({ isActive }) =>
+                      `navbar_link ${isActive ? "is_active" : ""}`
+                    }
                     to={item.path}
                   >
                     {t(item?.title)}{" "}
