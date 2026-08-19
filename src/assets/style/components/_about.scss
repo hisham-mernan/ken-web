@@ -172,3 +172,228 @@
     font-weight: 600;
   }
 }
+
+// ---- About page, matching the design system's about.html ----
+.about_eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide-caps);
+  text-transform: uppercase;
+  color: var(--color-red-clay);
+}
+
+.about_rule {
+  width: 64px;
+  height: 1px;
+  background: var(--color-desert-sage);
+}
+
+.about_split {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: var(--container-max, 1440px);
+  margin: 0 auto;
+  padding: 140px var(--space-7, 48px) 120px;
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 88px var(--space-5, 24px) 72px;
+  }
+}
+
+.about_split_copy {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.about_split_headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, calc(2rem + 2.2vw), 4.5rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+
+.about_split_body {
+  margin: 0;
+  max-width: 520px;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-saddle-brown);
+}
+
+.about_split_media {
+  position: relative;
+}
+
+.about_split_media_main {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  display: block;
+  box-shadow: var(--shadow-card);
+
+  @media (max-width: 1024px) {
+    height: 400px;
+  }
+}
+
+.about_split_media_inset {
+  position: absolute;
+  inset-inline-start: -56px;
+  bottom: -48px;
+  width: 240px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 6px solid var(--color-surface-page);
+  box-shadow: var(--shadow-card-hover);
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+// Mission and vision sit side by side under hairline rules, rather than one
+// above the other, so neither reads as the more important of the two.
+.about_band {
+  background: var(--color-surface-dark);
+  padding: 110px var(--space-7, 48px);
+
+  @media (max-width: 1024px) {
+    padding: 72px var(--space-5, 24px);
+  }
+}
+
+.about_band_inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 96px;
+  max-width: 1240px;
+  margin: 0 auto;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.about_band_col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border-on-dark);
+}
+
+.about_band_eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide-caps);
+  text-transform: uppercase;
+  color: var(--color-desert-sage);
+}
+
+.about_band_text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.375rem, calc(1.2rem + 0.7vw), 1.875rem);
+  line-height: 1.25;
+  color: var(--color-off-white);
+}
+
+.about_why {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 120px var(--space-7, 48px);
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    padding: 72px var(--space-5, 24px);
+  }
+}
+
+.about_why_header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+
+.about_why_headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, calc(1.4rem + 1.4vw), 3rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+
+.about_why_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Columns are divided by a hairline rather than spaced apart, which is what
+// makes the row read as one band instead of three cards.
+.about_why_col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 36px 32px;
+
+  & + & {
+    border-inline-start: 1px solid var(--color-border-default);
+  }
+
+  @media (max-width: 900px) {
+    padding: 28px 0;
+
+    & + & {
+      border-inline-start: none;
+      border-top: 1px solid var(--color-border-default);
+    }
+  }
+}
+
+.about_why_index {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--color-desert-sage);
+}
+
+.about_why_title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.375rem;
+  color: var(--color-text-primary);
+}
+
+.about_why_body {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-saddle-brown);
+}
