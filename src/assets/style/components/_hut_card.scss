@@ -1,6 +1,15 @@
 .hut_card {
-  box-shadow: 0px 4px 20px 0px #0000001a;
-  box-shadow: 0px 4px 20px 0px #0000001a;
+  // The arched top is a brand signature and is left alone. What changes is the
+  // depth and the scrim: a warm-tinted shadow and the system overlay, rather
+  // than neutral black, and a lift on hover.
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--duration-normal) var(--ease-standard),
+    transform var(--duration-normal) var(--ease-standard);
+
+  &:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
 
   border: 26px solid #f9f5ebcc;
   border-top-left-radius: 200px;
@@ -20,7 +29,7 @@
     z-index: 5;
   }
   &.dark::after {
-    background: linear-gradient(180deg, rgba(77, 80, 54, 0) 0%, #747763 92.66%);
+    background: var(--overlay-scrim);
   }
   &.primary::after {
     background: linear-gradient(0deg, #a5938154 33%, transparent);
@@ -49,14 +58,15 @@
 
 .card_shadow {
   border: 10px solid #a593811a;
+  transition: border-color var(--duration-normal) var(--ease-standard);
   &:hover {
     border: 10px solid #74776399;
   }
-  border-radius: 16px;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  -ms-border-radius: 16px;
-  -o-border-radius: 16px;
+  border-radius: var(--radius-lg);
+  -webkit-border-radius: var(--radius-lg);
+  -moz-border-radius: var(--radius-lg);
+  -ms-border-radius: var(--radius-lg);
+  -o-border-radius: var(--radius-lg);
   @media (max-width: 768px) {
     border-width: 4px;
     &:hover {

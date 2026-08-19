@@ -1,10 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* fonts */
-  --font-blinker: "Blinker", sans-serif;
+  /* fonts -- Ken Design System
+     Display: The Year of the Camel, the brand's calligraphic face, English
+     headlines only and never long paragraphs. Body/UI: Jost. Arabic: Cairo,
+     which serves as both display and body since the display face is Latin. */
+  --font-display: "The Year of the Camel", "Jost", serif;
+  --font-body: "Jost", "Open Sans", sans-serif;
   --font-cairo: "Cairo", sans-serif;
+  --font-arabic: "Cairo", sans-serif;
 
+  /* Kept as an alias so existing rules keep resolving; both now mean Jost. */
+  --font-blinker: var(--font-body);
   --font-open-sans: "Open Sans", sans-serif;
 
   /* break poinst */
@@ -66,6 +73,25 @@
   --color-grean-light: #f2f8f2;
   --color-grean-normal: #28a138;
   --color-dmv-black: #23262f;
+
+  /* ---- Ken Design System: semantic surfaces, borders and state ---- */
+  --color-surface-page: #FFFBF2;
+  --color-surface-card: #FFFFFF;
+  --color-surface-sunken: #DDD4C2;
+  --color-surface-dark: #3F2E1E;
+  --color-border-subtle: rgba(63, 46, 30, 0.12);
+  --color-border-default: rgba(63, 46, 30, 0.22);
+  --color-border-on-dark: rgba(255, 251, 242, 0.25);
+  --color-state-success: #5C7A4E;
+  --color-state-error: #8C3A2B;
+
+  /* ---- radii: architectural, not bubbly. Pill is for buttons and badges. ---- */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
 }
 @layer base {
   ::-webkit-scrollbar {

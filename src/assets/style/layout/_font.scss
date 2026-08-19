@@ -1,5 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
+// The Year of the Camel -- the brand display face, used for English headlines
+// only. Body copy stays on Jost; Arabic keeps Cairo, which covers both.
+@each $weight, $file in (100: "Thin", 200: "ExtraLight", 300: "Light", 400: "Regular", 500: "Medium", 700: "Bold", 800: "ExtraBold") {
+  @font-face {
+    font-family: "The Year of the Camel";
+    src: url("../../fonts/TheYearofTheCamel-#{$file}.otf") format("opentype");
+    font-weight: $weight;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
 
 @font-face {
@@ -20,7 +32,7 @@
   line-height: $line-height;
 }
 .body_lg {
-  font-family: var(--font-blinker);
+  font-family: var(--font-body);
 
   @include typography(14px, 20px);
 
@@ -38,6 +50,9 @@
   }
 }
 .display_xs {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-display);
+
   @include typography(32px, 40px);
 
   @media (max-width: 1024px) {
@@ -51,7 +66,8 @@
   }
 }
 .display_sm {
-  font-family: var(--font-blinker);
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-display);
   font-weight: 700;
 
   @include typography(20px, 32px);
@@ -67,7 +83,8 @@
   }
 }
 .display_md {
-  font-family: var(--font-blinker);
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-display);
   font-weight: 700;
 
   @include typography(20px, 32px);
@@ -95,6 +112,7 @@
   }
 }
 .headline_lg {
+  font-family: var(--font-display);
   font-weight: 500;
   letter-spacing: 0.15000000596046448px;
 
@@ -129,7 +147,7 @@
 body:dir(ltr) {
   &,
   .p-component {
-    font-family: var(--font-blinker) !important;
+    font-family: var(--font-body) !important;
   }
 }
 body:dir(rtl) {

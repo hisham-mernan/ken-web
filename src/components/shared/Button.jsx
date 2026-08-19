@@ -9,7 +9,7 @@ const Button = ({
   type = "primary",
   role = "button",
   size = "lg",
-  rounded = "lg",
+  rounded = "full",
   textSize = "title_lg",
   disabled,
   loading,
@@ -34,18 +34,21 @@ const Button = ({
     base: "body_lg",
     sm: "body_sm",
   };
+  // ds_button carries the shared design-system behaviour: body face, 1px lift
+  // on hover, and the fast standard ease. Kept in CSS so every variant below
+  // inherits it without repeating utility strings.
   const base = `${sizes[size]} ${radious[rounded]} ${textSizes[textSize]} ${
     hasFullWidth ? "w-full" : ""
-  }  outline-none cursor-pointer disabled:cursor-default transition-all ease-in-out duration-500    !font-semibold   p-4 flex items-center justify-center gap-2 transition-all ease-in-out duration-300  `;
+  } ds_button outline-none cursor-pointer disabled:cursor-default !font-semibold p-4 flex items-center justify-center gap-2 `;
   const styles = {
-    primary_light: `${base}  bg-primary-4 hover:bg-primary-5 hover:button_shadow  disabled:bg-[#dddddd] disabled:cursor-not-allowed disabled:text-primary/30  text-white `,
+    primary_light: `${base} ds_button_raised  bg-primary-4 hover:bg-primary-5 disabled:bg-[#dddddd] disabled:cursor-not-allowed disabled:text-primary/30  text-white `,
     light: `${base}  bg-white hover:bg-light  text-secondary-2 !font-normal `,
-    primary: `${base}  bg-primary-2 hover:button_shadow  disabled:bg-[#dddddd] disabled:cursor-not-allowed disabled:text-primary/30  text-white `,
-    error: `${base}  bg-red-dark  text-white `,
-    primary_dark: `${base}  bg-primary-dark  border border-primary-dark  disabled:bg-[#dddddd] disabled:cursor-not-allowed disabled:text-primary/30  text-font-light `,
-    secondary_light: `${base} bg-secondary-2 hover:button_shadow hover:bg-secondary-3 disabled:bg-[#6E513570]   text-white `,
-    secondary_lighter: `${base} bg-secondary-light button_shadow  disabled:bg-[#6E513570]   text-white `,
-    secondary: `${base} bg-secondary hover:button_shadow hover:bg-secondary-1 disabled:bg-secondary/10 disabled:text-secondary/30  text-white `,
+    primary: `${base} ds_button_raised  bg-primary-2 disabled:bg-[#dddddd] disabled:cursor-not-allowed disabled:text-primary/30  text-white `,
+    error: `${base} ds_button_raised  bg-red-dark  text-white `,
+    primary_dark: `${base} ds_button_raised  bg-primary-dark  border border-primary-dark  disabled:bg-[#dddddd] disabled:cursor-not-allowed disabled:text-primary/30  text-font-light `,
+    secondary_light: `${base} ds_button_raised bg-secondary-2 hover:bg-secondary-3 disabled:bg-[#6E513570]   text-white `,
+    secondary_lighter: `${base} ds_button_raised bg-secondary-light button_shadow  disabled:bg-[#6E513570]   text-white `,
+    secondary: `${base} ds_button_raised bg-secondary hover:bg-secondary-1 disabled:bg-secondary/10 disabled:text-secondary/30  text-white `,
     outline: `${base} border border-[#C8C8C891] bg-white text-[#5D5D5D]`,
     outline_primary: `outline-0 shadow-none flex_center gap-2.5 text-primary-2  w-full border border-primary-2 rounded-lg ${base}`,
     outline_secondary: `outline-0 shadow-none flex_center gap-2.5 text-secondary-4  w-fit border border-secondary-4 rounded-[10px] backdrop-blur-[20px] py-2 px-5`,

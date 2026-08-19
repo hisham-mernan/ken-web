@@ -1,3 +1,23 @@
+:root {
+  /* ---- Ken Design System: effects ----
+     Shadows are warm-tinted, never pure black. Motion is minimal: short fades
+     and 1px lifts, no bounce or spring. */
+  --shadow-card: 0 1px 3px rgba(63, 46, 30, 0.06), 0 20px 40px -12px rgba(63, 46, 30, 0.16);
+  --shadow-card-hover: 0 8px 16px rgba(63, 46, 30, 0.1), 0 28px 56px -14px rgba(63, 46, 30, 0.24);
+  --shadow-button: 0 1px 2px rgba(28, 20, 13, 0.3), 0 6px 16px -4px rgba(28, 20, 13, 0.35);
+
+  --overlay-scrim: linear-gradient(180deg, rgba(28, 20, 13, 0) 0%, rgba(28, 20, 13, 0.72) 100%);
+  --overlay-hero: linear-gradient(180deg, rgba(28, 20, 13, 0.15) 0%, rgba(28, 20, 13, 0.55) 100%);
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 650ms;
+
+  --tracking-display: 0.01em;
+  --tracking-wide-caps: 0.18em;
+}
+
 // end input
 // container
 .Container {
@@ -39,9 +59,13 @@
 }
 
 .secondary_border {
-  box-shadow: 0px 4px 10px 0px #0000000d;
-  border: 1px solid var(--color-font-light);
-  border-radius: 4px;
+  // Ken Design System card: white surface, 20px radius, soft warm shadow.
+  // The old 4px radius and neutral shadow read as generic UI; warm-tinted
+  // shadows and architectural radii are what make the brand feel considered.
+  background: var(--color-surface-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -199,4 +223,38 @@
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
   }
+}
+
+
+// ---- Ken Design System: buttons ----
+// Applied to every Button variant rather than rewritten per variant, so the
+// motion and depth are consistent without touching call sites.
+.ds_button {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  &:disabled {
+    transform: none;
+  }
+}
+
+// Depth only on filled buttons; outline and glass stay flat by design.
+.ds_button_raised {
+  box-shadow: var(--shadow-button);
+}
+
+// Section headings lead with the display face.
+.ds_display {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-display);
 }
