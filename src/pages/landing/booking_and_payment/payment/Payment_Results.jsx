@@ -99,12 +99,8 @@ const Failed_Payment = ({ id }) => {
               fill="var(--color-secondary-1)"
             />
           </span>
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[32px] !font-bold text-secondary-1">
-            {t("booking_failed")}
-          </h2>
-          <p className="text-secondary-light text-xs sm:text-sm lg:text-base">
-            {t("failed_payment_des")}
-          </p>
+          <h2 className="result_title is_error">{t("booking_failed")}</h2>
+          <p className="result_subtitle">{t("failed_payment_des")}</p>
         </header>
 
         {/* retry Button */}
@@ -200,10 +196,10 @@ const Success_Payment = ({ id }) => {
       />
       <div className="flex flex-col gap-4 sm:gap-8 md:gap-12 lg:gap-16">
         <header className="flex_center text-center flex-col gap-5">
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-[32px] !font-bold text-secondary-1">
+          <h2 className="result_title">
             {t(isPartiallyPaid ? "deposit_received_title" : "success_payment_title")}
           </h2>
-          <p className="text-secondary-light text-xs sm:text-sm lg:text-base">
+          <p className="result_subtitle">
             {t(isPartiallyPaid ? "deposit_received_des" : "success_payment_des")}
           </p>
         </header>

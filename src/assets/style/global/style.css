@@ -517,6 +517,47 @@ body:dir(rtl) .p-component {
   text-transform: capitalize;
 }
 
+.profile_card {
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.profile_name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+
+.profile_meta {
+  font-size: 0.8125rem;
+  color: var(--color-desert-sage);
+}
+
+.result_title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+.result_title.is_error {
+  color: var(--color-state-error);
+}
+
+.result_subtitle {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-saddle-brown);
+}
+
 .main_gradient {
   position: relative;
 }

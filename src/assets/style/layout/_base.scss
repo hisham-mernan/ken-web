@@ -313,3 +313,49 @@
   color: var(--color-text-primary);
   text-transform: capitalize;
 }
+
+// ---- Ken Design System: profile ----
+.profile_card {
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.profile_name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, calc(1.5rem + 1vw), 2.5rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+
+.profile_meta {
+  font-size: 0.8125rem;
+  color: var(--color-desert-sage);
+}
+
+// ---- Ken Design System: payment result screens ----
+// The outcome is the message, so it carries the display face at a size that
+// reads as a statement rather than as another section heading.
+.result_title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, calc(1.4rem + 1.4vw), 3rem);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+
+  &.is_error {
+    color: var(--color-state-error);
+  }
+}
+
+.result_subtitle {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-saddle-brown);
+}

@@ -329,7 +329,7 @@ const Profile = () => {
       <section className=" ">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="shadow_primary border border-[#C9A96E40] rounded-[20px] bg-[#FDFBF7] p-4 sm:p-8 md:p-6 lg:p-10 xl:px-16 xl:py-12  "
+          className="profile_card p-4 sm:p-8 md:p-6 lg:p-10 xl:px-16 xl:py-12"
         >
           <header className=" pb-12 flex items-center justify-between gap-8">
             <Form
@@ -341,10 +341,10 @@ const Profile = () => {
               skeleton={loadingData}
             />
             <div className={`flex-1 flex flex-col gap-1`}>
-              <h1 className="font-bold text-[28px] truncate">
+              <h1 className="profile_name truncate">
                 {data?.full_name}
               </h1>
-              <span className="text-[#999999] text-sm">
+              <span className="profile_meta">
                 {t("join_since", { year: 2024 })}
               </span>
             </div>
