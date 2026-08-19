@@ -1,0 +1,1 @@
+import{u as i,j as e}from"./index-D7_iYmJY.js";const o=({title:s="",textClassName:r,containerClassName:t,isCentered:a=!0})=>{const{t:n}=i();return e.jsx("header",{className:`section_header ${a?"is_centered":""} ${t??""}`,children:e.jsx("h2",{className:`section_header_title ${r??""}`,children:n(s)})})};export{o as L};

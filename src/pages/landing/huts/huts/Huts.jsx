@@ -11,7 +11,7 @@ import Huts_Editorial from "./components/Huts_Editorial";
 import useGetData from "../../../../hooks/useGetData";
 import { API } from "../../../../service/apiUrl";
 import { HutsHero3 } from "../../../../assets/images/Image";
-import { SHOW_EVENTS, SHOW_SERVICES } from "../../../../config/features";
+import { SHOW_EVENTS, SHOW_SERVICES, SHOW_CONTACT_FORM } from "../../../../config/features";
 
 /**
  * Huts, per the Ken design system: a short image hero, then each hut in
@@ -36,7 +36,7 @@ const Huts = () => {
       {SHOW_EVENTS && <Events />}
       {SHOW_SERVICES && <Services />}
       <Testimonials />
-      <Support />
+      {SHOW_CONTACT_FORM && <Support />}
     </main>
   );
 };

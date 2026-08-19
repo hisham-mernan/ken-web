@@ -9,3 +9,10 @@
 export const SHOW_EVENTS = false;
 export const SHOW_SERVICES = false;
 export const SHOW_SPECIAL_ITEMS = false;
+
+/**
+ * The "Send Message" contact form that sat at the foot of the huts, hut
+ * detail and contact pages. Hidden, not deleted -- Support.jsx and its route
+ * are untouched, so flipping this back restores it everywhere at once.
+ */
+export const SHOW_CONTACT_FORM = false;
