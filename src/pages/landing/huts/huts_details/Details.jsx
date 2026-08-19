@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Page_Hero from "../../../../components/layout/header/Page_Hero";
+import { getImageUrl, IMG } from "../../../../utils/getImageUrl";
 
 // lib
 import { useForm } from "react-hook-form";
@@ -105,11 +107,15 @@ const Details = () => {
   }
 
   return (
-    <main className="page_p flex flex-col gap-10 md:gap-20 layout_bg ">
-      <div className="Container flex flex-col gap-10 md:gap-[72px">
-        <Landing_Header
-          title={currentLanguageCode === "en" ? data?.title : data?.title_ar}
-        />
+    <main className="flex flex-col gap-10 md:gap-20 layout_bg">
+      {/* Opens like the other inner pages: the hut's own photography under the
+          system scrim, with its name in the display face. */}
+      <Page_Hero
+        image={getImageUrl(data?.main_image, { width: IMG.hero })}
+        eyebrow="huts"
+        title={currentLanguageCode === "en" ? data?.title : data?.title_ar}
+      />
+      <div className="Container flex flex-col gap-10 md:gap-[72px]">
         <Content loading={loadingData} data={data} />
         <Activity loading={loadingData} data={data} />
         <Location loading={loadingData} data={data?.location} />
