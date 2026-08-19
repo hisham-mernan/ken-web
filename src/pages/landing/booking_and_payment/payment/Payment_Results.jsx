@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Landing_Header from "../../../../components/layout/header/Landing_Header";
 import useGetData from "../../../../hooks/useGetData";
-import { API } from "../../../../service/apiUrl";
+import { API, apiKey } from "../../../../service/apiUrl";
 import { useNavigate } from "react-router-dom";
 import Payment_Booking_Details from "./components/Payment_Booking_Details";
 import Payment_Ticket_Card from "./components/Payment_Ticket_Card";
@@ -246,12 +246,15 @@ const Success_Payment = ({ id }) => {
             />
           )}
         </div>
-        {/* Raised in Daftra when the payment landed. Absent until that
-            succeeds, so the link only shows once there is one to open. */}
-        {data?.invoice_url && (
+        {/* Served by our own backend rather than Daftra: Daftra's invoice
+            links redirect to a Daftra sign-in, and a guest has no account
+            there. The token lets a guest open their own invoice. */}
+        {id && (
           <div className="Container flex justify-center">
             <a
-              href={data.invoice_url}
+              href={`${apiKey}/api/products/bookings/${id}/invoice.pdf${
+                getGuestToken(id) ? `?access_token=${getGuestToken(id)}` : ""
+              }`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block rounded-full border border-primary-dark px-8 py-3 text-primary-3 text-sm sm:text-base"
