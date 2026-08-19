@@ -752,6 +752,7 @@ body:dir(ltr) .mobile_navbar.close aside {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-black-warm);
   background-image: var(--overlay-hero), url("../../images/home/hero.webp");
   background-size: cover;
   background-position: center;

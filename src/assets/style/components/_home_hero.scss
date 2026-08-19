@@ -6,6 +6,11 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  // hero.webp carries a deckled edge whose outer rows are fully transparent.
+  // Full-bleed on a light page that showed as a ragged off-white strip along
+  // the top and bottom, so the warm black sits behind it and the deckle melts
+  // into the scrim instead.
+  background-color: var(--color-black-warm);
   background-image: var(--overlay-hero),
     url("../../images/home/hero.webp");
   background-size: cover;
