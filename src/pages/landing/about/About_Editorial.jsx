@@ -1,4 +1,5 @@
 import React from "react";
+import useReveal from "../../../hooks/useReveal";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "primereact/skeleton";
 
@@ -50,6 +51,7 @@ const DEFAULT_SERVICES = [
  */
 const About_Editorial = () => {
   const { t } = useTranslation();
+  const { ref, revealClass, style } = useReveal();
   const isEn = currentLanguageCode === "en";
 
   const { data: storyData, loading: storyLoading } = useGetData(
@@ -73,7 +75,7 @@ const About_Editorial = () => {
     <>
       {/* ---- Our Story: editorial split with an offset inset image ---- */}
       {storyLoading ? (
-        <section className="about_split">
+        <section ref={ref} style={style} className={`about_split ${revealClass}`}>
           <div className="about_split_copy">
             <Skeleton width="30%" height="14px" />
             <Skeleton width="80%" height="56px" />

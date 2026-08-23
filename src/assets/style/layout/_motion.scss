@@ -1,0 +1,69 @@
+// ---- Ken Design System: motion ----
+// The system asks for minimal movement: 200-650ms fades and translates on the
+// standard ease, no bounce and no spring. Everything here obeys that, and
+// everything here is switched off for anyone who has asked for reduced motion.
+
+// Sections lift into place the first time they scroll into view.
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+  will-change: opacity, transform;
+
+  &.is_shown {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// The hero photograph settles rather than snapping in: it fades up from the
+// warm black already sitting behind it, and the type follows a beat later.
+@keyframes ken_hero_image_in {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ken_rise_in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// A slow, small drift. Big enough to catch the eye, small enough not to nag.
+@keyframes ken_scroll_bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is_shown {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .home_hero::before,
+  .home_hero_body > *,
+  .home_hero_scroll,
+  .home_hero_scroll_line {
+    animation: none !important;
+  }
+}

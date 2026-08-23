@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useReveal from "../../../../hooks/useReveal";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "primereact/skeleton";
@@ -17,6 +18,7 @@ import { getImageUrl } from "../../../../utils/getImageUrl";
  */
 const Discover_Triptych = ({ data, loading }) => {
   const { t, i18n } = useTranslation();
+  const { ref, revealClass, style } = useReveal();
   const navigate = useNavigate();
   const isRtl = i18n?.language === "ar";
   // The first panel opens by default so the section never reads as flat.
@@ -41,7 +43,11 @@ const Discover_Triptych = ({ data, loading }) => {
   if (!huts.length) return null;
 
   return (
-    <section className="discover_triptych_section">
+    <section
+      ref={ref}
+      style={style}
+      className={`discover_triptych_section ${revealClass}`}
+    >
       <Discover_Header />
       <div className="discover_triptych">
         {huts.map((hut, index) => {

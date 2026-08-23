@@ -16,6 +16,18 @@ import Button from "../../../components/shared/Button";
 const Home_Hero = () => {
   const { t } = useTranslation();
 
+  // Takes the reader to whatever section follows the hero, rather than a
+  // hard-coded offset that would drift if the page order changed.
+  const scrollToNext = () => {
+    const hero = document.querySelector(".home_hero");
+    const next = hero?.nextElementSibling;
+    if (next) {
+      next.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+    }
+  };
+
   // The stored headline carries a literal "</br>" as its line break.
   const headlineLines = String(t("home_hero"))
     .split(/<\/?br\s*\/?>/i)
@@ -49,10 +61,12 @@ const Home_Hero = () => {
         </div>
       </div>
 
-      <span className="home_hero_scroll">
+      {/* A button, not a decorative span: it says "Scroll Down", so it should
+          scroll down when clicked -- and be reachable by keyboard. */}
+      <button type="button" className="home_hero_scroll" onClick={scrollToNext}>
         {t("scroll_down")}
-        <span className="home_hero_scroll_line" />
-      </span>
+        <span className="home_hero_scroll_line" aria-hidden="true" />
+      </button>
     </section>
   );
 };

@@ -1,10 +1,25 @@
 import React from "react";
+import useReveal from "../../../hooks/useReveal";
 import { Skeleton } from "primereact/skeleton";
 import { useTranslation } from "react-i18next";
 
 import useGetData from "./../../../hooks/useGetData";
 import { API } from "../../../service/apiUrl";
 import { getImageUrl, IMG } from "../../../utils/getImageUrl";
+
+/** Up to two initials from a name, for reviewers with no avatar uploaded. */
+const initialsOf = (name) => {
+  const parts = String(name || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!parts.length) return "—";
+  return parts
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+};
 
 /**
  * Testimonials as the design system's card: white surface, warm shadow, 20px
@@ -18,12 +33,13 @@ import { getImageUrl, IMG } from "../../../utils/getImageUrl";
  */
 const Testimonials = ({ className }) => {
   const { t } = useTranslation();
+  const { ref, revealClass, style } = useReveal();
   const { data, loading } = useGetData(API.testimonials);
 
   if (!loading && data?.length === 0) return null;
 
   return (
-    <section className={`testimonials_ds ${className ?? ""}`}>
+    <section ref={ref} style={style} className={`testimonials_ds ${revealClass} ${className ?? ""}`}>
       <header className="testimonials_ds_header">
         <h2 className="testimonials_ds_headline">{t("testimonials")}</h2>
       </header>
@@ -54,7 +70,14 @@ const Testimonials = ({ className }) => {
                       className="testimonials_ds_avatar"
                     />
                   ) : (
-                    <span className="testimonials_ds_avatar is_empty" />
+                    // Initials rather than a blank disc: it identifies the
+                    // reviewer instead of reading as a failed image.
+                    <span
+                      className="testimonials_ds_avatar is_empty"
+                      aria-hidden="true"
+                    >
+                      {initialsOf(item?.user?.full_name)}
+                    </span>
                   )}
                   <span className="testimonials_ds_person_text">
                     <strong>{item?.user?.full_name}</strong>

@@ -1,0 +1,1 @@
+import{u as r,j as s}from"./index-a0-KcPPn.js";const n=({className:a="",title:t="",des:l=""})=>{const{t:e}=r();return s.jsxs("header",{className:`${a} flex flex-col gap-2.5`,children:[s.jsx("h1",{className:"auth_title",children:e(t)}),s.jsx("p",{className:"auth_subtitle",children:e(l)})]})};export{n as A};

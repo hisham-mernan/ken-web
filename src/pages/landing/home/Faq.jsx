@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import useReveal from "../../../hooks/useReveal";
 import { Skeleton } from "primereact/skeleton";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -20,6 +21,7 @@ import { currentLanguageCode } from "../../../utils/switchLang";
  */
 const Faq = () => {
   const { t } = useTranslation();
+  const { ref, revealClass, style } = useReveal();
   const { data, loading } = useGetData(API.home.faq);
   const [open, setOpen] = useState(() => new Set());
   const faqContainerRef = useRef(null);
@@ -56,7 +58,17 @@ const Faq = () => {
   if (!loading && data?.length === 0) return null;
 
   return (
-    <section ref={faqContainerRef} id="faq" className="faq_ds">
+    <section
+      // Two refs on one node: the deep-link scroll target and the reveal
+      // observer both need it.
+      ref={(node) => {
+        faqContainerRef.current = node;
+        ref.current = node;
+      }}
+      id="faq"
+      className={`faq_ds ${revealClass}`}
+      style={style}
+    >
       <header className="faq_ds_header">
         <h2 className="faq_ds_headline">{t("faq")}</h2>
       </header>
