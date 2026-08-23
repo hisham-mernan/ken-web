@@ -10,8 +10,12 @@
   align-items: start;
   background: var(--color-surface-page);
 
+  // The photograph is a 545x989 portrait with the logo at the top and the
+  // tagline at the bottom, so cropping either edge loses the point of it.
+  // Sizing the column to the image's own aspect ratio means object-fit: cover
+  // has nothing to crop. A proportional column cropped 43% of it at 1920x905.
   @media (min-width: 900px) {
-    grid-template-columns: 1fr 0.85fr;
+    grid-template-columns: 1fr clamp(320px, calc(100vh * 545 / 989), 640px);
   }
 }
 

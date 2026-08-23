@@ -1475,7 +1475,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 }
 @media (min-width: 900px) {
   .auth_shell {
-    grid-template-columns: 1fr 0.85fr;
+    grid-template-columns: 1fr clamp(320px, 55.1061678463vh, 640px);
   }
 }
 
