@@ -5,6 +5,9 @@
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
+  // Columns size themselves rather than stretching to the tallest, so the
+  // photograph cannot drag the row height around.
+  align-items: start;
   background: var(--color-surface-page);
 
   @media (min-width: 900px) {
@@ -17,6 +20,10 @@
   flex-direction: column;
   justify-content: center;
   gap: 32px;
+  // At least the viewport, so a short form (login) still centres; a long one
+  // (register) simply grows past it.
+  min-height: 100vh;
+  box-sizing: border-box;
   padding: 48px var(--space-5, 24px);
 
   @media (min-width: 900px) {
@@ -68,10 +75,17 @@
 
 // Hidden on small screens rather than squeezed: a sliver of photograph above
 // a form helps nobody.
+// auth_image.webp is 545x989 -- a tall portrait. Left to size itself it grew
+// past 1000px at column width, inflated the grid row, and the form centred
+// inside that oversized row, which is where the gap above "Sign Up" came from.
+// Pinned to the viewport and made sticky, so a long form scrolls beside it.
 .auth_media {
   display: none;
   margin: 0;
-  position: relative;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
 
   @media (min-width: 900px) {
     display: block;

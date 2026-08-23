@@ -1470,6 +1470,7 @@ body:dir(ltr) .mobile_navbar.close aside {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
+  align-items: start;
   background: var(--color-surface-page);
 }
 @media (min-width: 900px) {
@@ -1483,6 +1484,8 @@ body:dir(ltr) .mobile_navbar.close aside {
   flex-direction: column;
   justify-content: center;
   gap: 32px;
+  min-height: 100vh;
+  box-sizing: border-box;
   padding: 48px var(--space-5, 24px);
 }
 @media (min-width: 900px) {
@@ -1534,7 +1537,10 @@ body:dir(ltr) .mobile_navbar.close aside {
 .auth_media {
   display: none;
   margin: 0;
-  position: relative;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 @media (min-width: 900px) {
   .auth_media {
