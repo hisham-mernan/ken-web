@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Skeleton } from "primereact/skeleton";
 
 import Button from "../../../../components/shared/Button";
+import Hut_Rates from "../../../../components/shared/Hut_Rates";
 import { getImageUrl } from "../../../../utils/getImageUrl";
 
 /**
@@ -94,12 +95,7 @@ const Discover_Triptych = ({ data, loading }) => {
                     {guests ? <span>{`${guests} ${t("person")}`}</span> : null}
                   </div>
                   <div className="discover_panel_actions">
-                    {hut?.lowest_price > 0 && (
-                      <span className="discover_panel_price">
-                        {hut.lowest_price} {t("sar")}
-                        <span> / {t("per_night")}</span>
-                      </span>
-                    )}
+                    <Hut_Rates hut={hut} tone="light" />
                     <Button
                       type="light"
                       size="md"

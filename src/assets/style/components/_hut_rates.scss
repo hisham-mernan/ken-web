@@ -1,0 +1,59 @@
+// A hut's two nightly rates, side by side. Used on the home panels, the huts
+// index and anywhere else a hut is listed, so the pair reads identically
+// everywhere rather than each surface inventing its own price treatment.
+.hut_rates {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-4, 16px);
+  flex-wrap: wrap;
+}
+
+.hut_rate {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  // The rule is a discount for the longer stay, so the two rates are peers --
+  // neither is struck through and neither is the "real" price.
+  & + & {
+    padding-inline-start: var(--space-4, 16px);
+    border-inline-start: 1px solid var(--rate-divider);
+  }
+}
+
+.hut_rate_amount {
+  font-family: var(--font-display, "Jost", serif);
+  font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--rate-amount);
+  white-space: nowrap;
+}
+
+.hut_rate_currency {
+  font-size: 0.6em;
+  font-weight: 500;
+}
+
+.hut_rate_label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-caption, 0.08em);
+  text-transform: uppercase;
+  color: var(--rate-label);
+  white-space: nowrap;
+}
+
+// On the ivory pages.
+.hut_rates.is_dark {
+  --rate-amount: var(--color-dark-walnut, #3f2e1e);
+  --rate-label: var(--color-saddle-brown, #806444);
+  --rate-divider: var(--color-border-subtle, rgba(63, 46, 30, 0.14));
+}
+
+// Over photography, where the panel is already scrimmed.
+.hut_rates.is_light {
+  --rate-amount: var(--color-off-white, #fffbf2);
+  --rate-label: rgba(255, 251, 242, 0.72);
+  --rate-divider: rgba(255, 251, 242, 0.28);
+}

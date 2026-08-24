@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { isRangeAvailable } from "../../../../../utils/validator";
 import { formatDateToYYYYMMDD } from "../../../../../utils/formateDateToYYYYMMDD";
+import { quoteStay } from "../../../../../utils/hutPricing";
 
 const Booking_Hut = ({
   setError,
@@ -203,85 +204,40 @@ const Booking_Hut = ({
       className: "col-span-1 lg:col-span-2",
     },
   ].filter(Boolean);
-  const calculatePrice = () => {
-    const fromRaw = watch("date_from");
-    const toRaw = watch("date_to");
+  // The hut itself, at its weekday/weekend rates. Mirrors the server rule in
+  // src/utils/hutPricing.js -- the nights used to be priced from whichever
+  // available-date range happened to cover them, which meant a stay spanning
+  // two ranges silently fell back to the server's stale total.
+  const hut = isConfirm ? data?.hut_details : data;
+  const stay = quoteStay(hut, watch("date_from"), watch("date_to"));
 
-    const fromDate = new Date(fromRaw);
-    const toDate = new Date(toRaw);
+  // Everything booked alongside the hut.
+  const extrasTotal = [special, eventTickets, serviceTickets]
+    .filter((list) => list?.length > 0)
+    .flat()
+    .reduce(
+      (sum, item) => sum + Number(item.quantity || 0) * Number(item.price || 0),
+      0
+    );
 
-    const msPerDay = 1000 * 60 * 60 * 24;
-    const availableDates = isConfirm
-      ? data?.hut_details?.available_dates
-      : data?.available_dates;
-    const defaultPrice = isConfirm
-      ? data?.hut_details?.price
-      : data?.price || 0;
+  const asMoney = (value) => (Number.isFinite(value) ? Math.round(value) : 0);
 
-    let total = 0;
-    let hasNoPrice = false;
-    for (
-      let d = new Date(fromDate);
-      d < toDate;
-      d = new Date(d.getTime() + msPerDay)
-    ) {
-      const matchedPeriod = availableDates?.find((range) => {
-        const start = new Date(range.date_from);
-        const end = new Date(range.date_to);
+  const subtotal = asMoney(stay.total + extrasTotal);
+  // A promo code is only applied once the booking reaches confirmation, which
+  // is where the server applies it too.
+  const discountPercent =
+    isConfirm && subtotal > 0 ? Number(data?.promocode?.percentage) || 0 : 0;
+  const discount = asMoney((subtotal * discountPercent) / 100);
+  const totalPrice = subtotal - discount;
 
-        const current = new Date(d);
-        current.setHours(0, 0, 0, 0);
-        start.setHours(0, 0, 0, 0);
-        end.setHours(0, 0, 0, 0);
-
-        return current >= start && current <= end;
-      });
-
-      if (matchedPeriod?.price) {
-        const nightlyPrice = matchedPeriod ? matchedPeriod.price : defaultPrice;
-
-        total += nightlyPrice;
-      } else {
-        hasNoPrice = true;
-      }
-    }
-    if (hasNoPrice) {
-      total += +data?.total_price;
-    }
-    // Add specials
-    if (special?.length > 0) {
-      special.forEach((item) => {
-        total += Number(item.quantity) * Number(item.price);
-      });
-    }
-
-    if (eventTickets?.length > 0) {
-      eventTickets.forEach((item) => {
-        total += Number(item.quantity) * Number(item.price);
-      });
-    }
-
-    if (serviceTickets?.length > 0) {
-      serviceTickets.forEach((item) => {
-        total += Number(item.quantity) * Number(item.price);
-      });
-    }
-    if (data?.promocode && total > 0 && isConfirm) {
-      total = total - (total * data?.promocode?.percentage) / 100;
-    }
-
-    return total && total != "nan" ? total : 0;
-  };
-
-  const totalPrice = calculatePrice() ?? 0;
   const pricesList = [
-    {
-      id: 1,
-      label: "subtotal",
-      value: totalPrice,
-    },
-    { id: 2, label: "discount", value: 0 },
-    { id: 3, label: "total", value: 0 },
+    { id: 1, label: "subtotal", value: `${subtotal} ${t("sar")}` },
+    // Previously both of these were hardcoded to 0, so the Total row read
+    // "0" no matter what the guest had chosen.
+    ...(discount > 0
+      ? [{ id: 2, label: "discount", value: `- ${discount} ${t("sar")}` }]
+      : []),
+    { id: 3, label: "total", value: `${totalPrice} ${t("sar")}` },
   ];
   return (
     <section className="Container ">
@@ -308,6 +264,15 @@ const Booking_Hut = ({
             />
           </div>
           <footer className="flex flex-col gap-3">
+            {/* Why the total is what it is. Without this the long-stay rule is
+                invisible -- a guest adding a third night sees the figure move
+                and cannot tell whether it is a discount or a mistake. */}
+            {stay.nights > 0 && (
+              <p className="text-primary-3 text-sm">
+                {`${stay.nights} ${t("nights")}`}
+                {stay.longStay && ` · ${t("long_stay_note")}`}
+              </p>
+            )}
             {pricesList?.map((item) => (
               <div
                 key={item?.id}

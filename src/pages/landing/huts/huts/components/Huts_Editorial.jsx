@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Skeleton } from "primereact/skeleton";
 
 import Button from "../../../../../components/shared/Button";
+import Hut_Rates from "../../../../../components/shared/Hut_Rates";
 import { getImageUrl, IMG } from "../../../../../utils/getImageUrl";
 
 /**
@@ -89,12 +90,7 @@ const Huts_Editorial = ({ data, loading }) => {
               )}
 
               <div className="huts_editorial_actions">
-                {hut?.lowest_price > 0 && (
-                  <span className="huts_editorial_price">
-                    {hut.lowest_price} {t("sar")}
-                    <span> / {t("per_night")}</span>
-                  </span>
-                )}
+                <Hut_Rates hut={hut} />
                 <Button
                   type="primary"
                   size="md"

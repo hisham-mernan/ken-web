@@ -72,48 +72,34 @@ const Content = ({ loading = false, data }) => {
       <section className=" grid grid-cols-1 md:grid-cols-2 gap-6 2xl:gap-[46px] ">
         {/* left content */}
         <div className=" w-full md:max-w-[502px] flex flex-col gap-10 xl:gap-[60px] ">
-          {/* price */}
-          <div className="flex flex-col  gap-6 ">
-            {data?.lowest_price && (
+          {/* Price: the hut's two nightly rates. This block used to render
+              three rows that all printed the same lowest_price, one of them
+              against a hardcoded 1200 strikethrough. */}
+          <div className="flex flex-col gap-6">
+            {data?.weekday_price > 0 && (
               <header className="flex_center_y">
                 <SarIcon width="30" height="30" fill="black" />
-
                 <strong className="headline_lg !font-bold text-secondary ">
-                  {data?.lowest_price}
+                  {Number(data.weekday_price)}
                   <small className="title_lg !font-normal">
-                    /{t("regular_night")}
+                    /{t("weekday_night")}
                   </small>
                 </strong>
               </header>
             )}
-            {/*  weekend night only ui */}
-            {data?.lowest_price && (
+            {data?.weekend_price > 0 && (
               <div className="flex_center_y">
                 <SarIcon width="30" height="30" fill="black" />
                 <strong className="headline_lg !font-bold text-secondary ">
-                  {data?.lowest_price}
+                  {Number(data.weekend_price)}
                   <small className="title_lg !font-normal">
                     /{t("weekend_night")}
                   </small>
                 </strong>
               </div>
             )}
-            {/* full weekend night */}
-            {data?.lowest_price && (
-              <div className="flex_center_y">
-                <SarIcon width="30" height="30" fill="black" />
-                <div className="flex items-center gap-1">
-                  <strong className=" line-through decoration-black headline_lg !font-bold text-secondary ">
-                    1200
-                  </strong>
-                  <strong className="headline_lg !font-bold text-secondary ">
-                    {data?.lowest_price}
-                    <small className="title_lg !font-normal">
-                      /{t("full_weekend")}
-                    </small>
-                  </strong>
-                </div>
-              </div>
+            {data?.weekday_price > 0 && data?.weekend_price > 0 && (
+              <p className="body_lg text-primary-3">{t("long_stay_note")}</p>
             )}
           </div>
 
