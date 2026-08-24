@@ -92,7 +92,6 @@ const Discover_Triptych = ({ data, loading }) => {
                   <div className="discover_panel_meta">
                     {hut?.rate ? <span>★ {hut.rate}</span> : null}
                     {guests ? <span>{`${guests} ${t("person")}`}</span> : null}
-                    {hut?.size ? <span>{hut.size}</span> : null}
                   </div>
                   <div className="discover_panel_actions">
                     {hut?.lowest_price > 0 && (

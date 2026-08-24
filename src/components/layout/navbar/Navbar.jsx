@@ -45,6 +45,11 @@ const Navbar = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  // The white logo/icons/button variants only belong over the transparent,
+  // over-photo bar. Once the page scrolls, the bar goes solid even on the
+  // homepage, so every color decision below has to key off this, not off
+  // `isHome` alone -- otherwise the scrolled homepage bar keeps white-on-white.
+  const overPhoto = isHome && !scrolled;
   const toggleProfile = (e) => {
     profileRef.current.toggle(e);
   };
@@ -52,13 +57,13 @@ const Navbar = () => {
     <>
       <header
         className={`navbar ${scrolled ? "is_scrolled" : ""} ${
-          isHome && !scrolled ? "is_over_photo" : ""
+          overPhoto ? "is_over_photo" : ""
         }`}
       >
         <nav className="navbar_inner">
           <Link to="/" className="outline-none">
             <img
-              src={isHome ? LogoWhite : Logo}
+              src={overPhoto ? LogoWhite : Logo}
               alt="logo"
               className="w-[70px]"
             />
@@ -86,7 +91,7 @@ const Navbar = () => {
                   className={` cursor-pointer hidden md:flex items-center justify-center w-10 h-10 rounded-full glass_effect_40 `}
                   onClick={(e) => toggleProfile(e)}
                 >
-                  <UserIcon2 fill={isHome ? "#FFFDFD" : "#2E301A"} />
+                  <UserIcon2 fill={overPhoto ? "#FFFDFD" : "#2E301A"} />
                 </span>
               )}
             </div>
@@ -96,7 +101,7 @@ const Navbar = () => {
                   type="glass_40"
                   to="/my-booking"
                   className={`!hidden lg:!flex !rounded-full !h-[40px] min-w-[100px]  text-nowrap !text-base !font-semibold backdrop-blur-2xl ${
-                    isHome ? "" : "text-primary-dark!"
+                    overPhoto ? "" : "text-primary-dark!"
                   }`}
                 >
                   {t("booking")}
@@ -106,18 +111,18 @@ const Navbar = () => {
               <div className="lg:flex  items-center hidden  gap-1 md:gap-2 ">
                 <Button
                   to="/account/register"
-                  type={isHome ? "glass_gradiant" : "glass_40"}
+                  type={overPhoto ? "glass_gradiant" : "glass_40"}
                   className={`!rounded-full !h-[40px] w-fit min-w-[100px] px-[14px] !text-base font-semibold! ${
-                    isHome ? "" : "text-primary-dark! shadow hover:bg-black/10!"
+                    overPhoto ? "" : "text-primary-dark! shadow hover:bg-black/10!"
                   } `}
                 >
                   {t("sign_up")}
                 </Button>
                 <Button
                   to="/account/login"
-                  type={isHome ? "glass_40" : "glass_gradiant_light"}
+                  type={overPhoto ? "glass_40" : "glass_gradiant_light"}
                   className={`!rounded-full  !h-[40px]  w-fit min-w-[100px] px-[14px] min-w-[100px]  text-nowrap !text-base font-semibold! ${
-                    isHome ? "" : "text-primary-dark"
+                    overPhoto ? "" : "text-primary-dark"
                   } `}
                 >
                   {t("login")}
@@ -127,21 +132,21 @@ const Navbar = () => {
 
             <span
               className={`cursor-pointer flex items-center justify-center  lg:hidden w-10 h-10 rounded-full  ${
-                isHome ? "glass_effect_40" : "glass_effect_gradiant_light"
+                overPhoto ? "glass_effect_40" : "glass_effect_gradiant_light"
               } `}
               role="button"
               onClick={() => setToggleNav(true)}
             >
-              <BurgerIcon fill={isHome ? "#FFFDFD" : "#2E301A"} />
+              <BurgerIcon fill={overPhoto ? "#FFFDFD" : "#2E301A"} />
             </span>
             <span
               className={`cursor-pointer flex items-center justify-center w-10 h-10 rounded-full  ${
-                isHome ? "glass_effect_40" : "glass_effect_gradiant_light"
+                overPhoto ? "glass_effect_40" : "glass_effect_gradiant_light"
               } `}
               role="button"
               onClick={switchLang}
             >
-              <LangIcon fill={isHome ? "#FFFDFD" : "#2E301A"} />
+              <LangIcon fill={overPhoto ? "#FFFDFD" : "#2E301A"} />
             </span>
           </div>
         </nav>

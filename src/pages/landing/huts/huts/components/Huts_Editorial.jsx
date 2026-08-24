@@ -77,7 +77,6 @@ const Huts_Editorial = ({ data, loading }) => {
               <div className="huts_editorial_meta">
                 {hut?.rate ? <span>★ {hut.rate}</span> : null}
                 {guests ? <span>{guests}</span> : null}
-                {hut?.size ? <span>{hut.size}</span> : null}
                 {hut?.total_reviews ? (
                   <span>{`${hut.total_reviews} ${t("reviews")}`}</span>
                 ) : null}

@@ -50,14 +50,6 @@ const Home_Hero = () => {
           <Button type="light" size="lg" hasFullWidth={false} to="/huts">
             {t("book_now")}
           </Button>
-          <Button
-            type="outline_secondary"
-            size="lg"
-            hasFullWidth={false}
-            to="/huts"
-          >
-            {t("view_huts")}
-          </Button>
         </div>
       </div>
 
