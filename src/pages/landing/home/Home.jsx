@@ -11,7 +11,11 @@ import Discover from "./Discover";
 
 import useGetData from "../../../hooks/useGetData";
 import { API } from "../../../service/apiUrl";
-import { SHOW_EVENTS, SHOW_SERVICES } from "../../../config/features";
+import {
+  SHOW_EVENTS,
+  SHOW_SERVICES,
+  SHOW_CONNECT_BANNER,
+} from "../../../config/features";
 
 const Home = () => {
   // Pre-fetch consolidated homepage data in 1 single HTTP network request
@@ -26,7 +30,7 @@ const Home = () => {
       {SHOW_SERVICES && <Services />}
       <Testimonials />
       <Faq />
-      <Connect_With_Ken />
+      {SHOW_CONNECT_BANNER && <Connect_With_Ken />}
     </main>
   );
 };

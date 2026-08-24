@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import Connect_With_Ken from "../../../components/shared/Connect_With_Ken";
+import { SHOW_CONNECT_BANNER } from "../../../config/features";
 import Testimonials from "../../../components/shared/testimonials/Testimonials";
 import About_Editorial from "./About_Editorial";
 import Page_Hero from "../../../components/layout/header/Page_Hero";
@@ -25,7 +26,7 @@ const About = () => {
       />
       <About_Editorial />
       <Testimonials />
-      <Connect_With_Ken />
+      {SHOW_CONNECT_BANNER && <Connect_With_Ken />}
     </main>
   );
 };

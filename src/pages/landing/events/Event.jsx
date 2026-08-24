@@ -3,6 +3,7 @@ import Special_Landing_Header from "../../../components/layout/header/Special_La
 import Services from "../../../components/shared/services/Services";
 import Testimonials from "../../../components/shared/testimonials/Testimonials";
 import Connect_With_Ken from "../../../components/shared/Connect_With_Ken";
+import { SHOW_CONNECT_BANNER } from "../../../config/features";
 import All_Events from "./All_Events";
 
 const Event = () => {
@@ -13,7 +14,7 @@ const Event = () => {
       </section>
       <Services />
       <Testimonials />
-      <Connect_With_Ken />
+      {SHOW_CONNECT_BANNER && <Connect_With_Ken />}
     </main>
   );
 };

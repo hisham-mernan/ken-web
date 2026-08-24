@@ -1,6 +1,7 @@
 import React from "react";
 import Testimonials from "../../../components/shared/testimonials/Testimonials";
 import Connect_With_Ken from "../../../components/shared/Connect_With_Ken";
+import { SHOW_CONNECT_BANNER } from "../../../config/features";
 
 import Services from "../../../components/shared/services/Services";
 import Service_Category from "./Service_Category";
@@ -15,7 +16,7 @@ const Service_Page = () => {
         <Service_Category />
       </section>
       <Testimonials className="section_p_b" />
-      <Connect_With_Ken />
+      {SHOW_CONNECT_BANNER && <Connect_With_Ken />}
     </main>
   );
 };

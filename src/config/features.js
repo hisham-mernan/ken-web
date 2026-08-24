@@ -16,3 +16,11 @@ export const SHOW_SPECIAL_ITEMS = false;
  * are untouched, so flipping this back restores it everywhere at once.
  */
 export const SHOW_CONTACT_FORM = false;
+
+/**
+ * The "Ready to embark..." Connect With Ken CTA banner that sat at the foot
+ * of the homepage, about, services, events and terms pages. Hidden, not
+ * deleted -- Connect_With_Ken.jsx is untouched, so flipping this back
+ * restores it everywhere at once.
+ */
+export const SHOW_CONNECT_BANNER = false;
