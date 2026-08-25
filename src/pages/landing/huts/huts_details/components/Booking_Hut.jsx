@@ -224,18 +224,23 @@ const Booking_Hut = ({
 
   const subtotal = asMoney(stay.total + extrasTotal);
   // A promo code is only applied once the booking reaches confirmation, which
-  // is where the server applies it too.
+  // is where the server applies it too. It sends the percentage on its own --
+  // the code itself is deliberately never returned, so reading it off a
+  // promocode object here always came back undefined and no discount showed.
   const discountPercent =
-    isConfirm && subtotal > 0 ? Number(data?.promocode?.percentage) || 0 : 0;
+    isConfirm && subtotal > 0 ? Number(data?.discount_percentage) || 0 : 0;
   const discount = asMoney((subtotal * discountPercent) / 100);
   const totalPrice = subtotal - discount;
 
+  // Total is the subtotal less the discount, so the two rows can only differ
+  // when a promo code applied. With nothing to break down -- no discount, and
+  // no events or services on sale -- a Subtotal row just prints Total twice.
   const pricesList = [
-    { id: 1, label: "subtotal", value: `${subtotal} ${t("sar")}` },
-    // Previously both of these were hardcoded to 0, so the Total row read
-    // "0" no matter what the guest had chosen.
     ...(discount > 0
-      ? [{ id: 2, label: "discount", value: `- ${discount} ${t("sar")}` }]
+      ? [
+          { id: 1, label: "subtotal", value: `${subtotal} ${t("sar")}` },
+          { id: 2, label: "discount", value: `- ${discount} ${t("sar")}` },
+        ]
       : []),
     { id: 3, label: "total", value: `${totalPrice} ${t("sar")}` },
   ];
