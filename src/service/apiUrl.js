@@ -41,6 +41,10 @@ export const API = {
   booking: {
     create: "/api/products/booking/",
     details: "/api/products/bookings/",
+    // Checks one typed code so the booking form can show the discount before
+    // the guest commits. The hut payload deliberately no longer carries the
+    // codes themselves.
+    validate_promocode: "/api/products/promocodes/validate/",
     // Opens a guest booking straight from the token in their confirmation email.
     by_token: "/api/products/bookings/by-token/",
     confirm: {

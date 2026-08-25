@@ -13,13 +13,15 @@ import {
   PercentageIcon,
   UsersIcon,
 } from "../../../../../assets/icons/Icon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../../../../context/Auth_Context";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { isRangeAvailable } from "../../../../../utils/validator";
 import { formatDateToYYYYMMDD } from "../../../../../utils/formateDateToYYYYMMDD";
 import { quoteStay } from "../../../../../utils/hutPricing";
+import axiosInstance from "../../../../../service/axiosInstance";
+import { API } from "../../../../../service/apiUrl";
 
 const Booking_Hut = ({
   setError,
@@ -211,6 +213,38 @@ const Booking_Hut = ({
   const hut = isConfirm ? data?.hut_details : data;
   const stay = quoteStay(hut, watch("date_from"), watch("date_to"));
 
+  // The discount a code typed into this form is worth, so the guest sees what
+  // they are saving before committing rather than first at confirmation. The
+  // server is asked because the hut payload no longer lists its codes -- it
+  // used to, which handed a working discount to anyone reading the API.
+  const typedCode = watch("promocode");
+  const [typedPercent, setTypedPercent] = useState(0);
+
+  useEffect(() => {
+    if (isConfirm) return; // confirmation reads the applied figure off the booking
+    const code = (typedCode || "").trim();
+    const hutId = hut?.id;
+    if (!code || !hutId) {
+      setTypedPercent(0);
+      return;
+    }
+    // Debounced: this fires on every keystroke otherwise.
+    const timer = setTimeout(async () => {
+      try {
+        const res = await axiosInstance.post(API.booking.validate_promocode, {
+          hut: hutId,
+          code,
+        });
+        setTypedPercent(res?.data?.valid ? Number(res.data.percentage) || 0 : 0);
+      } catch {
+        // An unreachable check must not invent a discount the server will not
+        // honour, so a failure shows no discount rather than a stale one.
+        setTypedPercent(0);
+      }
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [typedCode, hut?.id, isConfirm]);
+
   // Everything booked alongside the hut.
   const extrasTotal = [special, eventTickets, serviceTickets]
     .filter((list) => list?.length > 0)
@@ -223,12 +257,12 @@ const Booking_Hut = ({
   const asMoney = (value) => (Number.isFinite(value) ? Math.round(value) : 0);
 
   const subtotal = asMoney(stay.total + extrasTotal);
-  // A promo code is only applied once the booking reaches confirmation, which
-  // is where the server applies it too. It sends the percentage on its own --
-  // the code itself is deliberately never returned, so reading it off a
-  // promocode object here always came back undefined and no discount showed.
+  // On the confirm page the booking already carries the percentage the server
+  // applied. The code itself is deliberately never returned, which is why this
+  // reads a plain percentage rather than a promocode object.
+  const confirmedPercent = Number(data?.discount_percentage) || 0;
   const discountPercent =
-    isConfirm && subtotal > 0 ? Number(data?.discount_percentage) || 0 : 0;
+    subtotal > 0 ? (isConfirm ? confirmedPercent : typedPercent) : 0;
   const discount = asMoney((subtotal * discountPercent) / 100);
   const totalPrice = subtotal - discount;
 
