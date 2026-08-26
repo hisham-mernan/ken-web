@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 // lib
-import Slider from "react-slick";
 import { Skeleton } from "primereact/skeleton";
 import { useTranslation } from "react-i18next";
 
 // components
 import Custome_Calendar from "../../../../../components/shared/calendar/Custome_Calendar";
+import Hut_Gallery from "./Hut_Gallery";
 
 // assets
 import { SarBlackIcon } from "../../../../../assets/images/Image";
@@ -20,22 +20,12 @@ import {
 // utils
 import { currentLanguageCode } from "../../../../../utils/switchLang";
 
-import { getImageUrl, IMG } from "../../../../../utils/getImageUrl";
 const Content = ({ loading = false, data }) => {
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const onClose = () => {
     setVisible(false);
   };
-  let settings = {
-    dots: true,
-    infinite: false,
-    rtl: currentLanguageCode === "en" ? false : true,
-
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
   // formater
   const iconList = [
     {
@@ -53,7 +43,7 @@ const Content = ({ loading = false, data }) => {
     {
       icon: <BedRoom fill="var(--color-primary-3)" width="44" height="44" />,
       value: data?.bedrooms_num
-        ? `${data?.bathrooms_num} ${t("bedrooms")}`
+        ? `${data?.bedrooms_num} ${t("bedrooms")}`
         : "-",
     },
     {
@@ -124,21 +114,10 @@ const Content = ({ loading = false, data }) => {
         </div>
 
         {/* right content */}
-        <figure className=" w-full max-w-[690px] xl:mx-auto">
-          <Slider {...settings}>
-            {data?.images?.map((item) => (
-              <figure
-                key={item?.id}
-                className="hut_details_gradient h-[443px] w-full rounded-lg"
-              >
-                <img loading="lazy" decoding="async"
-                  src={getImageUrl(item?.image, { width: IMG.card })}
-                  className="w-full h-full rounded-lg object-cover"
-                />
-              </figure>
-            ))}
-          </Slider>
-        </figure>
+        <Hut_Gallery
+          images={data?.images}
+          title={currentLanguageCode === "en" ? data?.title : data?.title_ar}
+        />
       </section>
     </>
   );
