@@ -45,6 +45,9 @@ export const API = {
     // the guest commits. The hut payload deliberately no longer carries the
     // codes themselves.
     validate_promocode: "/api/products/promocodes/validate/",
+    // The signed-in customer's own loyalty tier, so the form can show the
+    // discount before they commit rather than only at confirmation.
+    loyalty: "/api/products/loyalty/me/",
     // Opens a guest booking straight from the token in their confirmation email.
     by_token: "/api/products/bookings/by-token/",
     confirm: {

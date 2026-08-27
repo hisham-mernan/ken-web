@@ -211,6 +211,24 @@ const Booking_Hut = ({
   const hut = isConfirm ? data?.hut_details : data;
   const stay = quoteStay(hut, watch("date_from"), watch("date_to"));
 
+  // What the customer's past stays are worth to them. Only the signed-in
+  // caller's own standing is available -- a guest still earns and receives the
+  // tier discount, it is just applied when the booking is priced rather than
+  // previewed here, because looking one up would mean answering questions
+  // about a phone number to whoever asked.
+  const [tier, setTier] = useState(null);
+  useEffect(() => {
+    if (isConfirm || !token) return;
+    let cancelled = false;
+    axiosInstance
+      .get(API.booking.loyalty)
+      .then((res) => !cancelled && setTier(res?.data || null))
+      .catch(() => !cancelled && setTier(null));
+    return () => {
+      cancelled = true;
+    };
+  }, [isConfirm, token]);
+
   // The discount a code typed into this form is worth, so the guest sees what
   // they are saving before committing rather than first at confirmation. The
   // server is asked because the hut payload no longer lists its codes -- it
@@ -259,8 +277,13 @@ const Booking_Hut = ({
   // applied. The code itself is deliberately never returned, which is why this
   // reads a plain percentage rather than a promocode object.
   const confirmedPercent = Number(data?.discount_percentage) || 0;
+  // The server charges the better of the code and the tier, never both added
+  // together, so the preview has to do the same or it promises a total that
+  // will not be honoured.
+  const tierPercent = Number(tier?.percent) || 0;
+  const previewPercent = Math.max(typedPercent, tierPercent);
   const discountPercent =
-    subtotal > 0 ? (isConfirm ? confirmedPercent : typedPercent) : 0;
+    subtotal > 0 ? (isConfirm ? confirmedPercent : previewPercent) : 0;
   const discount = asMoney((subtotal * discountPercent) / 100);
   const totalPrice = subtotal - discount;
 
@@ -308,6 +331,14 @@ const Booking_Hut = ({
               <p className="text-primary-3 text-sm">
                 {`${stay.nights} ${t("nights")}`}
                 {stay.longStay && ` · ${t("long_stay_note")}`}
+              </p>
+            )}
+            {!isConfirm && tierPercent > 0 && tierPercent >= typedPercent && (
+              <p className="text-primary-2 text-sm font-medium">
+                {t("tier_note", {
+                  tier: t(`tier_${tier?.tier}`),
+                  percent: tierPercent,
+                })}
               </p>
             )}
             {pricesList?.map((item) => (

@@ -350,5 +350,9 @@
   "download_invoice": "Download your invoice",
   "download_partial_invoice": "Download your invoice (partially paid)",
   "home_hero_plain": "Stay Quietly With no worries",
-  "max_number_of_guests": "Maximum guests"
+  "max_number_of_guests": "Maximum guests",
+  "tier_note": "{{tier}} member — {{percent}}% off this booking",
+  "tier_bronze": "Bronze",
+  "tier_silver": "Silver",
+  "tier_gold": "Gold"
 }
