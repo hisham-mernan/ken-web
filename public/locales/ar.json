@@ -354,5 +354,7 @@
   "tier_note": "عضو {{tier}} — خصم {{percent}}٪ على هذا الحجز",
   "tier_bronze": "برونزي",
   "tier_silver": "فضي",
-  "tier_gold": "ذهبي"
+  "tier_gold": "ذهبي",
+  "location": "الموقع",
+  "extend_reservation_until": "تمديد الحجز حتى"
 }

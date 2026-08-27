@@ -47,12 +47,11 @@ const Huts_Editorial = ({ data, loading }) => {
         const title = (isRtl && hut?.title_ar) || hut?.title || "";
         const description =
           (isRtl && hut?.description_ar) || hut?.description || "";
-        const guests =
-          hut?.max_persons_num || hut?.max_kids_num
-            ? `${Math.min(hut.max_persons_num, hut.max_kids_num)} - ${
-                (hut.max_persons_num || 0) + (hut.max_kids_num || 0)
-              } ${t("person")}`
-            : null;
+        // The whole overnight capacity, children included -- adding the
+        // child allowance on top advertised twice the beds.
+        const guests = hut?.max_persons_num
+          ? `${hut.max_persons_num} ${t("person")}`
+          : null;
 
         return (
           <article

@@ -32,13 +32,13 @@ const Hut_Card = ({ className = "", data }) => {
     {
       id: 2,
       icon: <UserTag />,
-      value: `${
-        data?.max_kids_num || data?.max_persons_num
-          ? `${Math.min(data.max_persons_num, data.max_kids_num)} - ${
-              data?.max_kids_num + data?.max_persons_num
-            } ${t("person")}`
-          : "-"
-      }`,
+      // max_persons_num is the whole overnight capacity, children
+      // included. Adding the child allowance to it advertised twice
+      // the beds: the largest cottage read "4 - 12 Persons" for
+      // somewhere that sleeps eight.
+      value: data?.max_persons_num
+        ? `${data.max_persons_num} ${t("person")}`
+        : "-",
     },
     { id: 3, icon: <LinearBox />, value: data?.size },
   ];

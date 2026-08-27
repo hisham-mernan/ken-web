@@ -107,6 +107,10 @@ const Footer = () => {
                 key={i}
                 target="_blank"
                 aria-label={item?.alt}
+                // The icon stays 16px; the link around it is padded out to a
+                // finger-sized target. A 16x16 tap area is under every
+                // guideline going and is genuinely hard to hit on a phone.
+                className="flex_center -m-2 p-2"
               >
                 <img loading="lazy" decoding="async"
                   src={item.img}
