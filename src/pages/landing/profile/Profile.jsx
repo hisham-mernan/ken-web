@@ -331,7 +331,10 @@ const Profile = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="profile_card p-4 sm:p-8 md:p-6 lg:p-10 xl:px-16 xl:py-12"
         >
-          <header className=" pb-12 flex items-center justify-between gap-8">
+          {/* Wraps on a phone. Avatar, name and three stats in one row needs
+              more than 390px, so the stats used to run off the right edge --
+              the reviews count clipped and the tier stat entirely off-screen. */}
+          <header className="pb-8 sm:pb-12 flex flex-wrap items-center justify-between gap-4 sm:gap-8">
             <Form
               formList={imageList}
               control={control}
@@ -348,7 +351,7 @@ const Profile = () => {
                 {t("join_since", { year: 2024 })}
               </span>
             </div>
-            <div className="flex items-baseline justify-between gap-10">
+            <div className="flex items-baseline justify-between gap-6 sm:gap-10 w-full sm:w-auto order-last sm:order-none">
               {profileStat?.map((item) => (
                 <div
                   key={item?.id}
