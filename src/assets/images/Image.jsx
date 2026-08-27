@@ -1,7 +1,11 @@
-export { default as Logo } from "./logo/logo.svg";
-export { default as LogoLight } from "./logo/logo_light.svg";
-export { default as LogoSecondary } from "./logo/logo_secondary.svg";
-export { default as LogoWhite } from "./logo/logo_white.svg";
+// The brand lockup. Two artworks cover every placement: the brown mark for
+// light surfaces and the white one for dark surfaces and photography. The
+// four names are kept so call sites do not have to change, and because they
+// still describe the surface each is meant for.
+export { default as Logo } from "./logo/new_logo.png";
+export { default as LogoLight } from "./logo/new_logo_white.png";
+export { default as LogoSecondary } from "./logo/new_logo_white.png";
+export { default as LogoWhite } from "./logo/new_logo_white.png";
 
 // auth
 export { default as AuthImage } from "./auth/auth_image.webp";
