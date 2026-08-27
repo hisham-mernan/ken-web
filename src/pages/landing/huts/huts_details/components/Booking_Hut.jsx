@@ -270,7 +270,16 @@ const Booking_Hut = ({
       0
     );
 
-  const asMoney = (value) => (Number.isFinite(value) ? Math.round(value) : 0);
+  // Money to the halala, matching the server. This used to round to whole
+  // riyals, which quoted a guest 1377 for a stay products/loyalty.py then
+  // charged 1377.50 for -- and made a small discount vanish entirely: 5% of a
+  // 5 SAR test rate rounded to nothing while the tier note above still
+  // promised it.
+  const asMoney = (value) =>
+    Number.isFinite(value) ? Math.round(value * 100) / 100 : 0;
+  // Whole riyals stay whole; only a fractional amount spends the two decimals.
+  const showMoney = (value) =>
+    Number.isInteger(value) ? String(value) : value.toFixed(2);
 
   const subtotal = asMoney(stay.total + extrasTotal);
   // On the confirm page the booking already carries the percentage the server
@@ -285,7 +294,7 @@ const Booking_Hut = ({
   const discountPercent =
     subtotal > 0 ? (isConfirm ? confirmedPercent : previewPercent) : 0;
   const discount = asMoney((subtotal * discountPercent) / 100);
-  const totalPrice = subtotal - discount;
+  const totalPrice = asMoney(subtotal - discount);
 
   // Total is the subtotal less the discount, so the two rows can only differ
   // when a promo code applied. With nothing to break down -- no discount, and
@@ -293,11 +302,11 @@ const Booking_Hut = ({
   const pricesList = [
     ...(discount > 0
       ? [
-          { id: 1, label: "subtotal", value: `${subtotal} ${t("sar")}` },
-          { id: 2, label: "discount", value: `- ${discount} ${t("sar")}` },
+          { id: 1, label: "subtotal", value: `${showMoney(subtotal)} ${t("sar")}` },
+          { id: 2, label: "discount", value: `- ${showMoney(discount)} ${t("sar")}` },
         ]
       : []),
-    { id: 3, label: "total", value: `${totalPrice} ${t("sar")}` },
+    { id: 3, label: "total", value: `${showMoney(totalPrice)} ${t("sar")}` },
   ];
   return (
     <section className="Container ">
@@ -329,7 +338,7 @@ const Booking_Hut = ({
                 and cannot tell whether it is a discount or a mistake. */}
             {stay.nights > 0 && (
               <p className="text-primary-3 text-sm">
-                {`${stay.nights} ${t("nights")}`}
+                {t("stay_nights", { count: stay.nights })}
                 {stay.longStay && ` · ${t("long_stay_note")}`}
               </p>
             )}

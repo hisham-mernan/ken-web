@@ -109,7 +109,7 @@
   "min_number_of_guests_is": "The minimum number of guests is",
   "do_you_have_prome_code": "Do you have a PROMO CODE for discount? ",
   "add_here": "ADD HERE",
-  "subtotal": "subtotal",
+  "subtotal": "Subtotal",
   "i_accept_all": "I accept all",
   "terms_and_conditions": "terms and conditions",
   "location_des": "Choose your desired cottage, select the booking dates, customize your experience by adding events or additional services .",
@@ -351,7 +351,7 @@
   "download_partial_invoice": "Download your invoice (partially paid)",
   "home_hero_plain": "Stay Quietly With no worries",
   "max_number_of_guests": "Maximum guests",
-  "tier_note": "{{tier}} member — {{percent}}% off this booking",
+  "tier_note": "{{tier}} Member — {{percent}}% off this booking",
   "tier_bronze": "Bronze",
   "tier_silver": "Silver",
   "tier_gold": "Gold",
@@ -365,5 +365,7 @@
   "tier_progress_many": "{{count}} more stays earn you {{tier}} — {{percent}}% off every booking.",
   "no_tier_yet_short": "None yet",
   "tier_pill": "{{percent}}% off",
-  "tier_progress_two": "2 more stays earn you {{tier}} — {{percent}}% off every booking."
+  "tier_progress_two": "2 more stays earn you {{tier}} — {{percent}}% off every booking.",
+  "stay_nights_one": "1 night",
+  "stay_nights_other": "{{count}} nights"
 }

@@ -366,5 +366,11 @@
   "tier_progress_many": "{{count}} إقامات إضافية تمنحك {{tier}} — خصم {{percent}}٪ على كل حجز.",
   "no_tier_yet_short": "لا يوجد بعد",
   "tier_pill": "خصم {{percent}}٪",
-  "tier_progress_two": "إقامتان إضافيتان تمنحانك {{tier}} — خصم {{percent}}٪ على كل حجز."
+  "tier_progress_two": "إقامتان إضافيتان تمنحانك {{tier}} — خصم {{percent}}٪ على كل حجز.",
+  "stay_nights_zero": "بدون ليالٍ",
+  "stay_nights_one": "ليلة واحدة",
+  "stay_nights_two": "ليلتان",
+  "stay_nights_few": "{{count}} ليالٍ",
+  "stay_nights_many": "{{count}} ليلة",
+  "stay_nights_other": "{{count}} ليلة"
 }
