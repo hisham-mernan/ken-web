@@ -39,6 +39,11 @@ const Booking_Hut = ({
   serviceTickets,
 }) => {
   const { t } = useTranslation();
+  // max_persons_num is the whole overnight capacity, children included;
+  // max_kids_num only caps how many of it may be children.
+  const capacityHut = isConfirm ? data?.hut_details : data;
+  const capacity = Number(capacityHut?.max_persons_num) || 0;
+  const maxKids = Number(capacityHut?.max_kids_num) || 0;
   const navigate = useNavigate();
   const { id } = useParams();
   const [disabled, setDisabled] = useState(isDisabled);
@@ -131,22 +136,18 @@ const Booking_Hut = ({
           message: `${t("min_number_of_adult")}: 0 `,
         },
         max: {
-          value: isConfirm
-            ? data?.hut_details?.max_persons_num
-            : data?.max_persons_num,
-          message: `${t("max_number_of_adult")}: ${
-            isConfirm
-              ? data?.hut_details?.max_persons_num
-              : data?.max_persons_num
-          } `,
+          value: capacity,
+          message: `${t("max_number_of_guests")}: ${capacity} `,
         },
+        // The server counts the whole party against one capacity, so the form
+        // has to as well -- otherwise the guest fills both fields, is told
+        // nothing, and only finds out when the booking is refused.
+        validate: (value) =>
+          Number(value || 0) + Number(watch("kids_max_num") || 0) <= capacity ||
+          `${t("max_number_of_guests")}: ${capacity}`,
       },
 
-      insteraction: `→ ${t("max_number_of_adult")}:${
-        isConfirm
-          ? data?.hut_details?.max_persons_num
-          : data?.max_persons_num || 0
-      }`,
+      insteraction: `→ ${t("max_number_of_guests")}: ${capacity}`,
       icon: <UsersIcon />,
       disabled: disabled,
     },
@@ -165,17 +166,14 @@ const Booking_Hut = ({
           message: `${t("min_number_of_kids")} 0 `,
         },
         max: {
-          value: isConfirm
-            ? data?.hut_details?.max_kids_num
-            : data?.max_kids_num,
-          message: `${t("max_number_of_kids")}: ${
-            isConfirm ? data?.hut_details?.max_kids_num : data?.max_kids_num
-          } `,
+          value: maxKids,
+          message: `${t("max_number_of_kids")}: ${maxKids} `,
         },
+        validate: (value) =>
+          Number(value || 0) + Number(watch("persons_max_num") || 0) <=
+            capacity || `${t("max_number_of_guests")}: ${capacity}`,
       },
-      insteraction: `→ ${t("max_number_of_kids")}:${
-        isConfirm ? data?.hut_details?.max_kids_num : data?.max_kids_num || 0
-      }`,
+      insteraction: `→ ${t("max_number_of_kids")}: ${maxKids}`,
       icon: <UsersIcon />,
       disabled: disabled,
     },

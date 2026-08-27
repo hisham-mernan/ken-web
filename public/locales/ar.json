@@ -349,5 +349,6 @@
   "view_partial_invoice": "عرض الفاتورة (مدفوعة جزئياً)",
   "download_invoice": "تحميل الفاتورة",
   "download_partial_invoice": "تحميل الفاتورة (مدفوعة جزئياً)",
-  "home_hero_plain": "اقم بهدوء بلا قلق"
+  "home_hero_plain": "اقم بهدوء بلا قلق",
+  "max_number_of_guests": "الحد الأقصى للضيوف"
 }

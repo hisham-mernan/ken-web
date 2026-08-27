@@ -30,13 +30,11 @@ const Content = ({ loading = false, data }) => {
   const iconList = [
     {
       icon: <UserTag fill="var(--color-primary-3)" width="44" height="44" />,
-      // How many the hut sleeps. This used to print a range built from the
-      // adult and child allowances added together, so the largest hut
-      // advertised "4 - 12 Persons" for somewhere that sleeps eight.
-      value: (data?.max_persons_num ?? 0) + (data?.max_kids_num ?? 0)
-        ? `${(data?.max_persons_num ?? 0) + (data?.max_kids_num ?? 0)} ${t(
-            "person"
-          )}`
+      // How many the cottage sleeps. max_persons_num is the whole overnight
+      // capacity, children included -- max_kids_num only caps how many of it
+      // may be children, so adding the two would advertise twice the beds.
+      value: data?.max_persons_num
+        ? `${data.max_persons_num} ${t("person")}`
         : "-",
     },
     {
