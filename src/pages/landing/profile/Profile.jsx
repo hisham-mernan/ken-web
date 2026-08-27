@@ -18,6 +18,7 @@ import {
 import { BurgerIcon, Key2Icon } from "../../../assets/icons/Icon";
 import { useForm } from "react-hook-form";
 import axiosInstance from "../../../service/axiosInstance";
+import { currentLanguageCode } from "../../../utils/switchLang";
 import { toast } from "react-toastify";
 import { handleErrors } from "../../../utils/handleError";
 import Form from "../../../components/shared/form/Form";
@@ -218,10 +219,31 @@ const Profile = () => {
       icon: <Key2Icon />,
     },
   ];
+  // The customer's own loyalty standing: tier, paid stays, reviews and what
+  // the next tier needs. Only ever the caller's own -- see LoyaltyStandingView.
+  const [standing, setStanding] = useState(null);
+  useEffect(() => {
+    let cancelled = false;
+    axiosInstance
+      .get(API.booking.loyalty)
+      .then((res) => !cancelled && setStanding(res?.data || null))
+      .catch(() => !cancelled && setStanding(null));
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Real figures. These three were hardcoded to 12 bookings, 3 reviews and
+  // "gold", so every visitor was told they were a Gold member -- which,
+  // once tiers began carrying a discount, contradicted what checkout charged.
   const profileStat = [
-    { id: 1, value: 12, label: "bookings" },
-    { id: 2, value: 3, label: "reviews" },
-    { id: 3, value: "gold", label: "tier" },
+    { id: 1, value: standing?.stays ?? 0, label: "stays" },
+    { id: 2, value: standing?.reviews ?? 0, label: "reviews" },
+    {
+      id: 3,
+      value: standing?.tier ? t(`tier_${standing.tier}`) : t("no_tier_yet_short"),
+      label: "tier",
+    },
   ];
   const profileList = [
     {
@@ -325,7 +347,7 @@ const Profile = () => {
   return (
     <section className=" Container page_p flex flex-col gap-5 sm:gap-8 lg:gap-[62px] pb-[78px] ">
       <Landing_Header title="my_profile" />
-      <Profile_Badge />
+      <Profile_Badge standing={standing} />
       <section className=" ">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -347,9 +369,18 @@ const Profile = () => {
               <h1 className="profile_name truncate">
                 {data?.full_name}
               </h1>
-              <span className="profile_meta">
-                {t("join_since", { year: 2024 })}
-              </span>
+              {/* The account's own date. This printed a hardcoded 2024 to
+                  everyone, whenever they actually joined. */}
+              {data?.created_at && (
+                <span className="profile_meta">
+                  {t("join_since_date", {
+                    date: new Date(data.created_at).toLocaleDateString(
+                      currentLanguageCode === "ar" ? "ar" : "en-GB",
+                      { month: "long", year: "numeric" }
+                    ),
+                  })}
+                </span>
+              )}
             </div>
             <div className="flex items-baseline justify-between gap-6 sm:gap-10 w-full sm:w-auto order-last sm:order-none">
               {profileStat?.map((item) => (

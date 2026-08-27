@@ -356,5 +356,15 @@
   "tier_silver": "فضي",
   "tier_gold": "ذهبي",
   "location": "الموقع",
-  "extend_reservation_until": "تمديد الحجز حتى"
+  "extend_reservation_until": "تمديد الحجز حتى",
+  "join_since_date": "عضو منذ {{date}}",
+  "stays": "الإقامات",
+  "no_tier_badge": "واصل اكتشاف كِن",
+  "tier_member": "عضو {{tier}}",
+  "tier_benefit": "خصم {{percent}}٪ على كل حجز.",
+  "tier_progress_one": "إقامة واحدة إضافية تمنحك {{tier}} — خصم {{percent}}٪ على كل حجز.",
+  "tier_progress_many": "{{count}} إقامات إضافية تمنحك {{tier}} — خصم {{percent}}٪ على كل حجز.",
+  "no_tier_yet_short": "لا يوجد بعد",
+  "tier_pill": "خصم {{percent}}٪",
+  "tier_progress_two": "إقامتان إضافيتان تمنحانك {{tier}} — خصم {{percent}}٪ على كل حجز."
 }

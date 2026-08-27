@@ -355,5 +355,15 @@
   "tier_bronze": "Bronze",
   "tier_silver": "Silver",
   "tier_gold": "Gold",
-  "location": "Location"
+  "location": "Location",
+  "join_since_date": "Member since {{date}}",
+  "stays": "Stays",
+  "no_tier_badge": "Keep exploring Ken",
+  "tier_member": "{{tier}} Member",
+  "tier_benefit": "{{percent}}% off every booking you make.",
+  "tier_progress_one": "One more stay earns you {{tier}} — {{percent}}% off every booking.",
+  "tier_progress_many": "{{count}} more stays earn you {{tier}} — {{percent}}% off every booking.",
+  "no_tier_yet_short": "None yet",
+  "tier_pill": "{{percent}}% off",
+  "tier_progress_two": "2 more stays earn you {{tier}} — {{percent}}% off every booking."
 }
