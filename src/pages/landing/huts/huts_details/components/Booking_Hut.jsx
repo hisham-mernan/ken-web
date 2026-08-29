@@ -44,6 +44,13 @@ const Booking_Hut = ({
   const capacityHut = isConfirm ? data?.hut_details : data;
   const capacity = Number(capacityHut?.max_persons_num) || 0;
   const maxKids = Number(capacityHut?.max_kids_num) || 0;
+  // Children come out of the same capacity as adults, so how many are allowed
+  // depends on how many adults were entered. The flat max_kids_num told a
+  // guest of the small cottage that one child was fine when two adults had
+  // already filled it, and the refusal then read "Maximum guests: 2" on the
+  // children field -- which looks like the children limit is 2 and broken.
+  const adultsEntered = Number(watch("persons_max_num")) || 0;
+  const kidsAllowed = Math.max(0, Math.min(maxKids, capacity - adultsEntered));
   const navigate = useNavigate();
   const { id } = useParams();
   const [disabled, setDisabled] = useState(isDisabled);
@@ -144,7 +151,7 @@ const Booking_Hut = ({
         // nothing, and only finds out when the booking is refused.
         validate: (value) =>
           Number(value || 0) + Number(watch("kids_max_num") || 0) <= capacity ||
-          `${t("max_number_of_guests")}: ${capacity}`,
+          t("party_shares_capacity", { capacity }),
       },
 
       insteraction: `→ ${t("max_number_of_guests")}: ${capacity}`,
@@ -166,14 +173,14 @@ const Booking_Hut = ({
           message: `${t("min_number_of_kids")} 0 `,
         },
         max: {
-          value: maxKids,
-          message: `${t("max_number_of_kids")}: ${maxKids} `,
+          value: kidsAllowed,
+          message: t("party_shares_capacity", { capacity }),
         },
         validate: (value) =>
           Number(value || 0) + Number(watch("persons_max_num") || 0) <=
-            capacity || `${t("max_number_of_guests")}: ${capacity}`,
+            capacity || t("party_shares_capacity", { capacity }),
       },
-      insteraction: `→ ${t("max_number_of_kids")}: ${maxKids}`,
+      insteraction: `→ ${t("max_number_of_kids")}: ${kidsAllowed}`,
       icon: <UsersIcon />,
       disabled: disabled,
     },
