@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { Outlet, useNavigate } from "react-router-dom";
 
 // assets
-import { AuthImage } from "../../assets/images/Image";
+import { AuthImage, Logo } from "../../assets/images/Image";
 import { ArrowIcon } from "../../assets/icons/Icon";
 import { currentLanguageCode } from "../../utils/switchLang";
 
@@ -46,6 +46,11 @@ const Auth_Container = () => {
           It was a 250-380px strip of stretched image before. */}
       <figure className="auth_media">
         <img src={AuthImage} alt="" />
+        {/* The lockup used to be painted into the photograph, so it still
+            showed the old brand long after the rest of the site had moved on
+            and could only be changed by editing the picture. It is a real
+            element now, taken from the same export as every other logo. */}
+        <img className="auth_media_logo" src={Logo} alt="Ken" />
       </figure>
     </main>
   );

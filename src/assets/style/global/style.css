@@ -1558,6 +1558,23 @@ body:dir(ltr) .mobile_navbar.close aside {
   position: absolute;
   inset: 0;
   background: var(--overlay-hero);
+  z-index: 1;
+}
+
+/* Sits over the sky, which stays pale at the top of the crop at every width
+   the panel is shown at, so the dark lockup keeps its contrast. Above the
+   hero overlay rather than under it. */
+/* Selector carries the element too: the blanket `.auth_media img` rule above
+   stretches every image in this panel to fill it, and would otherwise win. */
+.auth_media img.auth_media_logo {
+  position: absolute;
+  z-index: 2;
+  top: clamp(32px, 7vh, 72px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(150px, 42%, 260px);
+  height: auto;
+  object-fit: contain;
 }
 
 .huts_editorial {
