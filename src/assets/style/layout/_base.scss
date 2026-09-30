@@ -306,7 +306,7 @@
 .section_header_title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2.25rem, calc(1.8rem + 2vw), 4rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -324,7 +324,7 @@
 
 .profile_name {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(1.75rem, calc(1.5rem + 1vw), 2.5rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -365,6 +365,7 @@
 // selectable cards rather than a pair of thin bordered rows.
 .checkout_legend {
   font-family: var(--font-display);
+  font-weight: 300;
   font-size: 1.5rem;
   letter-spacing: var(--tracking-display);
   color: var(--color-text-primary);

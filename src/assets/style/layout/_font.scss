@@ -72,8 +72,13 @@
     @include typography(10px, 12px);
   }
 }
+// Heading weights follow the brand document: the top of the display scale is
+// set in The Year of the Camel ExtraBold, the tier below it in Light. Only
+// classes that actually use --font-display are touched -- headline_sm and
+// title_lg are body-face and keep their own weights.
 .display_xs {
   font-family: var(--font-display);
+  font-weight: 300;
   letter-spacing: var(--tracking-display);
 
   @include typography(32px, 40px);
@@ -91,7 +96,7 @@
 .display_sm {
   font-family: var(--font-display);
   letter-spacing: var(--tracking-display);
-  font-weight: 700;
+  font-weight: 800;
 
   @include typography(20px, 32px);
 
@@ -108,7 +113,7 @@
 .display_md {
   font-family: var(--font-display);
   letter-spacing: var(--tracking-display);
-  font-weight: 700;
+  font-weight: 800;
 
   @include typography(20px, 32px);
   @media (min-width: 991px) {
@@ -136,7 +141,7 @@
 }
 .headline_lg {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 300;
   letter-spacing: 0.15000000596046448px;
 
   @include typography(16px, 24px);

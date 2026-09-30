@@ -112,6 +112,7 @@
 
 .display_xs {
   font-family: var(--font-display);
+  font-weight: 300;
   letter-spacing: var(--tracking-display);
   font-size: 32px;
   line-height: 40px;
@@ -138,7 +139,7 @@
 .display_sm {
   font-family: var(--font-display);
   letter-spacing: var(--tracking-display);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 20px;
   line-height: 32px;
 }
@@ -164,7 +165,7 @@
 .display_md {
   font-family: var(--font-display);
   letter-spacing: var(--tracking-display);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 20px;
   line-height: 32px;
 }
@@ -207,7 +208,7 @@
 
 .headline_lg {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 300;
   letter-spacing: 0.150000006px;
   font-size: 16px;
   line-height: 24px;
@@ -530,7 +531,7 @@ body:dir(rtl) .p-component {
 .section_header_title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2.25rem, 1.8rem + 2vw, 4rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -547,7 +548,7 @@ body:dir(rtl) .p-component {
 
 .profile_name {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -581,6 +582,7 @@ body:dir(rtl) .p-component {
 
 .checkout_legend {
   font-family: var(--font-display);
+  font-weight: 300;
   font-size: 1.5rem;
   letter-spacing: var(--tracking-display);
   color: var(--color-text-primary);
@@ -950,7 +952,7 @@ body:dir(ltr) .mobile_navbar.close aside {
   animation-delay: 320ms;
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(3rem, 2.2rem + 3.4vw, 6rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1108,7 +1110,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .discover_headline {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2.5rem, 2rem + 2.2vw, 4.5rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1259,7 +1261,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .faq_ds_headline {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2.5rem, 2rem + 2.2vw, 4.5rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1373,7 +1375,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .testimonials_ds_headline {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2.5rem, 2rem + 2.2vw, 4.5rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1480,7 +1482,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .page_hero_title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2.5rem, 2rem + 2.2vw, 4.5rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1541,7 +1543,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .auth_title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2rem, 1.7rem + 1.4vw, 3rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1674,7 +1676,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .huts_editorial_title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(1.75rem, 1.4rem + 1.4vw, 3rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1813,7 +1815,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .about_ds_headline {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2.5rem, 2rem + 2.2vw, 4.5rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1919,7 +1921,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .about_ds_band_text {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(1.75rem, 1.4rem + 1.4vw, 3rem);
   line-height: 1.25;
   color: var(--color-off-white);
@@ -1928,7 +1930,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .about_hero_title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2rem, 1.6rem + 2.4vw, 3.875rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -1987,7 +1989,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .about_split_headline {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2.5rem, 2rem + 2.2vw, 4.5rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -2080,7 +2082,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .about_band_text {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.875rem);
   line-height: 1.25;
   color: var(--color-off-white);
@@ -2112,7 +2114,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .about_why_headline {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(1.75rem, 1.4rem + 1.4vw, 3rem);
   line-height: 1.08;
   letter-spacing: var(--tracking-display);
@@ -2160,7 +2162,7 @@ body:dir(ltr) .mobile_navbar.close aside {
 .about_why_title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: 1.375rem;
   color: var(--color-text-primary);
 }
