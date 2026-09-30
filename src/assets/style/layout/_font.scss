@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
-// The Year of the Camel -- the brand display face, used for English headlines
-// only. Body copy stays on Jost; Arabic keeps Cairo, which covers both.
+// The Year of the Camel -- the brand face. It carries Arabic as well as Latin:
+// it declares the arab script with init/medi/fina shaping and covers 129 Arabic
+// codepoints, so it sets Arabic headlines properly. The note that used to sit
+// here called it Latin-only, which is why Arabic headings were sent to Cairo.
 @each $weight, $file in (100: "Thin", 200: "ExtraLight", 300: "Light", 400: "Regular", 500: "Medium", 700: "Bold", 800: "ExtraBold") {
   @font-face {
     font-family: "The Year of the Camel";
@@ -13,6 +15,27 @@
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+
+// Helvetica Neue -- body and UI copy, per the brand document.
+//
+// This cut has no Arabic at all: no arabic letters, no arabic-indic digits, no
+// riyal sign. The brand document asks for "Helvetica Neue World", the
+// multi-script edition that does carry Arabic, and that is not what we hold a
+// licence for. So Latin resolves here and Arabic falls through to the next
+// family in --font-body rather than to whatever the device happens to have.
+//
+// Subset to Latin and converted to woff2 by hand: the supplied .otf files are
+// 1.4 MB for these three weights and 143 KB after, for glyphs that are all
+// still there. Re-cut them if a weight is ever added.
+@each $weight in (400, 500, 700) {
+  @font-face {
+    font-family: "Helvetica Neue";
+    src: url("../../fonts/helvetica-neue-#{$weight}.woff2") format("woff2");
+    font-weight: $weight;
+    font-style: normal;
+    font-display: swap;
+  }
+}
 
 @font-face {
   font-family: "Bell MT";
@@ -150,9 +173,12 @@ body:dir(ltr) {
     font-family: var(--font-body) !important;
   }
 }
+// Both directions read the same stack. They used to differ, which forced
+// Cairo onto every Latin word on an Arabic page -- prices, "SAR", names --
+// and meant a font change had to be made twice to take effect.
 body:dir(rtl) {
   &,
   .p-component {
-    font-family: var(--font-cairo) !important;
+    font-family: var(--font-body) !important;
   }
 }

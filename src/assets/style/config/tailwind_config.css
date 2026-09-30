@@ -2,11 +2,13 @@
 
 @theme {
   /* fonts -- Ken Design System
-     Display: The Year of the Camel, the brand's calligraphic face, English
-     headlines only and never long paragraphs. Body/UI: Jost. Arabic: Cairo,
-     which serves as both display and body since the display face is Latin. */
+     Display: The Year of the Camel, the brand face, for headlines in both
+     scripts -- it carries Arabic as well as Latin. Body/UI: Helvetica Neue.
+     Our cut of Helvetica has no Arabic, so Cairo sits behind it and the
+     browser reaches for it per character; Latin keeps Helvetica even on an
+     Arabic page. Swap Cairo out if Helvetica Neue World is ever licensed. */
   --font-display: "The Year of the Camel", "Jost", serif;
-  --font-body: "Jost", "Open Sans", sans-serif;
+  --font-body: "Helvetica Neue", "Cairo", "Jost", sans-serif;
   --font-cairo: "Cairo", sans-serif;
   --font-arabic: "Cairo", sans-serif;
 

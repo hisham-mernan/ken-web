@@ -50,6 +50,27 @@
   font-display: swap;
 }
 @font-face {
+  font-family: "Helvetica Neue";
+  src: url("../../fonts/helvetica-neue-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../../fonts/helvetica-neue-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../../fonts/helvetica-neue-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: "Bell MT";
   src: url("/src/assets/fonts/bell-mt.ttf") format("truetype");
   font-weight: 400;
@@ -235,7 +256,7 @@ body:dir(ltr) .p-component {
 
 body:dir(rtl),
 body:dir(rtl) .p-component {
-  font-family: var(--font-cairo) !important;
+  font-family: var(--font-body) !important;
 }
 
 :root {
