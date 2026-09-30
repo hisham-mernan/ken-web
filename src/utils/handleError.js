@@ -86,23 +86,30 @@ export const handleErrors = (err, setError, t, navigate, item) => {
     return null;
   };
 
+  // Which field the server complained about, so an unrecognised message can
+  // still be shown against the input it belongs to.
+  const FIELD_KEYS = [
+    "phone",
+    "email",
+    "password",
+    "id_num",
+    "promocode",
+    "non_field_errors",
+  ];
+  const erroredField = FIELD_KEYS.find((key) => getFirstError(data?.[key]));
+
   const detail =
     data.detail ||
     data.message ||
     data.error ||
-    getFirstError(data?.phone) ||
-    getFirstError(data?.email) ||
-    getFirstError(data?.password) ||
-    getFirstError(data?.id_num) ||
-    getFirstError(data?.promocode) ||
-    getFirstError(data?.non_field_errors);
+    (erroredField ? getFirstError(data[erroredField]) : null);
   if (
     detail?.includes("Cannot cancel booking less than 2 days before start date")
   ) {
     toast.error(t("cancel_booking_restriction"));
     return;
   }
-  if (detail.includes("Service 'Services object")) {
+  if (detail?.includes("Service 'Services object")) {
     toast.error(detail);
     return;
   }
@@ -226,6 +233,18 @@ export const handleErrors = (err, setError, t, navigate, item) => {
       toast.error(t("invalid_promo_code"));
       return;
     default:
+      // A message this list does not name is still the server telling the
+      // customer what is wrong, and "an unexpected error" throws that away.
+      // It hid "Ensure this value is less than or equal to 2147483647" --
+      // which is what every resident whose national ID begins with 2 saw when
+      // they tried to register, with nothing to say which field was at fault.
+      if (detail && erroredField) {
+        toast.error(detail);
+        if (erroredField !== "non_field_errors" && typeof setError === "function") {
+          setError(erroredField, { type: "manual", message: detail });
+        }
+        return;
+      }
       toast.error(t("unexpected_error"));
       return;
   }
