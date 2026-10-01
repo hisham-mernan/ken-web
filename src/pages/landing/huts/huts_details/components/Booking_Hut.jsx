@@ -88,6 +88,7 @@ const Booking_Hut = ({
       },
       disabled: disabled,
       allowedDates: available_dates,
+      stayTimes: { checkIn, checkOut },
       className: "col-span-1 lg:col-span-2",
     },
     {
@@ -139,6 +140,7 @@ const Booking_Hut = ({
         },
       },
       disabled: disabled,
+      stayTimes: { checkIn, checkOut },
       className: "col-span-1 lg:col-span-2",
     },
     {
@@ -360,24 +362,6 @@ const Booking_Hut = ({
               setError={setError}
             />
           </div>
-          {/* Sits with the dates, which is the moment the times matter. */}
-          {(checkIn || checkOut) && (
-            <dl className="stay_times">
-              {checkIn && (
-                <div>
-                  <dt>{t("check_in")}</dt>
-                  <dd>{checkIn}</dd>
-                </div>
-              )}
-              {checkOut && (
-                <div>
-                  <dt>{t("check_out")}</dt>
-                  <dd>{checkOut}</dd>
-                </div>
-              )}
-            </dl>
-          )}
-
           <footer className="flex flex-col gap-3">
             {/* Why the total is what it is. Without this the long-stay rule is
                 invisible -- a guest adding a third night sees the figure move

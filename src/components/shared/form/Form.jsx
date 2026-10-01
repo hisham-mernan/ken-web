@@ -202,6 +202,7 @@ const Form = ({
             placeholder={item?.placeholder}
             hasRequiredStar={item.hasRequiredStar}
             allowedDates={item?.allowedDates}
+            stayTimes={item?.stayTimes}
             loading={dataLoader}
             viewOnly={viewOnly}
             handleChange={(e) => {

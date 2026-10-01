@@ -42,6 +42,7 @@ const Input_Calendar = ({
   disabled,
   viewOnly,
   allowedDates,
+  stayTimes,
 }) => {
   const { t } = useTranslation();
   const calendarRef = useRef();
@@ -150,11 +151,29 @@ const Input_Calendar = ({
   };
 
   const legend = (
-    <ul className="calendar_legend">
-      <li className="is_available">{t("calendar_available")}</li>
-      <li className="is_weekend">{t("calendar_weekend")}</li>
-      <li className="is_unavailable">{t("calendar_unavailable")}</li>
-    </ul>
+    <>
+      <ul className="calendar_legend">
+        <li className="is_available">{t("calendar_available")}</li>
+        <li className="is_weekend">{t("calendar_weekend")}</li>
+        <li className="is_unavailable">{t("calendar_unavailable")}</li>
+      </ul>
+      {(stayTimes?.checkIn || stayTimes?.checkOut) && (
+        <dl className="calendar_times">
+          {stayTimes.checkIn && (
+            <div>
+              <dt>{t("check_in")}</dt>
+              <dd>{stayTimes.checkIn}</dd>
+            </div>
+          )}
+          {stayTimes.checkOut && (
+            <div>
+              <dt>{t("check_out")}</dt>
+              <dd>{stayTimes.checkOut}</dd>
+            </div>
+          )}
+        </dl>
+      )}
+    </>
   );
 
   if (loading) {
