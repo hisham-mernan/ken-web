@@ -77,6 +77,10 @@ const Details = () => {
 
       delete dataToSend.date_from;
       delete dataToSend.date_to;
+      // The children field may be left empty, which react-hook-form reports as
+      // "" or null. The column behind it is not nullable, so an empty field
+      // means none rather than unknown.
+      dataToSend.kids_max_num = Number(dataToSend.kids_max_num) || 0;
 
       const response = await axiosInstance.post(API.booking.create, {
         ...dataToSend,

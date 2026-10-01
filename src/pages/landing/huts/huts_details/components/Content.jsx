@@ -59,29 +59,31 @@ const Content = ({ loading = false, data }) => {
       <section className=" grid grid-cols-1 md:grid-cols-2 gap-6 2xl:gap-[46px] ">
         {/* left content */}
         <div className=" w-full md:max-w-[502px] flex flex-col gap-10 xl:gap-[60px] ">
-          {/* Price: the hut's two nightly rates. This block used to render
-              three rows that all printed the same lowest_price, one of them
-              against a hardcoded 1200 strikethrough. */}
+          {/* Price: the hut's two nightly rates.
+              Reads which night it is, then the amount, then the currency --
+              "ليلة وسط الأسبوع ١٤٥٠ ر.س". It used to lead with the riyal mark
+              and join the two with a slash, which put the glyph hard against
+              the digits and left the Arabic reading back to front. */}
           <div className="flex flex-col gap-6">
             {data?.weekday_price > 0 && (
-              <header className="flex_center_y">
-                <SarIcon width="30" height="30" fill="black" />
-                <strong className="headline_lg !font-bold text-secondary ">
+              <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="title_lg !font-normal text-primary-3">
+                  {t("weekday_night")}
+                </span>
+                <strong className="headline_lg !font-bold text-secondary flex items-center gap-1.5">
                   {Number(data.weekday_price)}
-                  <small className="title_lg !font-normal">
-                    /{t("weekday_night")}
-                  </small>
+                  <SarIcon width="22" height="22" fill="currentColor" />
                 </strong>
               </header>
             )}
             {data?.weekend_price > 0 && (
-              <div className="flex_center_y">
-                <SarIcon width="30" height="30" fill="black" />
-                <strong className="headline_lg !font-bold text-secondary ">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="title_lg !font-normal text-primary-3">
+                  {t("weekend_night")}
+                </span>
+                <strong className="headline_lg !font-bold text-secondary flex items-center gap-1.5">
                   {Number(data.weekend_price)}
-                  <small className="title_lg !font-normal">
-                    /{t("weekend_night")}
-                  </small>
+                  <SarIcon width="22" height="22" fill="currentColor" />
                 </strong>
               </div>
             )}

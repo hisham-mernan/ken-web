@@ -167,7 +167,9 @@ const Booking_Hut = ({
       placeholder: `2 ${t("kids")}`,
       type: "number",
       validator: {
-        required: "required_field",
+        // Deliberately not required: a party with no children leaves this
+        // empty rather than typing a nought. The server treats an absent
+        // count as 0, and the capacity rule still counts whatever is entered.
         min: {
           value: 0,
           message: `${t("min_number_of_kids")} 0 `,
