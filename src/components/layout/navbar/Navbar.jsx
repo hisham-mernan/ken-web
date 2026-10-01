@@ -62,10 +62,13 @@ const Navbar = () => {
       >
         <nav className="navbar_inner">
           <Link to="/" className="outline-none">
+            {/* Sized to sit level with the Sign up / Log in buttons rather
+                than floating above them: those are 40px tall, and the lockup
+                is 2.77:1, so 104px wide comes out at about 38px. */}
             <img
               src={overPhoto ? LogoWhite : Logo}
               alt="logo"
-              className="w-[70px]"
+              className="w-[84px] sm:w-[94px] lg:w-[104px]"
             />
           </Link>
           <ul className="navbar_links">

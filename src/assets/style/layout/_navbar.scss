@@ -67,10 +67,27 @@
     border-bottom-color: var(--color-red-clay);
   }
 
+  // The transition above had nothing to animate: there was no hover state at
+  // all, so pointing at a link did nothing. The rule slides in underneath and
+  // the colour warms, which also tells a keyboard user where they are.
+  &:hover,
+  &:focus-visible {
+    color: var(--color-red-clay);
+    border-bottom-color: var(--color-red-clay);
+  }
+
   .is_over_photo & {
     color: var(--color-off-white);
 
     &.is_active {
+      border-bottom-color: var(--color-off-white);
+    }
+
+    // Over a photograph the link is already off-white, so the underline
+    // carries the hover on its own.
+    &:hover,
+    &:focus-visible {
+      color: var(--color-off-white);
       border-bottom-color: var(--color-off-white);
     }
   }

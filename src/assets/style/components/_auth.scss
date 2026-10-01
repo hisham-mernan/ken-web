@@ -107,5 +107,24 @@
     position: absolute;
     inset: 0;
     background: var(--overlay-hero);
+    z-index: 1;
+  }
+
+  // The lockup over the photograph. Sits on the sky, which stays pale at the
+  // top of the crop at every width this panel is shown at, so the dark mark
+  // keeps its contrast; above the hero overlay rather than under it.
+  //
+  // The selector carries the element as well as the class because the blanket
+  // `img` rule above stretches every image in this panel to fill it, and is
+  // the more specific of the two otherwise.
+  img.auth_media_logo {
+    position: absolute;
+    z-index: 2;
+    top: clamp(32px, 7vh, 72px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(150px, 42%, 260px);
+    height: auto;
+    object-fit: contain;
   }
 }
