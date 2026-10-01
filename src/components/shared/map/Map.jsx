@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Marker, APIProvider, Map } from "@vis.gl/react-google-maps";
+import { useTranslation } from "react-i18next";
 
 const GoogleMap = ({
   markerPosition,
@@ -7,6 +8,7 @@ const GoogleMap = ({
   isEditable = false, // renamed from onlyForShow
   onChangeMap,
 }) => {
+  const { t } = useTranslation();
   const [position, setPosition] = useState(
     markerPosition
       ? { lat: markerPosition[0], lng: markerPosition[1] }
@@ -26,6 +28,18 @@ const GoogleMap = ({
     setPosition({ lat, lng });
     setMarkerPosition([lat, lng]);
     onChangeMap([lat, lng]);
+  };
+
+  // Tapping the pin hands the visitor over to Google Maps, where they can get
+  // directions -- the embedded map cannot. Suppressed while editing, since
+  // there the pin is being dragged to set a location, not followed.
+  const openInGoogleMaps = () => {
+    if (isEditable) return;
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${position.lat},${position.lng}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   const handleMapDrag = (event) => {
@@ -50,6 +64,9 @@ const GoogleMap = ({
             position={position}
             draggable={isEditable}
             onDragEnd={handleMapDrag}
+            clickable={!isEditable}
+            title={isEditable ? undefined : t("open_in_google_maps")}
+            onClick={openInGoogleMaps}
           />
         </Map>
       </div>

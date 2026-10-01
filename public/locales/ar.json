@@ -373,5 +373,6 @@
   "stay_nights_few": "{{count}} ليالٍ",
   "stay_nights_many": "{{count}} ليلة",
   "stay_nights_other": "{{count}} ليلة",
-  "party_shares_capacity": "يتسع هذا الكوخ لـ {{capacity}} إجمالًا، البالغون والأطفال معًا."
+  "party_shares_capacity": "يتسع هذا الكوخ لـ {{capacity}} إجمالًا، البالغون والأطفال معًا.",
+  "open_in_google_maps": "افتح في خرائط قوقل"
 }
