@@ -22,6 +22,7 @@ import { formatDateToYYYYMMDD } from "../../../../../utils/formateDateToYYYYMMDD
 import { quoteStay } from "../../../../../utils/hutPricing";
 import axiosInstance from "../../../../../service/axiosInstance";
 import { API } from "../../../../../service/apiUrl";
+import { currentLanguageCode } from "../../../../../utils/switchLang";
 
 const Booking_Hut = ({
   setError,
@@ -49,6 +50,24 @@ const Booking_Hut = ({
   // guest of the small cottage that one child was fine when two adults had
   // already filled it, and the refusal then read "Maximum guests: 2" on the
   // children field -- which looks like the children limit is 2 and broken.
+  // Check-in and check-out come from the cottage rather than being written
+  // into the page: the desk can move them, and all three read 15:00/12:00
+  // today. A guest otherwise has to find them in the terms after booking.
+  const formatTime = (value) => {
+    if (!value) return null;
+    const [hours, minutes] = String(value).split(":");
+    const when = new Date();
+    when.setHours(Number(hours), Number(minutes) || 0, 0, 0);
+    return when.toLocaleTimeString(
+      currentLanguageCode === "ar" ? "ar-SA" : "en-US",
+      // 12-hour in both: the policy is written as 3pm and 12pm, and en-GB
+      // would render that as 15:00.
+      { hour: "numeric", minute: "2-digit", hour12: true }
+    );
+  };
+  const checkIn = formatTime(capacityHut?.check_in);
+  const checkOut = formatTime(capacityHut?.check_out);
+
   const adultsEntered = Number(watch("persons_max_num")) || 0;
   const kidsAllowed = Math.max(0, Math.min(maxKids, capacity - adultsEntered));
   const navigate = useNavigate();
@@ -341,6 +360,24 @@ const Booking_Hut = ({
               setError={setError}
             />
           </div>
+          {/* Sits with the dates, which is the moment the times matter. */}
+          {(checkIn || checkOut) && (
+            <dl className="stay_times">
+              {checkIn && (
+                <div>
+                  <dt>{t("check_in")}</dt>
+                  <dd>{checkIn}</dd>
+                </div>
+              )}
+              {checkOut && (
+                <div>
+                  <dt>{t("check_out")}</dt>
+                  <dd>{checkOut}</dd>
+                </div>
+              )}
+            </dl>
+          )}
+
           <footer className="flex flex-col gap-3">
             {/* Why the total is what it is. Without this the long-stay rule is
                 invisible -- a guest adding a third night sees the figure move

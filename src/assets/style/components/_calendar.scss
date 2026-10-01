@@ -1,0 +1,112 @@
+// The booking date picker.
+//
+// The reference in the brand document colour-codes each day. The calendar
+// before this said only "greyed out", so the difference between a night that
+// is gone and a night that is merely dearer stayed invisible until the total
+// changed at the bottom of the form.
+//
+// Three states, in the brand palette rather than traffic-light primaries:
+//   available    desert sage green
+//   weekend      saddle brown -- free, but charged at the weekend rate
+//   unavailable  muted, struck through
+
+.ken_calendar_panel {
+  .calendar_day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-sm);
+    font-variant-numeric: tabular-nums;
+    transition: background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+  }
+
+  .calendar_day.is_available {
+    color: var(--color-state-success);
+    font-weight: 600;
+  }
+
+  .calendar_day.is_weekend {
+    color: var(--color-saddle-brown);
+    font-weight: 600;
+  }
+
+  // Taken nights stay legible rather than vanishing: a guest comparing dates
+  // needs to see that the 14th exists and is gone, not that it is missing.
+  .calendar_day.is_unavailable {
+    color: var(--color-state-error);
+    opacity: 0.45;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+}
+
+.calendar_legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 12px 4px 2px;
+  list-style: none;
+  border-top: 1px solid var(--color-border-subtle);
+  font-size: 12px;
+  color: var(--color-text-primary);
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: currentColor;
+    flex: none;
+  }
+
+  li.is_available {
+    color: var(--color-state-success);
+  }
+  li.is_weekend {
+    color: var(--color-saddle-brown);
+  }
+  li.is_unavailable {
+    color: var(--color-state-error);
+  }
+}
+
+// Check-in and check-out, shown with the dates on the booking form.
+.stay_times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+
+  > div {
+    flex: 1 1 160px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-off-white);
+  }
+
+  dt {
+    margin: 0 0 2px;
+    font-size: 12px;
+    color: var(--color-grey-color);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-variant-numeric: tabular-nums;
+  }
+}

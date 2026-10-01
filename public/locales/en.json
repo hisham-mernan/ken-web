@@ -369,5 +369,8 @@
   "stay_nights_one": "1 night",
   "stay_nights_other": "{{count}} nights",
   "party_shares_capacity": "This cottage sleeps {{capacity}} in total, adults and children together.",
-  "open_in_google_maps": "Open in Google Maps"
+  "open_in_google_maps": "Open in Google Maps",
+  "calendar_available": "Available",
+  "calendar_weekend": "Weekend rate",
+  "calendar_unavailable": "Unavailable"
 }
