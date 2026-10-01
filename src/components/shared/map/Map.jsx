@@ -7,6 +7,7 @@ const GoogleMap = ({
   setMarkerPosition,
   isEditable = false, // renamed from onlyForShow
   onChangeMap,
+  placeUrl,
 }) => {
   const { t } = useTranslation();
   const [position, setPosition] = useState(
@@ -22,7 +23,12 @@ const GoogleMap = ({
   }, [markerPosition]);
 
   const handleMapClick = (event) => {
-    if (!isEditable) return;
+    // Anywhere on the map, not only the pin -- nobody hunts for a 26px target
+    // to find out where a place is.
+    if (!isEditable) {
+      openInGoogleMaps();
+      return;
+    }
     const lat = event.detail.latLng.lat;
     const lng = event.detail.latLng.lng;
     setPosition({ lat, lng });
@@ -35,8 +41,11 @@ const GoogleMap = ({
   // there the pin is being dragged to set a location, not followed.
   const openInGoogleMaps = () => {
     if (isEditable) return;
+    // The listing when we have it: that opens Ken by name, with its photos and
+    // a directions button. The coordinates only ever drop a nameless pin.
     window.open(
-      `https://www.google.com/maps/search/?api=1&query=${position.lat},${position.lng}`,
+      placeUrl ||
+        `https://www.google.com/maps/search/?api=1&query=${position.lat},${position.lng}`,
       "_blank",
       "noopener,noreferrer"
     );
@@ -53,7 +62,10 @@ const GoogleMap = ({
 
   return (
     <APIProvider apiKey={import.meta.env.VITE_REACT_GOOGLE_MAP}>
-      <div className="h-[240px] w-full">
+      <div
+        className={`h-[240px] w-full ${isEditable ? "" : "cursor-pointer"}`}
+        title={isEditable ? undefined : t("open_in_google_maps")}
+      >
         <Map
           defaultCenter={position}
           defaultZoom={9}

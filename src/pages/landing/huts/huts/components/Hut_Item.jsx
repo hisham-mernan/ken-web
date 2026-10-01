@@ -50,13 +50,13 @@ const Hut_Item = ({ data }) => {
             currentLanguageCode === "en" ? "md:border-r" : "md:border-l"
           } border-primary-4 flex flex-col gap-8 lg:gap-12`}
         >
-          <figure className="max-w-[95%] xl:max-w-[453px] h-[250px] sm:h-[300px] md:h-[280px] lg:h-[320px] xl:h-[400px] relative rounded-lg overflow-hidden">
+          <figure className="max-w-[95%] xl:max-w-[453px] h-[250px] sm:h-[300px] md:h-[280px] lg:h-[320px] xl:h-[400px] relative overflow-hidden">
             <img
               src={getImageUrl(data?.main_image, { width: IMG.card })}
               alt={data?.title}
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-cover object-center rounded-lg "
+              className="w-full h-full object-cover object-center "
             />
           </figure>
           <h3
@@ -82,7 +82,7 @@ const Hut_Item = ({ data }) => {
           <figure className="flex gap-3 sm:gap-5 md:gap-8 lg:gap-5 xl:gap-8">
             {data?.images?.length > 0
               ? data?.images?.slice(0, 2)?.map((item) => (
-                  <figure key={item?.id || item?.image || item} className="w-full h-[160px] sm:h-[200px] lg:h-[250px] xl:h-[330px] relative rounded-lg overflow-hidden">
+                  <figure key={item?.id || item?.image || item} className="w-full h-[160px] sm:h-[200px] lg:h-[250px] xl:h-[330px] relative overflow-hidden">
                     <img
                       src={getImageUrl(typeof item === "string" ? item : item?.image, {
                         width: IMG.card,
@@ -90,7 +90,7 @@ const Hut_Item = ({ data }) => {
                       alt="hut images"
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full rounded-lg object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </figure>
                 ))

@@ -23,7 +23,7 @@ const Event_Item = ({
   return (
     <figure
       key={item?.id}
-      className={`relative main_gradient event rounded-lg ${
+      className={`relative main_gradient event ${
         hasBookingBtn
           ? "h-[300px] sm:h-[300px] lg:h-[426px]"
           : "h-[250px] sm:h-[300px] lg:h-[426px]"
@@ -34,7 +34,7 @@ const Event_Item = ({
         alt={currentLanguageCode === "en" ? item?.title : item?.title_ar}
         loading="lazy"
         decoding="async"
-        className="w-full h-full object-cover rounded-lg"
+        className="w-full h-full object-cover"
       />
       <div
         dir={currentLanguageCode === "en" ? "ltr" : "rtl"}

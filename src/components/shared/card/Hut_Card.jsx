@@ -63,7 +63,7 @@ const Hut_Card = ({ className = "", data }) => {
       onClick={() => navigate(`/huts/${data?.id}/details`)}
       onMouseEnter={() => swiperRef.current?.autoplay.start()}
       onMouseLeave={() => swiperRef.current?.autoplay.stop()}
-      className={`card_shadow transition-all overflow-hidden group ease-in-out duration-500 rounded-xl max-w-[360px] relative cursor-pointer ${className}`}
+      className={`card_shadow transition-all overflow-hidden group ease-in-out duration-500 max-w-[360px] relative cursor-pointer ${className}`}
     >
       <figure className="relative">
         <Swiper

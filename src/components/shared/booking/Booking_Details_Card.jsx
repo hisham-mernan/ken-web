@@ -62,7 +62,7 @@ const Booking_Details_Card = ({
                           <img loading="lazy" decoding="async"
                             src={getImageUrl(value?.qr_code_image)}
                             alt="QR"
-                            className="w-full h-full rounded-[10px] object-cover "
+                            className="w-full h-full object-cover "
                           />
                         </button>
                       )

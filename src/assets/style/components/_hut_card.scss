@@ -56,17 +56,18 @@
   }
 }
 
+// Square and unframed, like every other photograph on the site. The 10px
+// translucent border this used to carry was the frame the brand document asks
+// to remove; the hover it signalled moves to the shadow so the card still
+// answers the pointer.
 .card_shadow {
-  border: 10px solid #a593811a;
-  transition: border-color var(--duration-normal) var(--ease-standard);
+  border: 0;
+  box-shadow: var(--shadow-image);
+  transition: box-shadow var(--duration-normal) var(--ease-standard);
   &:hover {
-    border: 10px solid #74776399;
+    box-shadow: var(--shadow-card);
   }
-  border-radius: var(--radius-lg);
-  -webkit-border-radius: var(--radius-lg);
-  -moz-border-radius: var(--radius-lg);
-  -ms-border-radius: var(--radius-lg);
-  -o-border-radius: var(--radius-lg);
+  border-radius: 0;
   @media (max-width: 768px) {
     border-width: 4px;
     &:hover {

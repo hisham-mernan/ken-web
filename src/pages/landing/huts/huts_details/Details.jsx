@@ -122,7 +122,11 @@ const Details = () => {
       <div className="Container flex flex-col gap-10 md:gap-[72px]">
         <Content loading={loadingData} data={data} />
         <Activity loading={loadingData} data={data} />
-        <Location loading={loadingData} data={data?.location} />
+        <Location
+          loading={loadingData}
+          data={data?.location}
+          mapUrl={data?.map_url}
+        />
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Booking_Hut

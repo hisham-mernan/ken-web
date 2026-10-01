@@ -9,7 +9,7 @@ import { CarIcon } from "../../../../../assets/icons/Icon";
 import { currentLanguageCode } from "../../../../../utils/switchLang";
 import GoogleMap from "../../../../../components/shared/map/Map";
 
-const Location = ({ loading = false, data }) => {
+const Location = ({ loading = false, data, mapUrl }) => {
   const { t } = useTranslation();
   const address =
     currentLanguageCode === "en" ? data?.address : data?.address_ar;
@@ -26,7 +26,10 @@ const Location = ({ loading = false, data }) => {
     <section className=" flex flex-col gap-4 ">
       <h2 className="text-secondary title_lg !font-bold">{t("location")}</h2>
       {data?.latitude && data?.longitude && (
-        <GoogleMap markerPosition={[data?.latitude, data?.longitude]} />
+        <GoogleMap
+          markerPosition={[data?.latitude, data?.longitude]}
+          placeUrl={mapUrl}
+        />
       )}
       {/* Address is optional: the huts share one site, so the pin on the map is
           the location and there is no per-hut address to spell out. Icon and

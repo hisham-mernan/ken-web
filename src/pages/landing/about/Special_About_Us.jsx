@@ -27,23 +27,23 @@ const Special_About_Us = () => {
       <Landing_Header title="special_about_us" src="xl" />
       <div className="flex flex-col gap-4 lg:gap-6">
         {loading ? (
-          <div className="h-[130px] lg:h-[180px] rounded-lg">
+          <div className="h-[130px] lg:h-[180px]">
             <Skeleton height="100%" className="!bg-gray-200" />
           </div>
         ) : (
           items.map((item, idx) => (
             <figure
               key={item?.id || idx}
-              className="h-[110px] sm:h-[140px] lg:h-[160px] rounded-lg relative overflow-hidden group shadow-sm"
+              className="h-[110px] sm:h-[140px] lg:h-[160px] relative overflow-hidden group shadow-sm"
             >
               <img
                 src={getImageUrl(item?.image, { width: IMG.card })}
                 alt={item?.title}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-center object-cover rounded-lg transform group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-center object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-black/45 rounded-lg transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-black/45 transition-opacity duration-300" />
               <figcaption className="text-white font-bold tracking-[2px] truncate max-w-[90%] z-10 text-xl sm:text-2xl xl:text-3xl absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center uppercase">
                 {currentLanguageCode === "en" ? item?.title : item?.title_ar}
               </figcaption>

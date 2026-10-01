@@ -132,7 +132,7 @@ const Event_Details = () => {
             </div>
           </div>
           <figure
-            className={`order-1 md:order-2 w-full max-w-[690px] rounded-lg h-[330px] border border-font-light ${
+            className={`order-1 md:order-2 w-full max-w-[690px] h-[330px] border border-font-light ${
               data?.image ? "relative main_gradient" : ""
             } `}
           >
@@ -141,10 +141,10 @@ const Event_Details = () => {
                 src={getImageUrl(data?.image, { width: IMG.hero })}
                 alt="event image"
                 decoding="async"
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover"
               />
             ) : (
-              <span className="w-full h-full bg-gray-50 flex rounded-lg" />
+              <span className="w-full h-full bg-gray-50 flex" />
             )}
           </figure>
         </section>
@@ -209,9 +209,9 @@ const Details_Skeleton = () => {
         </div>
       </div>
       <figure
-        className={`order-1 md:order-2 w-full max-w-[690px] rounded-lg h-[330px]  `}
+        className={`order-1 md:order-2 w-full max-w-[690px] h-[330px]  `}
       >
-        <Skeleton width="100%" height="330px" className="rounded-lg" />
+        <Skeleton width="100%" height="330px" className="" />
       </figure>
     </section>
   );

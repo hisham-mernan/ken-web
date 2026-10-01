@@ -54,7 +54,7 @@ const Ticket = ({ item, className }) => {
 
         <img loading="lazy" decoding="async"
           src={getImageUrl(item?.image, { width: IMG.thumb })}
-          className="w-[152px] h-20 rounded-sm object-cover"
+          className="w-[152px] h-20 object-cover"
           alt=""
         />
       </div>

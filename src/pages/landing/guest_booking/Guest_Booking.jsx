@@ -69,7 +69,7 @@ const Guest_Booking = () => {
     return (
       <main className="page_p Container flex flex-col gap-6">
         <Skeleton width="240px" height="2rem" />
-        <Skeleton width="100%" height="320px" className="rounded-lg" />
+        <Skeleton width="100%" height="320px" className="" />
       </main>
     );
   }
@@ -87,7 +87,7 @@ const Guest_Booking = () => {
       </h1>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <figure className="w-full h-[280px] rounded-lg overflow-hidden border border-font-light">
+        <figure className="w-full h-[280px] overflow-hidden border border-font-light">
           {booking?.hut?.main_image ? (
             <img
               src={getImageUrl(booking.hut.main_image, {
@@ -130,7 +130,7 @@ const Guest_Booking = () => {
       </section>
 
       {Number(booking?.not_paid) > 0 && (
-        <section className="flex flex-col gap-3 p-6 border border-primary-dark rounded-lg">
+        <section className="flex flex-col gap-3 p-6 border border-primary-dark">
           <h2 className="title_lg text-primary-3">{t("balance_due")}</h2>
           <p className="body_sm text-primary-4">{t("balance_due_note")}</p>
           <div className="flex items-center justify-between gap-4">
@@ -145,7 +145,7 @@ const Guest_Booking = () => {
       )}
 
       {booking?.qr_code_image && (
-        <section className="flex flex-col items-center gap-3 p-6 border border-font-light rounded-lg">
+        <section className="flex flex-col items-center gap-3 p-6 border border-font-light">
           <h2 className="title_lg text-primary-3">{t("your_entry_qr_code")}</h2>
           {/* The reason a guest comes back here: their pass on arrival. */}
           <img

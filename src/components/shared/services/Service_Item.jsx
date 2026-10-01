@@ -20,13 +20,13 @@ const Service_Item = ({
 
   return (
     <figure
-      className={`main_gradient dark ${className} z-10 h-[490px] sm:h-[420px] sm:h-[506px] rounded-lg relative`}
+      className={`main_gradient dark ${className} z-10 h-[490px] sm:h-[420px] sm:h-[506px] relative`}
     >
       <img
         src={getImageUrl(data?.image, { width: IMG.card })}
         loading="lazy"
         decoding="async"
-        className="w-full h-full object-cover rounded-lg"
+        className="w-full h-full object-cover"
       />
       <figcaption className="absolute bottom-[25px] w-[90%] left-[50%] translate-x-[-50%] z-10">
         <h4 className="text-font-light headline_sm truncate">

@@ -159,7 +159,7 @@ const Box = ({
             <img loading="lazy" decoding="async"
               src={getImageUrl(item?.image, { width: IMG.thumb })}
               alt="special item image"
-              className="w-full sm:w-[200px] h-[190px] sm:h-[150px] rounded-[10px] object-cover object-center"
+              className="w-full sm:w-[200px] h-[190px] sm:h-[150px] object-cover object-center"
             />
             <div className="flex flex-col gap-2.5 py-5 px-4">
               <h3 className="text-[#202020] text-sm font-semibold line-clamp-2">
@@ -202,7 +202,7 @@ const Box = ({
 const Box_Skeleton = () => {
   return (
     <div className="w-[300] sm:w-[200px] min-w-[180px] sm:min-w-[200px] flex-shrink-0">
-      <Skeleton className="!w-full sm:!w-[200px] !h-[180px] sm:!h-[150px] !rounded-[10px]" />
+      <Skeleton className="!w-full sm:!w-[200px] !h-[180px] sm:!h-[150px]" />
       <div className="flex flex-col gap-2.5 py-5 px-4">
         <Skeleton width="100%" height="1rem" />
         <Skeleton width="60%" height="1rem" />
