@@ -3,6 +3,10 @@
      Shadows are warm-tinted, never pure black. Motion is minimal: short fades
      and 1px lifts, no bounce or spring. */
   --shadow-card: 0 1px 3px rgba(63, 46, 30, 0.06), 0 20px 40px -12px rgba(63, 46, 30, 0.16);
+  // Photographs on the editorial sections: square cornered and unframed,
+  // so the only thing lifting them off the page is a shadow light enough
+  // not to read as a border.
+  --shadow-image: 0 1px 2px rgba(63, 46, 30, 0.05), 0 10px 24px -14px rgba(63, 46, 30, 0.18);
   --shadow-card-hover: 0 8px 16px rgba(63, 46, 30, 0.1), 0 28px 56px -14px rgba(63, 46, 30, 0.24);
   --shadow-button: 0 1px 2px rgba(28, 20, 13, 0.3), 0 6px 16px -4px rgba(28, 20, 13, 0.35);
 
