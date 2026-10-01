@@ -1,6 +1,6 @@
 {
   "comment_0": "*************************** Auth *********************",
-  "sign_up_title": "Sign Up  🔑",
+  "sign_up_title": "Sign Up",
   "sign_up_des": "Stay quietly, with no worries.",
   "full_name": "Full Name",
   "full_name_placeholder": "Your full name",
@@ -21,7 +21,7 @@
   "sign_up": "Sign Up",
   "have_an_account": "Have an account ?",
   "login": "Log in",
-  "verify_account": "Verification  🔐",
+  "verify_account": "Verification",
   "verify_account_des": "Verify your email to confirm your sign up.",
   "we_send_code_to": "We will sent a Code  to ",
   "check_it": "check it!",

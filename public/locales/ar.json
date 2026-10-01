@@ -1,6 +1,6 @@
 {
   "comment_0": "*************************** Auth *********************",
-  "sign_up_title": "إنشاء حساب 🔑",
+  "sign_up_title": "إنشاء حساب",
   "sign_up_des": "ابقَ بهدوء، وبدون قلق.",
   "full_name": "الاسم الكامل",
   "full_name_placeholder": "اسمك الكامل",
@@ -21,7 +21,7 @@
   "sign_up": "إنشاء حساب",
   "have_an_account": "هل لديك حساب؟",
   "login": "تسجيل الدخول",
-  "verify_account": "التحقق 🔐",
+  "verify_account": "التحقق",
   "verify_account_des": "تحقق من بريدك الإلكتروني لتأكيد إنشاء الحساب.",
   "we_send_code_to": "أرسلنا رمزًا إلى",
   "check_it": "تحقق منه!",
